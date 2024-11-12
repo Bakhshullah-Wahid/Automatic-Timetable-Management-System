@@ -1,0 +1,15 @@
+export '../screens/common/about_us.dart';
+export '../screens/manager/coordinator/add_new_coordinator.dart';
+export '../screens/coordinator/add_new_time_screen.dart';
+export '../screens/coordinator/class_screen.dart';
+export '../screens/coordinator/dashboard.dart';
+export '../screens/common/error_screen.dart';
+export '../screens/coordinator/home_screen.dart';
+export '../screens/manager/coordinator/manager.dart';
+export '../screens/manager/manager_dashboard.dart';
+export '../screens/common/profile_screen.dart';
+export '../screens/coordinator/timings.dart';
+export '../screens/coordinator/view_timetable_screen.dart';
+export '../screens/manager/class/add_new_class.dart';
+export '../screens/manager/teacher/teacher_view.dart';
+export '../screens/manager/teacher/add_teacher.dart';
