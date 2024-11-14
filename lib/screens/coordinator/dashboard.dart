@@ -1,5 +1,7 @@
+import 'package:attms/route/my_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../provider/add_new_time_provider.dart';
 import '../../widget/coordinator/drawer_box.dart';
@@ -70,9 +72,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'AUTOMATIC TIMETABLE MANAGEMENT SYSTEM',
-                      style: Theme.of(context).textTheme.displayLarge,
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return TextButton(
+                          onPressed: () {
+                            context.pop();
+                            ref
+                                .read(addNewTimetableProvider.notifier)
+                                .setPosition(0);
+                          },
+                          child: Text(
+                            'Back',
+                            style: Theme.of(context).textTheme.displayLarge,
+                          ),
+                        );
+                      },
                     ),
                     Consumer(
                       builder: (context, ref, child) {

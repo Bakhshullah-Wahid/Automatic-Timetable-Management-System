@@ -32,6 +32,7 @@ class _LogInPageState extends State<LogInPage> {
     });
   }
 
+  bool isShow = false;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, WidgetRef ref, __) {
@@ -231,6 +232,18 @@ class _LogInPageState extends State<LogInPage> {
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.black),
                             decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  icon: Icon(isShow
+                                          ? Icons.visibility_off
+                                          : Icons.visibility
+                                      // Change icon based on _obscureText state
+                                      ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isShow =
+                                          !isShow; // Toggle the password visibility
+                                    });
+                                  }),
                               labelText: 'Password',
                               labelStyle: const TextStyle(
                                   fontSize: 10, color: Colors.black),
@@ -249,7 +262,7 @@ class _LogInPageState extends State<LogInPage> {
                                     const BorderSide(color: Colors.blue),
                               ),
                             ),
-                            obscureText: true,
+                            obscureText: isShow ? true : false,
                           ),
                         ),
                         const SizedBox(
