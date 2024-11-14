@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../provider/add_new_time_provider.dart';
 import '../route/navigations.dart';
 
 class TitleContainer extends StatefulWidget {
@@ -49,25 +51,36 @@ class _TitleContainerState extends State<TitleContainer> {
                         widget.pageTitle == 'Dashboard' ||
                         widget.pageTitle == 'Manage Teacher' ||
                         widget.pageTitle == 'New Timetable'
-                    ? TextButton(
-                        onPressed: () {
-                          if (widget.pageTitle == 'Manage Classes') {
-                            context.push(Routes.addClass);
-                          } else if (widget.pageTitle == 'Manage Coordinator') {
-                            context.push(Routes.addAccount);
-                          } else if (widget.pageTitle == 'Manage Department') {
-                            context.push(Routes.addDepartment);
-                          } else if (widget.pageTitle == 'Dashboard') {
-                            context.push(Routes.addNewTime);
-                          } else if (widget.pageTitle == 'Manage Teacher') {
-                            context.push(Routes.addTeacher);
-                          } else if (widget.pageTitle == 'New Timetable') {
-                            context.pop();
-                          } else {
-                            context.push(Routes.addNewTime);
-                          }
+                    ? Consumer(
+                        builder: (context, ref, child) {
+                          return TextButton(
+                              onPressed: () {
+                                if (widget.pageTitle == 'Manage Classes') {
+                                  context.push(Routes.addClass);
+                                } else if (widget.pageTitle ==
+                                    'Manage Coordinator') {
+                                  context.push(Routes.addAccount);
+                                } else if (widget.pageTitle ==
+                                    'Manage Department') {
+                                  context.push(Routes.addDepartment);
+                                } else if (widget.pageTitle == 'Dashboard') {
+                                  context.push(Routes.addNewTime);
+                                } else if (widget.pageTitle ==
+                                    'Manage Teacher') {
+                                  context.push(Routes.addTeacher);
+                                } else if (widget.pageTitle ==
+                                    'New Timetable') {
+                                  ref
+                                      .read(addNewTimetableProvider.notifier)
+                                      .setPosition(1);
+                                  // context.pop();
+                                } else {
+                                  context.push(Routes.addNewTime);
+                                }
+                              },
+                              child: Text('${widget.buttonName}'));
                         },
-                        child: Text('${widget.buttonName}'))
+                      )
                     : Container()
               ],
             ),

@@ -52,12 +52,12 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 // add time
 
   TimeOfDay time = TimeOfDay.now();
-  String slot1SelectedStart = "";
-  String slot1SelectedEnd = "";
-  String slot2SelectedStart = "";
-  String slot2SelectedEnd = "";
-  String slot3SelectedStart = "";
-  String slot3SelectedEnd = "";
+  String slot1SelectedStart = "9:30 AM";
+  String slot1SelectedEnd = "11:00 AM";
+  String slot2SelectedStart = "11:30 AM";
+  String slot2SelectedEnd = "1:00 PM";
+  String slot3SelectedStart = "1:30 PM";
+  String slot3SelectedEnd = "3:00 PM";
 // subject
   List filteredDataEven = [];
   List filteredDataOdd = [];
@@ -220,7 +220,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             description:
                 'Choose Semester, By choosing semester 1 will enable automatic selecting other semester with subjects respectively ',
             pageTitle: 'New Timetable',
-            buttonName: 'Go Back',
+            buttonName: 'Next',
           ),
           const SizedBox(
             height: 10,
@@ -248,191 +248,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     ),
                     Column(
                       children: [
-                        const Text(
-                            'Select the Semester(by selecting semester 01, every odd semesters are selected automatically by  Timetable management system',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal)),
-                        Center(
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  selectedSem =
-                                      await dialogebox.dialogeBoxOpening(
-                                    'Select Semester',
-                                    context,
-                                    sems,
-                                  );
-                                  filteringData();
-                                  setState(() {});
-                                },
-                                child: Text(selectedSem == null
-                                    ? 'Select Semester'
-                                    : '$selectedSem'))),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                            'Select start and End time for 1st slot classes(Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'From',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot1SelectedStart =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot1SelectedStart == ''
-                                          ? 'Enter Time'
-                                          : slot1SelectedStart))),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'To',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot1SelectedEnd =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot1SelectedEnd == ''
-                                          ? 'Enter Time'
-                                          : slot1SelectedEnd))),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                            'Select start and End time for 2nd slot classes(Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'From',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot2SelectedStart =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot2SelectedStart == ''
-                                          ? 'Enter Time'
-                                          : slot2SelectedStart))),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'To',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot2SelectedEnd =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot2SelectedEnd == ''
-                                          ? 'Enter Time'
-                                          : slot2SelectedEnd))),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                            'Select start and End time for 3rd slot classes(Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'From',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot3SelectedStart =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot3SelectedStart == ''
-                                          ? 'Enter Time'
-                                          : slot3SelectedStart))),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'To',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30),
-                              child: SizedBox(
-                                  width: 150,
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        slot3SelectedEnd =
-                                            await DateTimeHelper.pickTime(
-                                                time, context);
-                                        setState(() {});
-                                      },
-                                      child: Text(slot3SelectedEnd == ''
-                                          ? 'Enter Time'
-                                          : slot3SelectedEnd))),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: TextFormField(
@@ -467,6 +282,342 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                               ),
                             ),
                           ),
+                        ),
+                        const Text(
+                            'Select the Semester(by selecting semester 01, every odd semesters are selected automatically by  Timetable management system',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal)),
+                        Center(
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  selectedSem =
+                                      await dialogebox.dialogeBoxOpening(
+                                    'Select Semester',
+                                    context,
+                                    sems,
+                                  );
+                                  filteringData();
+                                  setState(() {});
+                                },
+                                child: Text(selectedSem == null
+                                    ? 'Select Semester'
+                                    : '$selectedSem'))),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                            'Selected start and End time for 1st slot classes',
+                            // (Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal)),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'From',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '9:30 AM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedStart =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedStart == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedStart))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'To',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedEnd =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedEnd == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedEnd))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '11:00 AM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        const Text(
+                            'Selected start and End time for 2nd slot classes',
+                            // (Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal)),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     const Text(
+                        //       'From',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 30),
+                        //       child: SizedBox(
+                        //           width: 150,
+                        //           child: ElevatedButton(
+                        //               onPressed: () async {
+                        //                 slot2SelectedStart =
+                        //                     await DateTimeHelper.pickTime(
+                        //                         time, context);
+                        //                 setState(() {});
+                        //               },
+                        //               child: Text(slot2SelectedStart == ''
+                        //                   ? 'Enter Time'
+                        //                   : slot2SelectedStart))),
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     const Text(
+                        //       'To',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 30),
+                        //       child: SizedBox(
+                        //           width: 150,
+                        //           child: ElevatedButton(
+                        //               onPressed: () async {
+                        //                 slot2SelectedEnd =
+                        //                     await DateTimeHelper.pickTime(
+                        //                         time, context);
+                        //                 setState(() {});
+                        //               },
+                        //               child: Text(slot2SelectedEnd == ''
+                        //                   ? 'Enter Time'
+                        //                   : slot2SelectedEnd))),
+                        //     ),
+                        //   ],
+                        // ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'From',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '11:30 PM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedStart =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedStart == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedStart))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'To',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedEnd =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedEnd == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedEnd))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '1:00 PM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                            'Selected start and End time for 3rd slot classes',
+                            // (Time from 9:00 to 3:30 are accepted and Friday is a special case for the Time Selection)',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal)),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     const Text(
+                        //       'From',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 30),
+                        //       child: SizedBox(
+                        //           width: 150,
+                        //           child: ElevatedButton(
+                        //               onPressed: () async {
+                        //                 slot3SelectedStart =
+                        //                     await DateTimeHelper.pickTime(
+                        //                         time, context);
+                        //                 setState(() {});
+                        //               },
+                        //               child: Text(slot3SelectedStart == ''
+                        //                   ? 'Enter Time'
+                        //                   : slot3SelectedStart))),
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     const Text(
+                        //       'To',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(left: 30),
+                        //       child: SizedBox(
+                        //           width: 150,
+                        //           child: ElevatedButton(
+                        //               onPressed: () async {
+                        //                 slot3SelectedEnd =
+                        //                     await DateTimeHelper.pickTime(
+                        //                         time, context);
+                        //                 setState(() {});
+                        //               },
+                        //               child: Text(slot3SelectedEnd == ''
+                        //                   ? 'Enter Time'
+                        //                   : slot3SelectedEnd))),
+                        //     ),
+                        //   ],
+                        // ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'From',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '1:30 PM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedStart =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedStart == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedStart))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'To',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 30),
+                            //   child: SizedBox(
+                            //       width: 150,
+                            //       child: ElevatedButton(
+                            //           onPressed: () async {
+                            //             slot1SelectedEnd =
+                            //                 await DateTimeHelper.pickTime(
+                            //                     time, context);
+                            //             setState(() {});
+                            //           },
+                            //           child: Text(slot1SelectedEnd == ''
+                            //               ? 'Enter Time'
+                            //               : slot1SelectedEnd))),
+                            // ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '3:00 PM',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w100),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                       ],
                     ),
@@ -893,32 +1044,32 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
   List<DataColumn> _dataCome() {
     return [
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Time',
         style: TextStyle(color: Colors.black),
       )),
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Mon',
         style: TextStyle(color: Colors.black),
       )),
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Tue',
         style: TextStyle(color: Colors.black),
       )),
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Wed',
         style: TextStyle(color: Colors.black),
       )),
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Thu',
         style: TextStyle(color: Colors.black),
       )),
-      DataColumn(
+      const DataColumn(
           label: Text(
         'Fri',
         style: TextStyle(color: Colors.black),
@@ -1351,35 +1502,35 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                       children: [
                         Text(
                           '${element['slot']}',
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                         Column(
                           children: [
                             Text(
                               element['Title'],
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             Text(
                               element['name'],
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             ),
                             Text(
                               element['class_name'],
-                              style: TextStyle(color: Colors.blue),
+                              style: const TextStyle(color: Colors.blue),
                             ),
                           ],
                         ),
                         Text(
                           element['semester'],
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(color: Colors.blue),
                         ),
                         Text(
                           element['day'],
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                         Text(
                           element['slot'],
-                          style: TextStyle(color: Colors.green),
+                          style: const TextStyle(color: Colors.green),
                         ),
                       ],
                     ),
@@ -1406,35 +1557,35 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                       children: [
                         Text(
                           '${element['slot']}',
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                         Column(
                           children: [
                             Text(
                               element['Title'],
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                             Text(
                               element['name'],
-                              style: TextStyle(color: Colors.red),
+                              style: const TextStyle(color: Colors.red),
                             ),
                             Text(
                               element['class_name'],
-                              style: TextStyle(color: Colors.blue),
+                              style: const TextStyle(color: Colors.blue),
                             ),
                           ],
                         ),
                         Text(
                           element['semester'],
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(color: Colors.blue),
                         ),
                         Text(
                           element['day'],
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                         Text(
                           element['slot'],
-                          style: TextStyle(color: Colors.green),
+                          style: const TextStyle(color: Colors.green),
                         ),
                       ],
                     ),
@@ -1451,28 +1602,28 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
               DataCell(Text(
                 e['slot']?.toString() ??
                     'N/A', // Access 'slot' using map notation
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               )),
               DataCell(Text(
                 e['Title']?.toString() ??
                     'N/A', // Access 'Title' using map notation
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               )),
               DataCell(Text(
                 e['Title']?.toString() ?? 'N/A',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               )),
               DataCell(Text(
                 e['Title']?.toString() ?? 'N/A',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               )),
               DataCell(Text(
                 e['Title']?.toString() ?? 'N/A',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               )),
               DataCell(Text(
                 e['Title']?.toString() ?? 'N/A',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ))
             ]))
         .toList();
