@@ -146,7 +146,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     // onTap: function(yesNo),
                     onTap: () async {
                       String v = await functionDepartment.function(
-                          yesNo, true, context, classType.text);
+                          yesNo, 0, context, classType.text);
                       if (v != 'null') {
                         classType.text = v;
                         setState(() {});
@@ -190,7 +190,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     onTap: () async {
                       List v = await functionDepartment.function(
                           formattedDepartments,
-                          false,
+                          1,
                           context,
                           department.text);
                       if (v != 'null') {

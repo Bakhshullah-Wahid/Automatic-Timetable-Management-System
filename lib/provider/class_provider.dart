@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:attms/services/class/fetch_class_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +15,7 @@ class ClassNotifier extends StateNotifier<List<FetchingClass>> {
 
   Future<void> retrieveClass() async {
     try {
-      DepartmentService urlFetch = DepartmentService();
+      ClassService urlFetch = ClassService();
       final response = await http.get(Uri.parse('${urlFetch.baseUrl}classs/'));
       if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);

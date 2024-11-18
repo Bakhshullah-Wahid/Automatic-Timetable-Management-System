@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../provider/class_provider.dart';
 import '../../provider/department_provider.dart';
+import '../../provider/subject_provider.dart';
 import '../../provider/teacher_provider.dart';
 import '../../wholeData/default_data.dart';
 import '../../widget/dialoge_box.dart';
@@ -32,11 +33,47 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   DialogeBoxOpen dialogebox = DialogeBoxOpen();
   String? selectedSem;
   String? selectedDepartment;
+  List<Map<String, dynamic>> formattedSubject = [];
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
         final position = ref.watch(addNewTimetableProvider);
+        ref.read(departmentProvider.notifier).retrieveDepartments();
+        ref.read(subjectProvider.notifier).retrieveSubject();
+        ref.read(teacherProvider.notifier).retrieveTeacher();
+        final teacher = ref.watch(teacherProvider);
+        final department = ref.watch(departmentProvider);
+        final subject = ref.watch(subjectProvider);
+        // // Convert departments to a list of maps
+        List<Map<String, dynamic>> formattedDepartments =
+            department.map((dept) {
+          return {
+            'department_name': dept.departmentName,
+            'department_id': dept.departmentId,
+          };
+        }).toList();
+        formattedSubject = subject.map((dept) {
+          return {
+            'subject_id': dept.subjectId,
+            'department_id': dept.departmentId,
+            'subject_name': dept.subjectName,
+            'theory': dept.theory,
+            'lab': dept.lab,
+            'course_module': dept.courseModule,
+            'teacher_id': dept.teacherId,
+            'semester': dept.semester
+          };
+        }).toList();
+
+        for (var i in formattedDepartments) {
+          for (var j in formattedSubject) {
+            if (i['department_id'] == j['department_id']) {
+              j['department_name'] = i['department_name'];
+            }
+          }
+        }
+
         return position == 0
             ? _buildSemesterSelection(context)
             : position == 1
@@ -64,6 +101,35 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   List teacherSelection = [];
   List otherDepartmentTeacher = [];
   String department = '';
+  // filteringData() async {
+  //   var prefs2 = await SharedPreferences.getInstance();
+  //   department = prefs2.getString('department').toString();
+  //   for (int i = 0; i < formattedSubject.length; i++) {
+  //     if (formattedSubject[i]['department_name'] == department) {
+  //       if (selectedSem == 'semester 01') {
+  //         if (formattedSubject[i]['semester'] == 'semester 01' ||
+  //             formattedSubject[i]['semester'] == 'semester 03' ||
+  //             formattedSubject[i]['semester'] == 'semester 05' ||
+  //             formattedSubject[i]['semester'] == 'semester 07') {
+  //           filteredDataOdd.add(formattedSubject[i]);
+
+  //         }
+  //       } else {
+  //         if (selectedSem == 'semester 02') {
+  //           if (formattedSubject[i]['semester'] == 'semester 02' ||
+  //               formattedSubject[i]['semester'] == 'semester 04' ||
+  //               formattedSubject[i]['semester'] == 'semester 06' ||
+  //               formattedSubject[i]['semester'] == 'semester 08') {
+  //             filteredDataEven.add(formattedSubject[i]);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  //   setState(() {});
+  //   print(filteredDataOdd);
+  // }
+
   filteringData() async {
     var prefs2 = await SharedPreferences.getInstance();
     department = prefs2.getString('department').toString();
@@ -1119,7 +1185,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                 List semester3and4 = [];
                 List semester5and6 = [];
                 List semester7and8 = [];
-                for (var filteredDatamm in filteredDataOdd) {
+                for (var filteredDatamm in filteredDataOdd!) {
                   if (filteredDatamm['Theory'] + filteredDatamm['Lab'] == 1) {
                     newFilteredData.add({
                       'teacherId': filteredDatamm['teacherId'],

@@ -231,7 +231,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                           onTap: () async {
                             List v = await functionDepartment.function(
                                 formattedDepartments,
-                                false,
+                                1,
                                 context,
                                 department.text);
                             if (v != 'null') {

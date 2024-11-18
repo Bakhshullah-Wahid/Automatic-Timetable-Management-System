@@ -16,8 +16,10 @@ abstract class Routes {
   static const wholeSetup = '/whole_setup';
   static const addClass = '/add_class';
   static const manageClass = '/manage_class';
-  static const manageDeparment = '/manage_department';
+  static const manageDepartment = '/manage_department';
   static const addDepartment = '/add_department';
   static const teacherView = '/teacher_view';
   static const addTeacher = '/add_teacher';
+  static const manageSubject = '/manage_subject';
+  static const addSubject = '/add_subject';
 }
