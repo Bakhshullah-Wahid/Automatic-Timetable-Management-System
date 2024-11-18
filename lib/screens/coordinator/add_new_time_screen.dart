@@ -40,11 +40,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
         return position == 0
             ? _buildSemesterSelection(context)
             : position == 1
-                ? _buildSubject(context)
+                ? _buildClass(context)
                 : position == 2
-                    ? _buildClass(context)
+                    ? _buildTeacher(context)
                     : position == 3
-                        ? _buildTeacher(context)
+                        ? _buildSubject(context)
                         : _buildGenerateTimetable(context);
       },
     );
@@ -111,6 +111,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             pageTitle: 'Subject Selected',
             description:
                 'Select Teacher(visitor/Other Department Teacher/Your Own Department for each subject listed below)',
+            buttonName: 'Next',
           ),
           const SizedBox(
             height: 5,
@@ -641,6 +642,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
           pageTitle: 'Class Selection',
           description:
               'Your Department classes are already selected if you want another department class for your batches. You can skip the class selection Process if you Dont want other class of Other Department',
+          buttonName: 'Next',
         ),
         const SizedBox(
           height: 3,
@@ -686,10 +688,10 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           bottomRight: Radius.circular(5)),
                       border: Border.all(color: Colors.black.withOpacity(0.1))),
                   child: formattedClass.isEmpty
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                            'No Classes Entered',
-                            style: TextStyle(color: Colors.black),
+                            'No Classes! check Database Connectivity',
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         )
                       : SizedBox(
@@ -845,6 +847,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             pageTitle: 'Teacher Selection',
             description:
                 'Select Teacher(visitor/Other Department Teacher/Your Own Department for each subject listed below)',
+            buttonName: 'Next',
           ),
           const SizedBox(
             height: 5,
@@ -892,75 +895,88 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                               bottomRight: Radius.circular(5)),
                           border:
                               Border.all(color: Colors.black.withOpacity(0.1))),
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: GroupedListView<dynamic, String>(
-                            elements: formattedTeacher,
-                            groupBy: (element) {
-                              return element['department_name'];
-                            },
-                            order: GroupedListOrder.ASC,
-                            groupSeparatorBuilder: (String groupByValue) =>
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    groupByValue,
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ),
-                            itemBuilder: (context, dynamic element) => ListTile(
-                                  title: InkWell(
-                                    onDoubleTap: () {
-                                      {
-                                        int value = element['teacher_id'];
-                                        bool idExists = selectedTeachers.any(
-                                            (element) =>
-                                                element['teacher_id'] == value);
-                                        setState(() {
-                                          if (idExists) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    backgroundColor: Colors.red,
-                                                    content: Text(
-                                                        'Teacher already added')));
-                                          } else {
-                                            selectedTeachers.add({
-                                              "teacher_id":
-                                                  element['teacher_id'],
-                                              "teacher_name":
-                                                  element['teacher_name'],
-                                              "email": element['email'],
-                                              // "designation":
-                                              //     element['designation'],
-                                              "department_name":
-                                                  element['department_name']
-                                            });
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    backgroundColor: Colors.red,
-                                                    content:
-                                                        Text('Teacher added')));
-                                          }
-                                        });
-                                      }
-                                    },
-                                    child: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.55,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            '${element['teacher_name']}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displayLarge,
+                      child: formattedTeacher.isEmpty
+                          ? Center(
+                              child: Text(
+                              'No Teacher Found',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ))
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.8,
+                              child: GroupedListView<dynamic, String>(
+                                  elements: formattedTeacher,
+                                  groupBy: (element) {
+                                    return element['department_name'];
+                                  },
+                                  order: GroupedListOrder.ASC,
+                                  groupSeparatorBuilder:
+                                      (String groupByValue) => Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              groupByValue,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge,
+                                            ),
                                           ),
-                                        )),
-                                  ),
-                                )),
-                      ),
+                                  itemBuilder: (context, dynamic element) =>
+                                      ListTile(
+                                        title: InkWell(
+                                          onDoubleTap: () {
+                                            {
+                                              int value = element['teacher_id'];
+                                              bool idExists = selectedTeachers
+                                                  .any((element) =>
+                                                      element['teacher_id'] ==
+                                                      value);
+                                              setState(() {
+                                                if (idExists) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(const SnackBar(
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          content: Text(
+                                                              'Teacher already added')));
+                                                } else {
+                                                  selectedTeachers.add({
+                                                    "teacher_id":
+                                                        element['teacher_id'],
+                                                    "teacher_name":
+                                                        element['teacher_name'],
+                                                    "email": element['email'],
+                                                    // "designation":
+                                                    //     element['designation'],
+                                                    "department_name": element[
+                                                        'department_name']
+                                                  });
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(const SnackBar(
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          content: Text(
+                                                              'Teacher added')));
+                                                }
+                                              });
+                                            }
+                                          },
+                                          child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.55,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  '${element['teacher_name']}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayLarge,
+                                                ),
+                                              )),
+                                        ),
+                                      )),
+                            ),
                     ),
                     const Column(
                       mainAxisAlignment: MainAxisAlignment.center,

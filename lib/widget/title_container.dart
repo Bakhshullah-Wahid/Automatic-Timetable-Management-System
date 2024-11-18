@@ -50,6 +50,9 @@ class _TitleContainerState extends State<TitleContainer> {
                         widget.pageTitle == 'Manage Coordinator' ||
                         widget.pageTitle == 'Dashboard' ||
                         widget.pageTitle == 'Manage Teacher' ||
+                        widget.pageTitle == 'Class Selection' ||
+                        widget.pageTitle == 'Teacher Selection' ||
+                        widget.pageTitle == 'Subject Selected' ||
                         widget.pageTitle == 'New Timetable'
                     ? Consumer(
                         builder: (context, ref, child) {
@@ -73,6 +76,24 @@ class _TitleContainerState extends State<TitleContainer> {
                                   ref
                                       .read(addNewTimetableProvider.notifier)
                                       .setPosition(1);
+                                  // context.pop();
+                                } else if (widget.pageTitle ==
+                                    'Class Selection') {
+                                  ref
+                                      .read(addNewTimetableProvider.notifier)
+                                      .setPosition(2);
+                                  // context.pop();
+                                } else if (widget.pageTitle ==
+                                    'Teacher Selection') {
+                                  ref
+                                      .read(addNewTimetableProvider.notifier)
+                                      .setPosition(3);
+                                  // context.pop();
+                                } else if (widget.pageTitle ==
+                                    'Subject Selected') {
+                                  ref
+                                      .read(addNewTimetableProvider.notifier)
+                                      .setPosition(4);
                                   // context.pop();
                                 } else {
                                   context.push(Routes.addNewTime);
