@@ -52,7 +52,7 @@ class _TitleContainerState extends State<TitleContainer> {
                         widget.pageTitle == 'Manage Teacher' ||
                         widget.pageTitle == 'Class Selection' ||
                         widget.pageTitle == 'Teacher Selection' ||
-                        widget.pageTitle == 'Subject Selected' ||
+                        widget.pageTitle == 'Subject Selected' ||       widget.pageTitle == 'Manage Subjects' ||
                         widget.pageTitle == 'New Timetable'
                     ? Consumer(
                         builder: (context, ref, child) {
@@ -60,7 +60,10 @@ class _TitleContainerState extends State<TitleContainer> {
                               onPressed: () {
                                 if (widget.pageTitle == 'Manage Classes') {
                                   context.push(Routes.addClass);
-                                } else if (widget.pageTitle ==
+                                }else if (widget.pageTitle ==
+                                    'Manage Subjects') {
+                                  context.push(Routes.addSubject);
+                                }  else if (widget.pageTitle ==
                                     'Manage Coordinator') {
                                   context.push(Routes.addAccount);
                                 } else if (widget.pageTitle ==

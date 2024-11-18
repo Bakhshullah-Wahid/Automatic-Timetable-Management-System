@@ -9,7 +9,7 @@ class DepartmentDataForSelectingClassAndCoordinator {
     int? departmentId;
 
     if (working != null) {
-      if (working == 'yes' || working == 'no') {
+      if (choiceValue == 0) {
         dummyClass = working;
       } else {
         dummyDepart = working;
@@ -57,28 +57,40 @@ class DepartmentDataForSelectingClassAndCoordinator {
                                         checkColor: Colors.white,
                                         activeColor: const Color.fromARGB(
                                             255, 236, 156, 92),
-                                        value: choiceValue
+                                        value: choiceValue == 0
                                             ? dummyClass == dataUse[index]
-                                            : dummyDepart ==
-                                                dataUse[index]
-                                                    ['department_name'],
+                                            : choiceValue == 1
+                                                ? dummyDepart ==
+                                                    dataUse[index]
+                                                        ['department_name']
+                                                : dummyDepart ==
+                                                    dataUse[index]
+                                                        ['teacher_name'],
                                         onChanged: (value) {
                                           if (value!) {
-                                            if (choiceValue) {
+                                            if (choiceValue == 0) {
                                               dummyClass = dataUse[index];
-                                            } else {
+                                            } else if (choiceValue == 1) {
                                               dummyDepart = dataUse[index]
                                                   ['department_name'];
                                               departmentId = dataUse[index]
                                                   ['department_id'];
+                                            } else {
+                                              dummyDepart = dataUse[index]
+                                                  ['teacher_name'];
+                                              departmentId =
+                                                  dataUse[index]['teacher_id'];
                                             }
                                           }
                                           setState(() {});
                                         },
                                       ),
-                                      Text(choiceValue
+                                      Text(choiceValue == 0
                                           ? dataUse[index]
-                                          : dataUse[index]['department_name']),
+                                          : choiceValue == 1
+                                              ? dataUse[index]
+                                                  ['department_name']
+                                              : dataUse[index]['teacher_name']),
                                     ],
                                   ),
                                 );
@@ -93,7 +105,7 @@ class DepartmentDataForSelectingClassAndCoordinator {
                   onPressed: () {
                     Navigator.of(context).pop();
                     setState(() {
-                      if (choiceValue) {
+                      if (choiceValue == 0) {
                         if (dummyClass != null) {
                           classTypes = dummyClass;
                         }
@@ -115,7 +127,7 @@ class DepartmentDataForSelectingClassAndCoordinator {
             ),
           );
         });
-    if (choiceValue) {
+    if (choiceValue == 0) {
       return classTypes.toString();
     } else {
       return departmentType;

@@ -89,14 +89,12 @@ class _AddAccountScreenState extends State<AddDepartmentScreen> {
                   if (formkey.currentState!.validate() &&
                       departmentName.text.isNotEmpty) {
                     if (departmentId == null) {
-                      
                       departUpdate.addDepartment(departmentName.text);
                     } else {
-                     
                       departUpdate.updateDepartment(
                           departmentId, departmentName.text);
                     }
-                    context.go(Routes.manageDeparment);
+                    context.go(Routes.manageDepartment);
                   }
                 },
                 child: const Text('Done'))

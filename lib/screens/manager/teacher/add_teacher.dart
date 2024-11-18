@@ -177,10 +177,7 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                   child: TextFormField(
                     onTap: () async {
                       List v = await functionDepartment.function(
-                          formattedDepartments,
-                          false,
-                          context,
-                          department.text);
+                          formattedDepartments, 1, context, department.text);
                       if (v != 'null') {
                         department.text = v[0];
                         departmentId = v[1];
@@ -231,7 +228,6 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                       email.text.isNotEmpty &&
                       teacherName.text.isNotEmpty) {
                     if (teacherId == null) {
-                      
                       teacherUpdate.addTeacher(
                           teacherName.text, email.text, departmentId!);
                     } else {
