@@ -39,6 +39,13 @@ class MyRouter {
               ),
             ),
             GoRoute(
+              path: Routes.subjectView,
+              name: 'subject_view',
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: ManageSubjectView(),
+              ),
+            ),
+            GoRoute(
               path: Routes.manageClass,
               name: 'manage_class',
               pageBuilder: (context, state) => const NoTransitionPage(
@@ -87,12 +94,14 @@ class MyRouter {
                 name: 'profile',
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: ProfileScreen(),
-                    )),GoRoute(
+                    )),
+            GoRoute(
                 path: Routes.teacherView,
                 name: 'teacher_view',
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: TeacherView(),
-                    )),GoRoute(
+                    )),
+            GoRoute(
               path: Routes.addTeacher,
               name: 'add_teacher',
               pageBuilder: (context, state) => NoTransitionPage(
@@ -135,14 +144,12 @@ class MyRouter {
                 name: "home",
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: HomeScreens())),
-
             GoRoute(
                 path: Routes.addNewTime,
                 name: "add_new_time",
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: NewTimeTableScreen(),
                     )),
-
             GoRoute(
                 path: Routes.viewTimeTable,
                 name: 'view_timetable',

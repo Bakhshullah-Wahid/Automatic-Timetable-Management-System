@@ -681,7 +681,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(5),
@@ -772,7 +772,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                   ],
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(5),
@@ -888,7 +888,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.45,
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -986,7 +986,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                       ],
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.45,
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -1575,21 +1575,17 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           '${element['slot']}',
                           style: const TextStyle(color: Colors.black),
                         ),
-                        Column(
-                          children: [
-                            Text(
-                              element['Title'],
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            Text(
-                              element['name'],
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                            Text(
-                              element['class_name'],
-                              style: const TextStyle(color: Colors.blue),
-                            ),
-                          ],
+                        Text(
+                          element['Title'],
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                        Text(
+                          element['name'],
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        Text(
+                          element['class_name'],
+                          style: const TextStyle(color: Colors.blue),
                         ),
                         Text(
                           element['semester'],

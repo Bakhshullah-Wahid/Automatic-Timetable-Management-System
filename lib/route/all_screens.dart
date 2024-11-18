@@ -13,3 +13,4 @@ export '../screens/coordinator/view_timetable_screen.dart';
 export '../screens/manager/class/add_new_class.dart';
 export '../screens/manager/teacher/teacher_view.dart';
 export '../screens/manager/teacher/add_teacher.dart';
+export '../screens/manager/subject/manage_subject_view.dart';
