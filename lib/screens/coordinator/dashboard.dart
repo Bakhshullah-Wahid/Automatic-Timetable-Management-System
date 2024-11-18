@@ -27,13 +27,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       'title': 'Select Semester And Time',
     },
     {
-      'title': 'Subjects',
-    },
-    {
       'title': 'Select Class',
     },
     {
       'title': 'Select Teacher',
+    },
+    {
+      'title': 'Subjects',
     },
     {
       'title': 'Generate Timetable',

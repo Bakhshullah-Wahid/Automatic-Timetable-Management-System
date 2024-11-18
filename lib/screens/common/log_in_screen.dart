@@ -32,7 +32,7 @@ class _LogInPageState extends State<LogInPage> {
     });
   }
 
-  bool isShow = false;
+  bool isShow = true;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, WidgetRef ref, __) {

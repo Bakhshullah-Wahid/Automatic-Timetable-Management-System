@@ -161,15 +161,6 @@ class MyRouter {
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: ProfileScreen(),
                     )),
-            // GoRoute(
-            //     path: Routes.timeWeek,
-            //     name: 'time-week',
-            //     pageBuilder: (context, state) => NoTransitionPage(
-            //           child: SemestersTiming(
-            //               // classTeacherSubjectData:
-            //               // state.extra as ClassTeacherSubjectDataMix?,
-            //               ),
-            //         )),
           ]),
     ],
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
