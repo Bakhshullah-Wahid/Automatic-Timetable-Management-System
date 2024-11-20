@@ -24,88 +24,98 @@ class ManageDepartmentView extends ConsumerWidget {
     }).toList();
     var mediaquery = MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
-      child: Column(
-        children: [
-          const TitleContainer(
-            description: "Department registered are listed below",
-            pageTitle: 'Manage Department',
-            buttonName: 'Add New Department',
-          ),
-          formattedDepartments.isEmpty
-              ? Center(
-                  child: Text(
-                  'No Data Found',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ))
-              : Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5)),
-                              border: Border.all(
-                                  color: Colors.black.withOpacity(0.1))),
-                          child: ListView.builder(
-                              itemCount: formattedDepartments.length,
-                              itemBuilder: (context, index) => ListTile(
-                                    title: Row(
-                                      children: [
-                                        SizedBox(
+        body: Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Column(
+          children: [
+            const TitleContainer(
+              description: "Department registered are listed below",
+              pageTitle: 'Manage Department',
+              buttonName: 'Add New Department',
+            ),
+            SizedBox(height: 25),
+            formattedDepartments.isEmpty
+                ? Center(
+                    child: Text(
+                    'No Data Found',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ))
+                : Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: ListView.builder(
+                            itemCount: formattedDepartments.length,
+                            itemBuilder: (context, index) => ListTile(
+                                  title: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 20.0),
+                                        child: Container(
                                           width: mediaquery.width * 0.7,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.black
-                                                        .withOpacity(0.1))),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                  formattedDepartments[index]
-                                                      ['department_name']),
-                                            ),
+                                          decoration: BoxDecoration(
+                                            color: Colors
+                                                .white, // Background color of the container
+                                            borderRadius: BorderRadius.circular(
+                                                8), // Optional: rounded corners
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.2), // Shadow color with opacity
+                                                offset: Offset(
+                                                    0, 10), // Shadow only below
+                                                blurRadius:
+                                                    8, // Controls how blurry the shadow is
+                                                spreadRadius:
+                                                    0.3, // Spread of the shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                                formattedDepartments[index]
+                                                    ['department_name']),
                                           ),
                                         ),
-                                        IconButton(
-                                            onPressed: () {
-                                              context.go(
-                                                Routes.addDepartment,
-                                                extra: UpdateDepartment(
-                                                    departmentName:
-                                                        departments[index]
-                                                            .departmentName,
-                                                    departmentId:
-                                                        departments[index]
-                                                            .departmentId),
-                                              );
-                                            },
-                                            icon: const Icon(Icons.edit,
-                                                color: Colors.black)),
-                                        IconButton(
-                                          onPressed: () async {
-                                            final DepartmentService
-                                                taskService =
-                                                DepartmentService();
-                                            await taskService.deleteTask(
-                                                departments[index]
-                                                    .departmentId);
-
-                                            departments.removeAt(
-                                                index); // Remove the task from the list
-
-//                                   },
-//                                 ),
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            context.go(
+                                              Routes.addDepartment,
+                                              extra: UpdateDepartment(
+                                                  departmentName:
+                                                      departments[index]
+                                                          .departmentName,
+                                                  departmentId:
+                                                      departments[index]
+                                                          .departmentId),
+                                            );
                                           },
-                                          icon: const Icon(Icons.delete,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  )))))
-        ],
+                                          icon: const Icon(Icons.edit,
+                                              color: Colors.black)),
+                                      IconButton(
+                                        onPressed: () async {
+                                          final DepartmentService taskService =
+                                              DepartmentService();
+                                          await taskService.deleteTask(
+                                              departments[index].departmentId);
+
+                                          departments.removeAt(
+                                              index); // Remove the task from the list
+
+                                          //                                   },
+                                          //                                 ),
+                                        },
+                                        icon: const Icon(Icons.delete,
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ))))
+          ],
+        ),
       ),
     ));
   }

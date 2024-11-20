@@ -56,9 +56,9 @@ class ManagerService {
     final response =
         await http.delete(Uri.parse('${baseUrl}users/delete/$id/'));
     if (response.statusCode == 204) {
-      print('Task deleted successfully');
+      // print('Task deleted successfully');
     } else {
-      print('Failed to add department: ${response.body}');
+      // print('Failed to add department: ${response.body}');
       throw Exception('Failed to add department: ${response.body}');
       // print('Failed to delete task: ${response.statusCode}');
     }

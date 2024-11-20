@@ -48,105 +48,126 @@ class ManagerScreen extends ConsumerWidget {
 
     var mediaquery = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            const TitleContainer(
-              description:
-                  "Coordinators registered for each departments are listed below",
-              pageTitle: 'Manage Coordinator',
-              buttonName: 'Add New Coordinator',
-            ),
-            Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(5),
-                                bottomRight: Radius.circular(5)),
-                            border: Border.all(
-                                color: Colors.black.withOpacity(0.1))),
-                        child: formattedManager.isEmpty
-                            ? Center(
-                                child: Text(
-                                'No Data Found',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ))
-                            : GroupedListView(
-                                elements: formattedManager,
-                                groupBy: (element) =>
-                                    element['department_name'] ?? '',
-                                order: GroupedListOrder.ASC,
-                                groupSeparatorBuilder: (String groupByValue) =>
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        groupByValue,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
+      backgroundColor: Colors.white,
+      body: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Column(
+            children: [
+              const TitleContainer(
+                description:
+                    "Coordinators registered for each departments are listed below",
+                pageTitle: 'Manage Coordinator',
+                buttonName: 'Add New Coordinator',
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: formattedManager.isEmpty
+                          ? Center(
+                              child: Text(
+                              'No Data Found',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ))
+                          : GroupedListView(
+                              elements: formattedManager,
+                              groupBy: (element) =>
+                                  element['department_name'] ?? '',
+                              order: GroupedListOrder.ASC,
+                              groupSeparatorBuilder: (String groupByValue) =>
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15.0),
+                                          child: Text(
+                                            groupByValue,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          ),
+                                        ),
+                                        Divider()
+                                      ],
                                     ),
-                                itemBuilder: (context, dynamic element) =>
-                                    ListTile(
-                                      title: Row(
-                                        children: [
-                                          SizedBox(
+                                  ),
+                              itemBuilder: (context, dynamic element) =>
+                                  ListTile(
+                                    title: Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 20.0),
+                                          child: Container(
                                             width: mediaquery.width * 0.7,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black
-                                                          .withOpacity(0.1))),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  element['user_name'] ??
-                                                      'No Name',
+                                            decoration: BoxDecoration(
+                                              color: Colors
+                                                  .white, // Background color of the container
+                                              borderRadius: BorderRadius.circular(
+                                                  8), // Optional: rounded corners
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  offset: Offset(0,
+                                                      10), // Shadow only below
+                                                  blurRadius:
+                                                      8, // Controls how blurry the shadow is
+                                                  spreadRadius:
+                                                      0.3, // Spread of the shadow
                                                 ),
+                                              ],
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                element['user_name'] ??
+                                                    'No Name',
                                               ),
                                             ),
                                           ),
-                                          IconButton(
-                                              onPressed: () {
-                                                
-
-                                                context.go(
-                                                  Routes.addAccount,
-                                                  extra: UpdateAccount(
-                                                      email: element['email'],
-                                                      name:
-                                                          element['user_name'],
-                                                      password:
-                                                          element['password'],
-                                                      userId:
-                                                          element['user_id'],
-                                                      departmentId: element[
-                                                          'department_id'],
-                                                      department:
-                                                          formattedDepartments),
-                                                );
-                                              },
-                                              icon: const Icon(
-                                                Icons.edit,
-                                                color: Colors.black,
-                                              )),
-                                          IconButton(
-                                            onPressed: () async {
-                                              final ManagerService taskService =
-                                                  ManagerService();
-                                              await taskService.deleteManager(
-                                                  element['user_id']);
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              context.go(
+                                                Routes.addAccount,
+                                                extra: UpdateAccount(
+                                                    email: element['email'],
+                                                    name: element['user_name'],
+                                                    password:
+                                                        element['password'],
+                                                    userId: element['user_id'],
+                                                    departmentId: element[
+                                                        'department_id'],
+                                                    department:
+                                                        formattedDepartments),
+                                              );
                                             },
-                                            icon: const Icon(Icons.delete,
-                                                color: Colors.black),
-                                          ),
-                                        ],
-                                      ),
-                                    )))))
-          ],
+                                            icon: const Icon(
+                                              Icons.edit,
+                                              color: Colors.black,
+                                            )),
+                                        IconButton(
+                                          onPressed: () async {
+                                            final ManagerService taskService =
+                                                ManagerService();
+                                            await taskService.deleteManager(
+                                                element['user_id']);
+                                          },
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ))))
+            ],
+          ),
         ),
       ),
     );

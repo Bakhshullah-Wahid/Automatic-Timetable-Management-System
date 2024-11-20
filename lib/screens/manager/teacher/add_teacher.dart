@@ -69,70 +69,100 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer(builder: (_, WidgetRef ref, __) {
-      ref.read(departmentProvider.notifier).retrieveDepartments();
-      final departments = ref.watch(departmentProvider);
-      // Convert departments to a list of maps
-      List<Map<String, dynamic>> formattedDepartments = departments.map((dept) {
-        return {
-          'department_name': dept.departmentName,
-          'department_id': dept.departmentId,
-        };
-      }).toList();
+    return Scaffold(
+        body: Container(
+      color: Colors.white,
+      child: Consumer(builder: (_, WidgetRef ref, __) {
+        ref.read(departmentProvider.notifier).retrieveDepartments();
+        final departments = ref.watch(departmentProvider);
+        // Convert departments to a list of maps
+        List<Map<String, dynamic>> formattedDepartments =
+            departments.map((dept) {
+          return {
+            'department_name': dept.departmentName,
+            'department_id': dept.departmentId,
+          };
+        }).toList();
 
-      return Form(
-        key: formkey,
-        child: Column(
-          children: [
-            const TitleContainer(
-              description: "Add/Update a Teacher for a Department",
-              pageTitle: "Add New Teacher",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Class name is required';
-                  } else {
-                    return null;
-                  }
-                },
-                controller: teacherName,
-                cursorHeight: 20,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-                decoration: InputDecoration(
-                  labelText: 'Class name',
-                  labelStyle:
-                      const TextStyle(fontSize: 10, color: Colors.black),
-                  hintStyle: const TextStyle(fontSize: 10),
-                  prefixIcon: const Icon(Icons.person, color: Colors.black),
-                  prefixStyle: const TextStyle(fontSize: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+        return Form(
+          key: formkey,
+          child: Column(
+            children: [
+              const TitleContainer(
+                description: "Add/Update a Teacher for a Department",
+                pageTitle: "Add New Teacher",
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Class name is required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: teacherName,
+                    cursorHeight: 20,
+                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                    decoration: InputDecoration(
+                      labelText: 'Class name',
+                      labelStyle:
+                          const TextStyle(fontSize: 10, color: Colors.black),
+                      hintStyle: const TextStyle(fontSize: 10),
+                      prefixIcon: const Icon(Icons.person, color: Colors.black),
+                      prefixStyle: const TextStyle(fontSize: 10),
+                      border: InputBorder.none,
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
@@ -153,27 +183,34 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                       hintStyle: const TextStyle(fontSize: 10),
                       prefixIcon: const Icon(Icons.email, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     onTap: () async {
                       List v = await functionDepartment.function(
@@ -202,45 +239,41 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                       labelStyle:
                           const TextStyle(fontSize: 10, color: Colors.black),
                       hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(
-                          Icons.local_fire_department_rounded,
-                          color: Colors.black),
+                      prefixIcon:
+                          const Icon(Icons.business, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  if (formkey.currentState!.validate() &&
-                      department.text.isNotEmpty &&
-                      email.text.isNotEmpty &&
-                      teacherName.text.isNotEmpty) {
-                    if (teacherId == null) {
-                      teacherUpdate.addTeacher(
-                          teacherName.text, email.text, departmentId!);
-                    } else {
-                      teacherUpdate.updateTeacher(teacherId, teacherName.text,
-                          email.text, departmentId);
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (formkey.currentState!.validate() &&
+                        department.text.isNotEmpty &&
+                        email.text.isNotEmpty &&
+                        teacherName.text.isNotEmpty) {
+                      if (teacherId == null) {
+                        teacherUpdate.addTeacher(
+                            teacherName.text, email.text, departmentId!);
+                      } else {
+                        teacherUpdate.updateTeacher(teacherId, teacherName.text,
+                            email.text, departmentId);
+                      }
+                      context.go(Routes.teacherView);
                     }
-                    context.go(Routes.teacherView);
-                  }
-                },
-                child: const Text('Done'))
-          ],
-        ),
-      );
-    }));
+                  },
+                  child: const Text('Done'))
+            ],
+          ),
+        );
+      }),
+    ));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:attms/route/my_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -42,104 +41,88 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0161CD),
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50.0),
-        child: Container(
-          decoration: const BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-            width: 5,
-            color: Color(0xFF0161CD),
-          ))),
-          child: widget.showNavigationBar
-              ? AppBar(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'University of Turbat',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                      Text(
-                        'AUTOMATIC TIMETABLE MANAGEMENT SYSTEM',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ],
-                  ),
-                )
-              : AppBar(
-                  title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Consumer(
-                      builder: (context, ref, child) {
-                        return TextButton(
-                          onPressed: () {
-                            context.pop();
-                            ref
-                                .read(addNewTimetableProvider.notifier)
-                                .setPosition(0);
-                          },
-                          child: Text(
-                            'Back',
-                            style: Theme.of(context).textTheme.displayLarge,
-                          ),
-                        );
-                      },
-                    ),
-                    Consumer(
-                      builder: (context, ref, child) {
-                        position = ref.watch(addNewTimetableProvider);
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: List.generate(
-                              routing.length,
-                              (index) {
-                                // Determine the button color based on the position
-
-                                Color textColor = position == index
-                                    ? Colors.orange
-                                    : Colors.black;
-
-                                return TextButton(
-                                  style: TextButton.styleFrom(
-                                    // Optional: Add padding for better button appearance
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                  ),
-                                  onPressed: () {
-                                    ref
-                                        .read(addNewTimetableProvider.notifier)
-                                        .setPosition(index);
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      position == index
-                                          ? const Icon(
-                                              size: 15,
-                                              Icons.circle,
-                                              color: Colors.orange,
-                                            )
-                                          : Container(),
-                                      Text(
-                                        routing[index]['title'] ??
-                                            'Button $index',
-                                        style: TextStyle(
-                                          color: textColor,
-                                        ), // Set text color based on selection
-                                      ),
-                                    ],
-                                  ),
-                                );
+        preferredSize: const Size.fromHeight(75.0),
+        child: widget.showNavigationBar
+            ? SizedBox() // Navigation bar hidden
+            : Column(
+                children: [
+                  AppBar(
+                    backgroundColor:
+                        Colors.white, // Explicitly set background color
+                    elevation: 0, // Remove shadow if needed
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return TextButton(
+                              onPressed: () {
+                                context.pop();
+                                ref
+                                    .read(addNewTimetableProvider.notifier)
+                                    .setPosition(0);
                               },
-                            ));
-                      },
+                              child: Text(
+                                'Back',
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                            );
+                          },
+                        ),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            position = ref.watch(addNewTimetableProvider);
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: List.generate(
+                                routing.length,
+                                (index) {
+                                  Color textColor = position == index
+                                      ? Colors.orange
+                                      : Colors.black;
+
+                                  return TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                    ),
+                                    onPressed: () {
+                                      ref
+                                          .read(
+                                              addNewTimetableProvider.notifier)
+                                          .setPosition(index);
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        if (position == index)
+                                          const Icon(
+                                            size: 15,
+                                            Icons.circle,
+                                            color: Colors.orange,
+                                          ),
+                                        Text(
+                                          routing[index]['title'] ??
+                                              'Button $index',
+                                          style: TextStyle(color: textColor),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                )),
-        ),
+                  ),
+                  Divider()
+                ],
+              ),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 50, bottom: 20),

@@ -17,10 +17,10 @@ class ManagerDrawerBox extends ConsumerStatefulWidget {
 class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
   List routing = [
     {'title': 'Dashboard', 'leading': Icons.dashboard},
-    {'title': 'Manage Classes', 'leading': Icons.account_balance},
+    {'title': 'Manage Classes', 'leading': Icons.groups},
     {'title': 'Manage Department', 'leading': Icons.business},
     {'title': 'Manage Teacher', 'leading': Icons.person},
-    {'title': 'Manage Subject', 'leading': Icons.science},
+    {'title': 'Manage Subject', 'leading': Icons.menu_book},
     {'title': 'Profile', 'leading': Icons.account_circle},
     {'title': 'About Us', 'leading': Icons.info},
   ];
@@ -32,7 +32,7 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
 
     return Container(
       decoration: const BoxDecoration(
-          border: Border(right: BorderSide(color: Colors.red, width: 5))),
+          border: Border(right: BorderSide(color: Colors.black12, width: 5))),
       child: Drawer(
         surfaceTintColor: Colors.white,
         width: mediaquery.width * 0.15,
@@ -69,6 +69,21 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                   width: mediaquery.width * 0.25,
                                   height: mediaquery.height * 0.04,
                                   decoration: BoxDecoration(
+                                      // Background color of the container
+                                      borderRadius: BorderRadius.circular(
+                                          8), // Optional: rounded corners
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(
+                                              0.2), // Shadow color with opacity
+                                          offset: Offset(
+                                              0, 10), // Shadow only below
+                                          blurRadius:
+                                              8, // Controls how blurry the shadow is
+                                          spreadRadius:
+                                              0.3, // Spread of the shadow
+                                        ),
+                                      ],
                                       color: Theme.of(context)
                                           .dialogTheme
                                           .backgroundColor),
@@ -82,22 +97,44 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                     ),
                                   ),
                                 )
-                              : Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        routing[index]['leading'],
-                                        color: Colors.black,
-                                      ),
-                                      SizedBox(
-                                        width: mediaquery.width * 0.002,
-                                      ),
-                                      Text(routing[index]['title'],
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.black)),
-                                    ],
+                              : Container(
+                                  height: mediaquery.height * 0.04,
+                                  decoration: BoxDecoration(
+                                      // Background color of the container
+                                      borderRadius: BorderRadius.circular(
+                                          8), // Optional: rounded corners
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(
+                                              0.2), // Shadow color with opacity
+                                          offset: Offset(
+                                              0, 10), // Shadow only below
+                                          blurRadius:
+                                              8, // Controls how blurry the shadow is
+                                          spreadRadius:
+                                              0.3, // Spread of the shadow
+                                        ),
+                                      ],
+                                      color: Theme.of(context)
+                                          .dialogTheme
+                                          .backgroundColor),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          routing[index]['leading'],
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: mediaquery.width * 0.002,
+                                        ),
+                                        Text(routing[index]['title'],
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black)),
+                                      ],
+                                    ),
                                   ),
                                 ),
                           onTap: () {

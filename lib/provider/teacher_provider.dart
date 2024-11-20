@@ -5,8 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-
-import '../services/coordinator/fetch_user_data.dart';
+ 
 import '../services/teacher/fetch_teacher.dart';
 
 // StateNotifier to manage department fetching state
@@ -26,18 +25,18 @@ class TeacherNotifier extends StateNotifier<List<FetchingTeacher>> {
             .toList();
 
         // Convert the state to a list of maps (dictionaries)
-        List<Map<String, dynamic>> teacherList =
-            state.map((dept) => dept.toMap()).toList();
+        // List<Map<String, dynamic>> teacherList =
+        //     state.map((dept) => dept.toMap()).toList();
 
         // Print just the list of dictionaries
       } else {
-        print(
-            'Failed to load departments with status code: ${response.statusCode}');
+        // print(
+        //     'Failed to load departments with status code: ${response.statusCode}');
       }
     } on TimeoutException {
-      print('Request timed out. Please check your network connection.');
+      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      print('Error occurred: $e');
+      // print('Error occurred: $e');
     }
   }
 }

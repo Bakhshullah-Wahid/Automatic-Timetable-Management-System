@@ -20,23 +20,19 @@ class _HomeScreensState extends State<HomeScreens> {
     var mediaquery = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Column(
-        children: [
-          const TitleContainer(
-            pageTitle: 'Dashboard',
-            buttonName: 'Add New Timetable',
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5)),
-                    border: Border.all(color: Colors.black.withOpacity(0.1))),
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            const TitleContainer(
+              pageTitle: 'Dashboard',
+              buttonName: 'Add New Timetable',
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: welcome.isEmpty
-                    ? Center(
+                    ? const Center(
                         child: Text(
                           'No Timetable Generated',
                           style: TextStyle(
@@ -97,8 +93,8 @@ class _HomeScreensState extends State<HomeScreens> {
                             )),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

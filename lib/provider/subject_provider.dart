@@ -25,18 +25,18 @@ class SubjectNotifier extends StateNotifier<List<FetchingSubject>> {
             .map((noteMap) => FetchingSubject.fromMap(noteMap))
             .toList();
         // Convert the state to a list of maps (dictionaries)
-        List<Map<String, dynamic>> subjectLists =
-            state.map((dept) => dept.toMap()).toList();
+        // List<Map<String, dynamic>> subjectLists =
+        //     state.map((dept) => dept.toMap()).toList();
 
         // Print just the list of dictionaries
       } else {
-        print(
-            'Failed to load departments with status code: ${response.statusCode}');
+        // print(
+        //     'Failed to load departments with status code: ${response.statusCode}');
       }
     } on TimeoutException {
-      print('Request timed out. Please check your network connection.');
+      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      print('Error occurred: $e');
+      // print('Error occurred: $e');
     }
   }
 }
