@@ -134,86 +134,117 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer(builder: (_, WidgetRef ref, __) {
-      ref.read(departmentProvider.notifier).retrieveDepartments();
-      ref.read(teacherProvider.notifier).retrieveTeacher();
-      final departments = ref.watch(departmentProvider);
-      final teachersss = ref.watch(teacherProvider);
-      // // Convert departments to a list of maps
-      List<Map<String, dynamic>> formattedDepartments = departments.map((dept) {
-        return {
-          'department_name': dept.departmentName,
-          'department_id': dept.departmentId,
-        };
-      }).toList();
-      List<Map<String, dynamic>> formattedTeacher = teachersss.map((dept) {
-        return {
-          'teacher_id': dept.teacherId,
-          'department_id': dept.departmentId,
-          'teacher_name': dept.teacherName,
-          'email': dept.email
-        };
-      }).toList();
+    return Scaffold(
+        body: Container(
+      color: Colors.white,
+      child: Consumer(builder: (_, WidgetRef ref, __) {
+        ref.read(departmentProvider.notifier).retrieveDepartments();
+        ref.read(teacherProvider.notifier).retrieveTeacher();
+        final departments = ref.watch(departmentProvider);
+        final teachersss = ref.watch(teacherProvider);
+        // // Convert departments to a list of maps
+        List<Map<String, dynamic>> formattedDepartments =
+            departments.map((dept) {
+          return {
+            'department_name': dept.departmentName,
+            'department_id': dept.departmentId,
+          };
+        }).toList();
+        List<Map<String, dynamic>> formattedTeacher = teachersss.map((dept) {
+          return {
+            'teacher_id': dept.teacherId,
+            'department_id': dept.departmentId,
+            'teacher_name': dept.teacherName,
+            'email': dept.email
+          };
+        }).toList();
 
-      for (var i in formattedDepartments) {
-        for (var j in formattedTeacher) {
-          if (i['department_id'] == j['department_id']) {
-            j['department_name'] = i['department_name'];
+        for (var i in formattedDepartments) {
+          for (var j in formattedTeacher) {
+            if (i['department_id'] == j['department_id']) {
+              j['department_name'] = i['department_name'];
+            }
           }
         }
-      }
 
-      return Form(
-        key: formkey,
-        child: Column(
-          children: [
-            const TitleContainer(
-              description: "Add/Update a new Subject for a Department",
-              pageTitle: "Add New Subject",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Subject name is required';
-                  } else {
-                    return null;
-                  }
-                },
-                controller: subjectName,
-                cursorHeight: 20,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-                decoration: InputDecoration(
-                  labelText: 'Subject name',
-                  labelStyle:
-                      const TextStyle(fontSize: 10, color: Colors.black),
-                  hintStyle: const TextStyle(fontSize: 10),
-                  prefixIcon: const Icon(Icons.person, color: Colors.black),
-                  prefixStyle: const TextStyle(fontSize: 10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: const BorderSide(color: Colors.blue),
+        return Form(
+          key: formkey,
+          child: Column(
+            children: [
+              const TitleContainer(
+                description: "Add/Update a new Subject for a Department",
+                pageTitle: "Add New Subject",
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Subject name is required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: subjectName,
+                    cursorHeight: 20,
+                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                    decoration: InputDecoration(
+                      labelText: 'Subject name',
+                      labelStyle:
+                          const TextStyle(fontSize: 10, color: Colors.black),
+                      hintStyle: const TextStyle(fontSize: 10),
+                      prefixIcon:
+                          const Icon(Icons.menu_book, color: Colors.black),
+                      prefixStyle: const TextStyle(fontSize: 10),
+                      border: InputBorder.none,
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     onTap: () async {
                       String v = await functionDepartment.function(
@@ -240,33 +271,39 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                       labelStyle:
                           const TextStyle(fontSize: 10, color: Colors.black),
                       hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(
-                          Icons.local_fire_department_rounded,
-                          color: Colors.black),
+                      prefixIcon:
+                          const Icon(Icons.calendar_today, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     onTap: () async {
                       List v = await functionDepartment.function(
@@ -283,35 +320,42 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                     readOnly: true,
                     style: const TextStyle(fontSize: 15, color: Colors.black),
                     decoration: InputDecoration(
-                      labelText: 'Teacher name',
+                      labelText: 'Assign Teacher',
                       labelStyle:
                           const TextStyle(fontSize: 10, color: Colors.black),
                       hintStyle: const TextStyle(fontSize: 10),
                       prefixIcon: const Icon(Icons.person, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
@@ -331,121 +375,37 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                       labelStyle:
                           const TextStyle(fontSize: 10, color: Colors.black),
                       hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(
-                          Icons.local_fire_department_rounded,
-                          color: Colors.black),
+                      prefixIcon:
+                          const Icon(Icons.library_books, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Theory: ', style: TextStyle(color: Colors.black)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.05,
-                  child: TextFormField(
-                    showCursor: false,
-                    readOnly: true,
-                    controller: theory,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
-                      suffixIcon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              _increment('theory');
-                            },
-                            child: Icon(Icons.arrow_drop_up, size: 24),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _decrement('theory');
-                            },
-                            child: Icon(Icons.arrow_drop_down, size: 24),
-                          ),
-                        ],
-                      ),
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(vertical: 8),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Background color of the container
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.2), // Shadow color with opacity
+                      offset: Offset(0, 10), // Shadow only below
+                      blurRadius: 8, // Controls how blurry the shadow is
+                      spreadRadius: 0.3, // Spread of the shadow
                     ),
-                    onChanged: (value1) {
-                      // Ensure valid numeric input
-                      if (int.tryParse(value1) == null) {
-                        theory.text = '0';
-                      }
-                    },
-                  ),
+                  ],
                 ),
-                Text(' + Lab: ', style: TextStyle(color: Colors.black)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.05,
-                  child: TextFormField(
-                    showCursor: false,
-                    readOnly: true,
-                    controller: lab,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
-                      suffixIcon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              _increment('lab');
-                            },
-                            child: Icon(Icons.arrow_drop_up, size: 24),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _decrement('lab');
-                            },
-                            child: Icon(Icons.arrow_drop_down, size: 24),
-                          ),
-                        ],
-                      ),
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(vertical: 8),
-                    ),
-                    onChanged: (value) {
-                      // Ensure valid numeric input
-                      if (int.tryParse(value) == null) {
-                        lab.text = '0';
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
                   child: TextFormField(
                     onTap: () async {
                       List v = await functionDepartment.function(
@@ -474,60 +434,177 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                       labelStyle:
                           const TextStyle(fontSize: 10, color: Colors.black),
                       hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(
-                          Icons.local_fire_department_rounded,
-                          color: Colors.black),
+                      prefixIcon:
+                          const Icon(Icons.business, color: Colors.black),
                       prefixStyle: const TextStyle(fontSize: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                      border: InputBorder.none,
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: const BorderSide(color: Colors.blue),
-                      ),
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide.none),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  if (formkey.currentState!.validate() &&
-                      department.text.isNotEmpty &&
-                      courseModule.text.isNotEmpty &&
-                      subjectName.text.isNotEmpty &&
-                      semester.text.isNotEmpty &&
-                      (int.parse(theory.text) + int.parse(lab.text)) != 0) {
-                    if (subjectId == null) {
-                      subjectUpdate.addSubject(
-                          semester.text,
-                          subjectName.text,
-                          courseModule.text,
-                          teacherId!,
-                          int.parse(theory.text),
-                          int.parse(lab.text),
-                          departmentId!);
-                    } else {
-                      subjectUpdate.updateSubject(
-                          semester.text,
-                          subjectId,
-                          subjectName.text,
-                          courseModule.text,
-                          departmentId,
-                          teacherId,
-                          int.parse(lab.text),
-                          int.parse(theory.text));
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Theory: ', style: TextStyle(color: Colors.black)),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Background color of the container
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional: rounded corners
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black
+                              .withOpacity(0.2), // Shadow color with opacity
+                          offset: Offset(0, 10), // Shadow only below
+                          blurRadius: 8, // Controls how blurry the shadow is
+                          spreadRadius: 0.3, // Spread of the shadow
+                        ),
+                      ],
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.05,
+                    child: TextFormField(
+                      showCursor: false,
+                      readOnly: true,
+                      controller: theory,
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                            borderSide: BorderSide.none),
+                        suffixIcon: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _increment('theory');
+                              },
+                              child: const Icon(Icons.arrow_drop_up, size: 24),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _decrement('theory');
+                              },
+                              child:
+                                  const Icon(Icons.arrow_drop_down, size: 24),
+                            ),
+                          ],
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                      onChanged: (value1) {
+                        // Ensure valid numeric input
+                        if (int.tryParse(value1) == null) {
+                          theory.text = '0';
+                        }
+                      },
+                    ),
+                  ),
+                  const Text(' + Lab: ', style: TextStyle(color: Colors.black)),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Background color of the container
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional: rounded corners
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black
+                              .withOpacity(0.2), // Shadow color with opacity
+                          offset: Offset(0, 10), // Shadow only below
+                          blurRadius: 8, // Controls how blurry the shadow is
+                          spreadRadius: 0.3, // Spread of the shadow
+                        ),
+                      ],
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.05,
+                    child: TextFormField(
+                      showCursor: false,
+                      readOnly: true,
+                      controller: lab,
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                            borderSide: BorderSide.none),
+                        suffixIcon: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _increment('lab');
+                              },
+                              child: const Icon(Icons.arrow_drop_up, size: 24),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _decrement('lab');
+                              },
+                              child:
+                                  const Icon(Icons.arrow_drop_down, size: 24),
+                            ),
+                          ],
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                      onChanged: (value) {
+                        // Ensure valid numeric input
+                        if (int.tryParse(value) == null) {
+                          lab.text = '0';
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (formkey.currentState!.validate() &&
+                        department.text.isNotEmpty &&
+                        courseModule.text.isNotEmpty &&
+                        subjectName.text.isNotEmpty &&
+                        semester.text.isNotEmpty &&
+                        (int.parse(theory.text) + int.parse(lab.text)) != 0) {
+                      if (subjectId == null) {
+                        subjectUpdate.addSubject(
+                            semester.text,
+                            subjectName.text,
+                            courseModule.text,
+                            teacherId!,
+                            int.parse(theory.text),
+                            int.parse(lab.text),
+                            departmentId!);
+                      } else {
+                        subjectUpdate.updateSubject(
+                            semester.text,
+                            subjectId,
+                            subjectName.text,
+                            courseModule.text,
+                            departmentId,
+                            teacherId,
+                            int.parse(lab.text),
+                            int.parse(theory.text));
+                      }
+                      context.go(Routes.manageSubject);
                     }
-                    context.go(Routes.manageSubject);
-                  }
-                },
-                child: const Text('Done'))
-          ],
-        ),
-      );
-    }));
+                  },
+                  child: const Text('Done'))
+            ],
+          ),
+        );
+      }),
+    ));
   }
 }

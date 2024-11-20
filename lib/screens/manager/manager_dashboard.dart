@@ -15,37 +15,34 @@ class _DashBoardScreenState extends State<ManagerDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-      appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize:
-              const Size.fromHeight(4.0), // Height of the bottom color area
-          child: Container(
-            decoration: const BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                        width: 5,
-                        color: Colors.red))), // Color of the bottom section
-            height: 5.0, // You can adjust this height as needed
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'University of Turbat',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 15),
-            ),
-            Text(
-              'AUTOMATIC TIMETABLE MANAGEMENT SYSTEM',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-          ],
-        ),
-      ),
+      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   elevation: 5,
+      //   bottom: PreferredSize(
+      //     preferredSize:
+      //         const Size.fromHeight(4.0), // Height of the bottom color area
+      //     child: Container(
+      //       // Color of the bottom section
+      //       height: 5.0, // You can adjust this height as needed
+      //     ),
+      //   ),
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       const Text(
+      //         'University of Turbat',
+      //         style: TextStyle(
+      //             color: Colors.black,
+      //             fontWeight: FontWeight.normal,
+      //             fontSize: 15),
+      //       ),
+      //       Text(
+      //         'AUTOMATIC TIMETABLE MANAGEMENT SYSTEM',
+      //         style: Theme.of(context).textTheme.displayLarge,
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: Row(
         children: [
           const ManagerDrawerBox(),

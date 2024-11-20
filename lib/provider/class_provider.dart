@@ -1,13 +1,9 @@
-// department_provider.dart
-
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:attms/services/class/fetch_class_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-
-import '../services/department/fetch_department.dart';
 
 // StateNotifier to manage department fetching state
 class ClassNotifier extends StateNotifier<List<FetchingClass>> {
@@ -25,18 +21,18 @@ class ClassNotifier extends StateNotifier<List<FetchingClass>> {
             .map((noteMap) => FetchingClass.fromMap(noteMap))
             .toList();
         // Convert the state to a list of maps (dictionaries)
-        List<Map<String, dynamic>> classLists =
-            state.map((dept) => dept.toMap()).toList();
+        // List<Map<String, dynamic>> classLists =
+        //     state.map((dept) => dept.toMap()).toList();
 
         // Print just the list of dictionaries
       } else {
-        print(
-            'Failed to load departments with status code: ${response.statusCode}');
+        // print(
+        //     'Failed to load departments with status code: ${response.statusCode}');
       }
     } on TimeoutException {
-      print('Request timed out. Please check your network connection.');
+      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      print('Error occurred: $e');
+      // print('Error occurred: $e');
     }
   }
 }

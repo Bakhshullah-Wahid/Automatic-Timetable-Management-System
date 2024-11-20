@@ -38,7 +38,8 @@ class MyRouter {
                 child: AddAccountScreen(
                     updatedData: state.extra as UpdateAccount?),
               ),
-            ),GoRoute(
+            ),
+            GoRoute(
               path: Routes.addSubject,
               name: 'add_subject',
               pageBuilder: (context, state) => NoTransitionPage(
@@ -158,6 +159,13 @@ class MyRouter {
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: NewTimeTableScreen(),
                     )),
+            GoRoute(
+              path: Routes.manageSubject,
+              name: 'manage_subject',
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: SubjectView(),
+              ),
+            ),
             GoRoute(
                 path: Routes.viewTimeTable,
                 name: 'view_timetable',

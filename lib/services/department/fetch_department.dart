@@ -46,9 +46,9 @@ class DepartmentService {
     final response =
         await http.delete(Uri.parse('${baseUrl}departments/delete/$id/'));
     if (response.statusCode == 204) {
-      print('Task deleted successfully');
+      // print('Task deleted successfully');
     } else {
-      print('Failed to delete task: ${response.statusCode}');
+      // print('Failed to delete task: ${response.statusCode}');
     }
   }
 }

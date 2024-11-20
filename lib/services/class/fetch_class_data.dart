@@ -48,8 +48,8 @@ class ClassService {
       }),
     );
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
       // Success
@@ -62,9 +62,9 @@ class ClassService {
     final response =
         await http.delete(Uri.parse('${baseUrl}classs/delete/$id/'));
     if (response.statusCode == 204) {
-      print('Task deleted successfully');
+      // print('Task deleted successfully');
     } else {
-      print('Failed to delete task: ${response.statusCode}');
+      // print('Failed to delete task: ${response.statusCode}');
     }
   }
 }

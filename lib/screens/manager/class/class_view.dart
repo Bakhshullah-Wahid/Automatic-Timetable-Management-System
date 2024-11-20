@@ -45,100 +45,123 @@ class ClassView extends ConsumerWidget {
 
     var mediaquery = MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
-      child: Column(
-        children: [
-          const TitleContainer(
-            description: "Classes registered for each Department are listed below",
-            pageTitle: 'Manage Classes',
-            buttonName: 'Add New Class',
-          ),
-          Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(5),
-                              bottomRight: Radius.circular(5)),
-                          border:
-                              Border.all(color: Colors.black.withOpacity(0.1))),
-                      child: formattedClass.isEmpty
-                          ? Center(
-                              child: Text(
-                              'No Class Found',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ))
-                          : GroupedListView(
-                              elements: formattedClass,
-                              groupBy: (element) =>
-                                  element['department_name'] ?? '',
-                              order: GroupedListOrder.ASC,
-                              groupSeparatorBuilder: (String groupByValue) =>
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      groupByValue,
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
+        body: Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Column(
+          children: [
+            const TitleContainer(
+              description:
+                  "Classes registered for each Department are listed below",
+              pageTitle: 'Manage Classes',
+              buttonName: 'Add New Class',
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: formattedClass.isEmpty
+                        ? Center(
+                            child: Text(
+                            'No Class Found',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ))
+                        : GroupedListView(
+                            elements: formattedClass,
+                            groupBy: (element) =>
+                                element['department_name'] ?? '',
+                            order: GroupedListOrder.ASC,
+                            groupSeparatorBuilder: (String groupByValue) =>
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 15.0),
+                                        child: Text(
+                                          groupByValue,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall,
+                                        ),
+                                      ),
+                                      Divider()
+                                    ],
                                   ),
-                              itemBuilder: (context, dynamic element) =>
-                                  ListTile(
-                                    title: Row(
-                                      children: [
-                                        SizedBox(
+                                ),
+                            itemBuilder: (context, dynamic element) => ListTile(
+                                  title: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 20.0),
+                                        child: Container(
                                           width: mediaquery.width * 0.7,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.black
-                                                        .withOpacity(0.1))),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                element['class_name'] ??
-                                                    'No Name',
+                                          decoration: BoxDecoration(
+                                            color: Colors
+                                                .white, // Background color of the container
+                                            borderRadius: BorderRadius.circular(
+                                                8), // Optional: rounded corners
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.2), // Shadow color with opacity
+                                                offset: Offset(
+                                                    0, 10), // Shadow only below
+                                                blurRadius:
+                                                    8, // Controls how blurry the shadow is
+                                                spreadRadius:
+                                                    0.3, // Spread of the shadow
                                               ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              element['class_name'] ??
+                                                  'No Name',
                                             ),
                                           ),
                                         ),
-                                        IconButton(
-                                            onPressed: () {
-                                              context.go(
-                                                Routes.addClass,
-                                                extra: UpdateClass(
-                                                    classId:
-                                                        element['class_id'],
-                                                    className:
-                                                        element['class_name'],
-                                                    classType:
-                                                        element['class_type'],
-                                                    department: element[
-                                                        'department_id'],
-                                                    departmentIdList:
-                                                        formattedDepartments),
-                                              );
-                                            },
-                                            icon: const Icon(Icons.edit,
-                                                color: Colors.black)),
-                                        IconButton(
-                                          onPressed: () async {
-                                            final ClassService classsService =
-                                                ClassService();
-                                            await classsService.deleteClass(
-                                                element['class_id']);
-
-                                            // Remove the task from the list
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            context.go(
+                                              Routes.addClass,
+                                              extra: UpdateClass(
+                                                  classId: element['class_id'],
+                                                  className:
+                                                      element['class_name'],
+                                                  classType:
+                                                      element['class_type'],
+                                                  department:
+                                                      element['department_id'],
+                                                  departmentIdList:
+                                                      formattedDepartments),
+                                            );
                                           },
-                                          icon: const Icon(Icons.delete,
-                                              color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  )))))
-        ],
+                                          icon: const Icon(Icons.edit,
+                                              color: Colors.black)),
+                                      IconButton(
+                                        onPressed: () async {
+                                          final ClassService classsService =
+                                              ClassService();
+                                          await classsService
+                                              .deleteClass(element['class_id']);
+
+                                          // Remove the task from the list
+                                        },
+                                        icon: const Icon(Icons.delete,
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ))))
+          ],
+        ),
       ),
     ));
   }
