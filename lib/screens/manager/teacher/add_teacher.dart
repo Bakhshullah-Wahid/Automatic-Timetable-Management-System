@@ -93,7 +93,7 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                 pageTitle: "Add New Teacher",
               ),
               const SizedBox(
-                height: 25,
+                height: 100,
               ),
               Container(
                 decoration: BoxDecoration(

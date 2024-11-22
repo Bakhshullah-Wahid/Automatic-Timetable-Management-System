@@ -8,6 +8,7 @@ import 'package:grouped_list/grouped_list.dart';
 import '../../../provider/department_provider.dart';
 import '../../../provider/teacher_provider.dart';
 import '../../../route/navigations.dart';
+import '../../../widget/dialoge_box.dart';
 import '../../../widget/title_container.dart';
 
 class TeacherView extends ConsumerWidget {
@@ -110,11 +111,11 @@ class TeacherView extends ConsumerWidget {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 10), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.3, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -147,10 +148,19 @@ class TeacherView extends ConsumerWidget {
                                               color: Colors.black)),
                                       IconButton(
                                         onPressed: () async {
-                                          final TeacherService teachersService =
-                                              TeacherService();
-                                          await teachersService.deleteClass(
-                                              element['teacher_id']);
+                                          DialogeBoxOpen deletes =
+                                              DialogeBoxOpen();
+                                          bool isDelete =
+                                              await deletes.deleteBox(
+                                                  element['teacher_name'],
+                                                  context);
+                                          if (isDelete) {
+                                            final TeacherService
+                                                teachersService =
+                                                TeacherService();
+                                            await teachersService.deleteClass(
+                                                element['teacher_id']);
+                                          }
 
                                           // Remove the task from the list
                                         },

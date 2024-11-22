@@ -119,7 +119,8 @@ class _TitleContainerState extends State<TitleContainer> {
                                   context.push(Routes.addNewTime);
                                 }
                               },
-                              child: Text('${widget.buttonName}'));
+                              child: Text('${widget.buttonName}',
+                                  style: TextStyle(color: Colors.orange)));
                         },
                       )
                     : Container()
@@ -137,9 +138,9 @@ class _TitleContainerState extends State<TitleContainer> {
                       BoxShadow(
                         color: Colors.black
                             .withOpacity(0.2), // Shadow color with opacity
-                        offset: Offset(0, 10), // Shadow only below
-                        blurRadius: 8, // Controls how blurry the shadow is
-                        spreadRadius: 0.3, // Spread of the shadow
+                        offset: Offset(0, 1), // Shadow only below
+                        blurRadius: 3, // Controls how blurry the shadow is
+                        spreadRadius: 0.4, // Spread of the shadow
                       ),
                     ],
                   ),
@@ -183,9 +184,9 @@ class _TitleContainerState extends State<TitleContainer> {
                       BoxShadow(
                         color: Colors.black
                             .withOpacity(0.2), // Shadow color with opacity
-                        offset: Offset(0, 10), // Shadow only below
-                        blurRadius: 8, // Controls how blurry the shadow is
-                        spreadRadius: 0.1, // Spread of the shadow
+                        offset: Offset(0, 1), // Shadow only below
+                        blurRadius: 3, // Controls how blurry the shadow is
+                        spreadRadius: 0.4, // Spread of the shadow
                       ),
                     ],
                   ),

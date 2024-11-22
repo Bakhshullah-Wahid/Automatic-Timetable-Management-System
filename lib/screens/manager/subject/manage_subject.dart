@@ -11,6 +11,7 @@ import '../../../provider/department_provider.dart';
 import '../../../provider/provider_dashboard.dart';
 import '../../../provider/subject_provider.dart';
 import '../../../route/navigations.dart';
+import '../../../widget/dialoge_box.dart';
 import '../../../widget/title_container.dart';
 
 // class SubjectView extends ConsumerWidget {
@@ -281,7 +282,6 @@ class _SubjectViewState extends State<SubjectView> {
               formatesSubject.add(formatSubject);
             }
           }
-
           var mediaquery = MediaQuery.of(context).size;
           return Container(
             color: Colors.white,
@@ -356,11 +356,11 @@ class _SubjectViewState extends State<SubjectView> {
                                                           .withOpacity(
                                                               0.2), // Shadow color with opacity
                                                       offset: Offset(0,
-                                                          10), // Shadow only below
+                                                          1), // Shadow only below
                                                       blurRadius:
-                                                          8, // Controls how blurry the shadow is
+                                                          3, // Controls how blurry the shadow is
                                                       spreadRadius:
-                                                          0.3, // Spread of the shadow
+                                                          0.4, // Spread of the shadow
                                                     ),
                                                   ],
                                                 ),
@@ -470,12 +470,21 @@ class _SubjectViewState extends State<SubjectView> {
                                             switchCheck
                                                 ? IconButton(
                                                     onPressed: () async {
-                                                      final SubjectService
-                                                          subjectService =
-                                                          SubjectService();
-                                                      await subjectService
-                                                          .deleteSubject(element[
-                                                              'subject_id']);
+                                                      DialogeBoxOpen deletes =
+                                                          DialogeBoxOpen();
+                                                      bool isDelete =
+                                                          await deletes.deleteBox(
+                                                              element[
+                                                                  'subject_name'],
+                                                              context);
+                                                      if (isDelete) {
+                                                        final SubjectService
+                                                            subjectService =
+                                                            SubjectService();
+                                                        await subjectService
+                                                            .deleteSubject(element[
+                                                                'subject_id']);
+                                                      }
 
                                                       // Remove the task from the list
                                                     },

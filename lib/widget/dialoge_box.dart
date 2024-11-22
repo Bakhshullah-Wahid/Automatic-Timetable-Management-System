@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 class DialogeBoxOpen {
@@ -134,5 +135,62 @@ class DialogeBoxOpen {
       },
     );
     return w;
+  }
+
+  deleteBox(
+    name,
+    context,
+  ) async {
+    bool hi = false;
+    await showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: Column(
+                  children: [const Text('Delete'), Divider()],
+                ),
+                content: SizedBox(
+                    width: 300,
+                    height: 200,
+                    child: ListTile(
+                      subtitle: Text(
+                        '"$name"',
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      title: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(3)),
+                        child: const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text(
+                            'Do you want to Delete: ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    )),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        hi = false;
+                        context.pop(context);
+                      },
+                      child: const Text('cancel')),
+                  ElevatedButton(
+                      onPressed: () {
+                        hi = true;
+                        context.pop(context);
+                      },
+                      child: const Text('Delete'))
+                ],
+              );
+            },
+          );
+        });
+    return hi;
   }
 }

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../route/navigations.dart';
 import '../../../wholeData/department/update_department.dart';
+import '../../../widget/dialoge_box.dart';
 import '../../../widget/title_container.dart';
 
 class ManageDepartmentView extends ConsumerWidget {
@@ -64,11 +65,11 @@ class ManageDepartmentView extends ConsumerWidget {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 10), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.3, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -97,13 +98,23 @@ class ManageDepartmentView extends ConsumerWidget {
                                               color: Colors.black)),
                                       IconButton(
                                         onPressed: () async {
-                                          final DepartmentService taskService =
-                                              DepartmentService();
-                                          await taskService.deleteTask(
-                                              departments[index].departmentId);
+                                          DialogeBoxOpen deletes =
+                                              DialogeBoxOpen();
+                                          bool isDelete =
+                                              await deletes.deleteBox(
+                                                  departments[index]
+                                                      .departmentName,
+                                                  context);
+                                          if (isDelete) {
+                                            final DepartmentService
+                                                taskService =
+                                                DepartmentService();
+                                            await taskService.deleteTask(
+                                                departments[index]
+                                                    .departmentId);
 
-                                          departments.removeAt(
-                                              index); // Remove the task from the list
+                                            departments.removeAt(index);
+                                          } // Remove the task from the list
 
                                           //                                   },
                                           //                                 ),

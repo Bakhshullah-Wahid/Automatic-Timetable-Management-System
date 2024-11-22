@@ -1,5 +1,6 @@
 import 'package:attms/provider/manager_provider.dart';
 import 'package:attms/services/coordinator/fetch_user_data.dart';
+import 'package:attms/widget/dialoge_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -110,16 +111,17 @@ class ManagerScreen extends ConsumerWidget {
                                                   .white, // Background color of the container
                                               borderRadius: BorderRadius.circular(
                                                   8), // Optional: rounded corners
+
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black.withOpacity(
                                                       0.2), // Shadow color with opacity
                                                   offset: Offset(0,
-                                                      10), // Shadow only below
+                                                      1), // Shadow only below
                                                   blurRadius:
-                                                      8, // Controls how blurry the shadow is
+                                                      3, // Controls how blurry the shadow is
                                                   spreadRadius:
-                                                      0.3, // Spread of the shadow
+                                                      0.4, // Spread of the shadow
                                                 ),
                                               ],
                                             ),
@@ -155,10 +157,18 @@ class ManagerScreen extends ConsumerWidget {
                                             )),
                                         IconButton(
                                           onPressed: () async {
-                                            final ManagerService taskService =
-                                                ManagerService();
-                                            await taskService.deleteManager(
-                                                element['user_id']);
+                                            DialogeBoxOpen deletes =
+                                                DialogeBoxOpen();
+                                            bool isDelete =
+                                                await deletes.deleteBox(
+                                                    element['user_name'],
+                                                    context);
+                                            if (isDelete) {
+                                              final ManagerService taskService =
+                                                  ManagerService();
+                                              await taskService.deleteManager(
+                                                  element['user_id']);
+                                            }
                                           },
                                           icon: const Icon(Icons.delete,
                                               color: Colors.black),

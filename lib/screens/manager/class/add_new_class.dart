@@ -93,7 +93,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                 pageTitle: "Add New Class",
               ),
               const SizedBox(
-                height: 25,
+                height: 100,
               ),
               Container(
                 decoration: BoxDecoration(
