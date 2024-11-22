@@ -75,13 +75,13 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.black.withOpacity(
-                                              0.2), // Shadow color with opacity
-                                          offset: Offset(
-                                              0, 10), // Shadow only below
+                                              0.1), // Shadow color with opacity
+                                          offset:
+                                              Offset(0, 7), // Shadow only below
                                           blurRadius:
-                                              8, // Controls how blurry the shadow is
+                                              4, // Controls how blurry the shadow is
                                           spreadRadius:
-                                              0.3, // Spread of the shadow
+                                              0.1, // Spread of the shadow
                                         ),
                                       ],
                                       color: Theme.of(context)
@@ -107,12 +107,12 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                         BoxShadow(
                                           color: Colors.black.withOpacity(
                                               0.2), // Shadow color with opacity
-                                          offset: Offset(
-                                              0, 10), // Shadow only below
+                                          offset:
+                                              Offset(0, 1), // Shadow only below
                                           blurRadius:
-                                              8, // Controls how blurry the shadow is
+                                              3, // Controls how blurry the shadow is
                                           spreadRadius:
-                                              0.3, // Spread of the shadow
+                                              0.4, // Spread of the shadow
                                         ),
                                       ],
                                       color: Theme.of(context)

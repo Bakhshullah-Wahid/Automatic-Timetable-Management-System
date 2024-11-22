@@ -8,6 +8,7 @@ import '../../../provider/department_provider.dart';
 import '../../../route/navigations.dart';
 import '../../../services/class/fetch_class_data.dart';
 import '../../../wholeData/class/update_class.dart';
+import '../../../widget/dialoge_box.dart';
 import '../../../widget/title_container.dart';
 
 class ClassView extends ConsumerWidget {
@@ -110,11 +111,11 @@ class ClassView extends ConsumerWidget {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 10), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.3, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -147,10 +148,22 @@ class ClassView extends ConsumerWidget {
                                               color: Colors.black)),
                                       IconButton(
                                         onPressed: () async {
-                                          final ClassService classsService =
-                                              ClassService();
-                                          await classsService
-                                              .deleteClass(element['class_id']);
+                                          DialogeBoxOpen deletes =
+                                              DialogeBoxOpen();
+                                          bool isDelete =
+                                              await deletes.deleteBox(
+                                                  element['class_name'],
+                                                  context);
+                                          if (isDelete) {
+                                            final ClassService classsService =
+                                                ClassService();
+                                            await classsService.deleteClass(
+                                                element['class_id']);
+                                          }
+                                          // final ClassService classsService =
+                                          //     ClassService();
+                                          // await classsService
+                                          //     .deleteClass(element['class_id']);
 
                                           // Remove the task from the list
                                         },

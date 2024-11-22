@@ -51,7 +51,7 @@ class _AddAccountScreenState extends State<AddDepartmentScreen> {
                 pageTitle: "Add New Department",
               ),
               const SizedBox(
-                height: 25,
+                height: 100,
               ),
               Container(
                 decoration: BoxDecoration(

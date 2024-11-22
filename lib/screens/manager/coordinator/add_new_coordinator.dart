@@ -110,7 +110,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                 pageTitle: "Add New Coordinator",
               ),
               const SizedBox(
-                height: 25,
+                height: 100,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -261,7 +261,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

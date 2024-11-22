@@ -176,7 +176,7 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                 pageTitle: "Add New Subject",
               ),
               const SizedBox(
-                height: 25,
+                height: 100,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -582,7 +582,7 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                             semester.text,
                             subjectName.text,
                             courseModule.text,
-                            teacherId!,
+                            teacherId,
                             int.parse(theory.text),
                             int.parse(lab.text),
                             departmentId!);

@@ -9,7 +9,7 @@ class SubjectService {
   final String baseUrl =
       'http://127.0.0.1:8000/'; // Change to your Django server URL
   Future<void> addSubject(
-    String semester,  String subjectName, String courseModule, int teacherId , int theory ,int lab,int departmentId) async {
+    String semester,  String subjectName, String courseModule, int? teacherId , int theory ,int lab,int departmentId) async {
     final response = await http.post(
       Uri.parse('${baseUrl}subjects/'),
       headers: <String, String>{

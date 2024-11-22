@@ -260,11 +260,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 11), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.10, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -378,10 +378,10 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             BoxShadow(
                               color: Colors.black.withOpacity(
                                   0.2), // Shadow color with opacity
-                              offset: Offset(0, 10), // Shadow only below
+                              offset: Offset(0, 1), // Shadow only below
                               blurRadius:
-                                  8, // Controls how blurry the shadow is
-                              spreadRadius: 0.3, // Spread of the shadow
+                                  3, // Controls how blurry the shadow is
+                              spreadRadius: 0.4, // Spread of the shadow
                             ),
                           ],
                         ),
@@ -837,8 +837,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           color: Colors.black
                               .withOpacity(0.2), // Shadow color with opacity
                           offset: Offset(0, 1), // Shadow only below
-                          blurRadius: 8, // Controls how blurry the shadow is
-                          spreadRadius: 0.10, // Spread of the shadow
+                          blurRadius: 3, // Controls how blurry the shadow is
+                          spreadRadius: 0.4, // Spread of the shadow
                         ),
                       ],
                     ),
@@ -896,11 +896,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 11), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.10, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -1031,11 +1031,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
                                                 offset: Offset(
-                                                    0, 11), // Shadow only below
+                                                    0, 1), // Shadow only below
                                                 blurRadius:
-                                                    8, // Controls how blurry the shadow is
+                                                    3, // Controls how blurry the shadow is
                                                 spreadRadius:
-                                                    0.10, // Spread of the shadow
+                                                    0.4, // Spread of the shadow
                                               ),
                                             ],
                                           ),
@@ -1171,8 +1171,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                   0.2), // Shadow color with opacity
                               offset: Offset(0, 1), // Shadow only below
                               blurRadius:
-                                  8, // Controls how blurry the shadow is
-                              spreadRadius: 0.10, // Spread of the shadow
+                                  3, // Controls how blurry the shadow is
+                              spreadRadius: 0.4, // Spread of the shadow
                             ),
                           ],
                         ),
@@ -1223,11 +1223,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                     color: Colors.black.withOpacity(
                                                         0.2), // Shadow color with opacity
                                                     offset: Offset(0,
-                                                        11), // Shadow only below
+                                                        1), // Shadow only below
                                                     blurRadius:
-                                                        8, // Controls how blurry the shadow is
+                                                        3, // Controls how blurry the shadow is
                                                     spreadRadius:
-                                                        0.10, // Spread of the shadow
+                                                        0.4, // Spread of the shadow
                                                   ),
                                                 ],
                                               ),
@@ -1318,8 +1318,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                   0.2), // Shadow color with opacity
                               offset: Offset(0, 1), // Shadow only below
                               blurRadius:
-                                  8, // Controls how blurry the shadow is
-                              spreadRadius: 0.10, // Spread of the shadow
+                                  3, // Controls how blurry the shadow is
+                              spreadRadius: 0.4, // Spread of the shadow
                             ),
                           ],
                         ),
@@ -1371,11 +1371,11 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                     color: Colors.black.withOpacity(
                                                         0.2), // Shadow color with opacity
                                                     offset: Offset(0,
-                                                        11), // Shadow only below
+                                                        1), // Shadow only below
                                                     blurRadius:
-                                                        8, // Controls how blurry the shadow is
+                                                        3, // Controls how blurry the shadow is
                                                     spreadRadius:
-                                                        0.10, // Spread of the shadow
+                                                        0.4, // Spread of the shadow
                                                   ),
                                                 ],
                                               ),
