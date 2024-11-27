@@ -237,7 +237,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                     style:
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
-                                  Divider()
+                                  const Divider()
                                 ],
                               ),
                             ),
@@ -259,7 +259,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                               BoxShadow(
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
-                                                offset: Offset(
+                                                offset: const Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
                                                     3, // Controls how blurry the shadow is
@@ -378,7 +378,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             BoxShadow(
                               color: Colors.black.withOpacity(
                                   0.2), // Shadow color with opacity
-                              offset: Offset(0, 1), // Shadow only below
+                              offset: const Offset(0, 1), // Shadow only below
                               blurRadius:
                                   3, // Controls how blurry the shadow is
                               spreadRadius: 0.4, // Spread of the shadow
@@ -404,7 +404,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.black),
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(
+                              errorStyle: const TextStyle(
                                 color: Colors.red,
                                 fontSize: 12,
                               ),
@@ -427,7 +427,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       const Text(
@@ -823,6 +823,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                 }
               }
             }
+
             return Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -836,7 +837,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         BoxShadow(
                           color: Colors.black
                               .withOpacity(0.2), // Shadow color with opacity
-                          offset: Offset(0, 1), // Shadow only below
+                          offset: const Offset(0, 1), // Shadow only below
                           blurRadius: 3, // Controls how blurry the shadow is
                           spreadRadius: 0.4, // Spread of the shadow
                         ),
@@ -876,7 +877,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                 .textTheme
                                                 .bodyLarge,
                                           ),
-                                          Divider()
+                                          const Divider()
                                         ],
                                       ),
                                     ),
@@ -895,7 +896,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                               BoxShadow(
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
-                                                offset: Offset(
+                                                offset: const Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
                                                     3, // Controls how blurry the shadow is
@@ -979,7 +980,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         BoxShadow(
                           color: Colors.black
                               .withOpacity(0.2), // Shadow color with opacity
-                          offset: Offset(0, 1), // Shadow only below
+                          offset: const Offset(0, 1), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.10, // Spread of the shadow
                         ),
@@ -1011,7 +1012,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                 .textTheme
                                                 .bodyLarge,
                                           ),
-                                          Divider()
+                                          const Divider()
                                         ],
                                       ),
                                     ),
@@ -1030,7 +1031,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                               BoxShadow(
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
-                                                offset: Offset(
+                                                offset: const Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
                                                     3, // Controls how blurry the shadow is
@@ -1071,7 +1072,8 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                                 .textTheme
                                                                 .displayLarge,
                                                           ),
-                                                          Text(' (selected)',
+                                                          const Text(
+                                                              ' (selected)',
                                                               style: TextStyle(
                                                                   fontSize: 10,
                                                                   color: Colors
@@ -1082,7 +1084,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                         radius: 15,
                                                         backgroundColor:
                                                             Colors.green[300],
-                                                        child: Center(
+                                                        child: const Center(
                                                           child: Icon(
                                                             Icons.check,
                                                             color: Colors.white,
@@ -1169,7 +1171,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             BoxShadow(
                               color: Colors.black.withOpacity(
                                   0.2), // Shadow color with opacity
-                              offset: Offset(0, 1), // Shadow only below
+                              offset: const Offset(0, 1), // Shadow only below
                               blurRadius:
                                   3, // Controls how blurry the shadow is
                               spreadRadius: 0.4, // Spread of the shadow
@@ -1203,7 +1205,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                         .textTheme
                                                         .bodyLarge,
                                                   ),
-                                                  Divider()
+                                                  const Divider()
                                                 ],
                                               ),
                                             ),
@@ -1222,7 +1224,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                   BoxShadow(
                                                     color: Colors.black.withOpacity(
                                                         0.2), // Shadow color with opacity
-                                                    offset: Offset(0,
+                                                    offset: const Offset(0,
                                                         1), // Shadow only below
                                                     blurRadius:
                                                         3, // Controls how blurry the shadow is
@@ -1316,7 +1318,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             BoxShadow(
                               color: Colors.black.withOpacity(
                                   0.2), // Shadow color with opacity
-                              offset: Offset(0, 1), // Shadow only below
+                              offset: const Offset(0, 1), // Shadow only below
                               blurRadius:
                                   3, // Controls how blurry the shadow is
                               spreadRadius: 0.4, // Spread of the shadow
@@ -1351,7 +1353,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                         .textTheme
                                                         .bodyLarge,
                                                   ),
-                                                  Divider()
+                                                  const Divider()
                                                 ],
                                               ),
                                             ),
@@ -1370,7 +1372,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                   BoxShadow(
                                                     color: Colors.black.withOpacity(
                                                         0.2), // Shadow color with opacity
-                                                    offset: Offset(0,
+                                                    offset: const Offset(0,
                                                         1), // Shadow only below
                                                     blurRadius:
                                                         3, // Controls how blurry the shadow is
@@ -1414,7 +1416,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                                     .textTheme
                                                                     .displayLarge,
                                                               ),
-                                                              Text(
+                                                              const Text(
                                                                   ' (selected)',
                                                                   style: TextStyle(
                                                                       fontSize:
@@ -1428,7 +1430,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                             backgroundColor:
                                                                 Colors
                                                                     .green[300],
-                                                            child: Center(
+                                                            child: const Center(
                                                               child: Icon(
                                                                 Icons.check,
                                                                 color: Colors
@@ -1456,46 +1458,10 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
     );
   }
 
-  List<DataColumn> dataCome() {
-    return [
-      const DataColumn(
-          label: Text(
-        'Time',
-        style: TextStyle(color: Colors.black),
-      )),
-      const DataColumn(
-          label: Text(
-        'Mon',
-        style: TextStyle(color: Colors.black),
-      )),
-      const DataColumn(
-          label: Text(
-        'Tue',
-        style: TextStyle(color: Colors.black),
-      )),
-      const DataColumn(
-          label: Text(
-        'Wed',
-        style: TextStyle(color: Colors.black),
-      )),
-      const DataColumn(
-          label: Text(
-        'Thu',
-        style: TextStyle(color: Colors.black),
-      )),
-      const DataColumn(
-          label: Text(
-        'Fri',
-        style: TextStyle(color: Colors.black),
-      ))
-    ];
-  }
-
-//Generrate table
-  List generatedTimetable1 = [];
-  List generatedTimetable2 = [];
-  List generatedTimetable3 = [];
-  List generatedTimetable4 = [];
+  List timetable = [];
+  List timetable2 = [];
+  List timetable3 = [];
+  List timetable4 = [];
   Widget _buildGenerateTimetable(context) {
     return Scaffold(
         body: Container(
@@ -1503,6 +1469,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
       child: Column(
         children: [
           const TitleContainer(
+            buttonName: 'Generate Timetable',
             pageTitle: 'Generate Timetable',
             description:
                 'When informations are selected completely by clicking the generate button you will be generating the timetable',
@@ -1511,88 +1478,22 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             padding: const EdgeInsets.all(20.0),
             child: ElevatedButton(
                 onPressed: () {
+                  List generatedTimetable1 = [];
+                  List generatedTimetable2 = [];
+
+                  List generatedTimetable3 = [];
+                  List generatedTimetable4 = [];
+                  timetable = [];
+                  timetable2 = [];
+                  timetable3 = [];
+                  timetable4 = [];
                   List newFilteredData = [];
                   List semester1and2 = [];
-                  List newFilteredDataWithIndex = [];
 
                   List semester3and4 = [];
                   List semester5and6 = [];
                   List semester7and8 = [];
-                  // for (var filteredDatamm in filteredDataOdd) {
-                  //   if (filteredDatamm['theory'] + filteredDatamm['lab'] == 1) {
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //   } else if (filteredDatamm['theory'] + filteredDatamm['lab'] ==
-                  //           2 ||
-                  //       filteredDatamm['theory'] + filteredDatamm['lab'] == 3) {
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //   } else if (filteredDatamm['theory'] + filteredDatamm['lab'] ==
-                  //       4) {
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //     newFilteredData.add({
-                  //       'teacher_id': filteredDatamm['teacher_id'],
-                  //       'teacher_name': filteredDatamm['teacher_name'],
-                  //       'subject_id': filteredDatamm['subject_id'],
-                  //       'subject_name': filteredDatamm['subject_name'],
-                  //       'course_module': filteredDatamm['course_module'],
-                  //       'theory': filteredDatamm['theory'],
-                  //       'lab': filteredDatamm['lab'],
-                  //       'semester': filteredDatamm['semester'],
-                  //       'department_name': filteredDatamm['department_name'],
-                  //     });
-                  //   }
-                  // }
+
                   for (var filteredDatamm in filteredDataOdd) {
                     int repetitionCount =
                         1; // Default for 'theory' + 'lab' == 1
@@ -1624,82 +1525,9 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                   }
                   // ----------------------------------------------------------------------------------------
 
-                  for (int i = 0; i < newFilteredData.length; i++) {
-                    newFilteredDataWithIndex.add({
-                      'teacher_id': newFilteredData[i]['teacher_id'],
-                      'subject_id': newFilteredData[i]['subject_id'],
-                      'id': i,
-                      'theory': newFilteredData[i]['theory'],
-                      'lab': newFilteredData[i]['lab'],
-                      'subject_name': newFilteredData[i]['subject_name'],
-                      'teacher_name': newFilteredData[i]['teacher_name'],
-                      'course_module': newFilteredData[i]['course_module'],
-                      'semester': newFilteredData[i]['semester'],
-                      'department_name': newFilteredData[i]['department_name']
-                    });
-                  }
                   // ================================================================================
 
-                  // for (var newFilteredDatam in newFilteredDataWithIndex) {
-                  //   if (newFilteredDatam['semester'] == 'semester 01' ||
-                  //       newFilteredDatam['semester'] == 'semester 02') {
-                  //     semester1and2.add({
-                  //       'id': newFilteredDatam['id'],
-                  //       'teacher_id': newFilteredDatam['teacher_id'],
-                  //       'subject_id': newFilteredDatam['subject_id'],
-                  //       'theory': newFilteredDatam['theory'],
-                  //       'lab': newFilteredDatam['lab'],
-                  //       'subject_name': newFilteredDatam['subject_name'],
-                  //       'teacher_name': newFilteredDatam['teacher_name'],
-                  //       'course_module': newFilteredDatam['course_module'],
-                  //       'semester': newFilteredDatam['semester'],
-                  //       'department_name': newFilteredDatam['department_name']
-                  //     });
-                  //   } else if (newFilteredDatam['semester'] == 'semester 03' ||
-                  //       newFilteredDatam['semester'] == 'semester 04') {
-                  //     semester3and4.add({
-                  //       'id': newFilteredDatam['id'],
-                  //       'teacher_id': newFilteredDatam['teacher_id'],
-                  //       'subject_id': newFilteredDatam['subject_id'],
-                  //       'theory': newFilteredDatam['theory'],
-                  //       'lab': newFilteredDatam['lab'],
-                  //       'subject_name': newFilteredDatam['subject_name'],
-                  //       'teacher_name': newFilteredDatam['teacher_name'],
-                  //       'course_module': newFilteredDatam['course_module'],
-                  //       'semester': newFilteredDatam['semester'],
-                  //       'department_name': newFilteredDatam['department_name']
-                  //     });
-                  //   } else if (newFilteredDatam['semester'] == 'semester 05' ||
-                  //       newFilteredDatam['semester'] == 'semester 06') {
-                  //     semester5and6.add({
-                  //       'id': newFilteredDatam['id'],
-                  //       'teacher_id': newFilteredDatam['teacher_id'],
-                  //       'subject_id': newFilteredDatam['subject_id'],
-                  //       'theory': newFilteredDatam['theory'],
-                  //       'lab': newFilteredDatam['lab'],
-                  //       'subject_name': newFilteredDatam['subject_name'],
-                  //       'teacher_name': newFilteredDatam['teacher_name'],
-                  //       'course_module': newFilteredDatam['course_module'],
-                  //       'semester': newFilteredDatam['semester'],
-                  //       'department_name': newFilteredDatam['department_name']
-                  //     });
-                  //   } else if (newFilteredDatam['semester'] == 'semester 07' ||
-                  //       newFilteredDatam['semester'] == 'semester 08') {
-                  //     semester7and8.add({
-                  //       'id': newFilteredDatam['id'],
-                  //       'teacher_id': newFilteredDatam['teacher_id'],
-                  //       'subject_id': newFilteredDatam['subject_id'],
-                  //       'theory': newFilteredDatam['theory'],
-                  //       'lab': newFilteredDatam['lab'],
-                  //       'subject_name': newFilteredDatam['subject_name'],
-                  //       'teacher_name': newFilteredDatam['teacher_name'],
-                  //       'course_module': newFilteredDatam['course_module'],
-                  //       'semester': newFilteredDatam['semester'],
-                  //       'department_name': newFilteredDatam['department_name']
-                  //     });
-                  //   }
-                  // }
-                  for (var newFilteredDatam in newFilteredDataWithIndex) {
+                  for (var newFilteredDatam in newFilteredData) {
                     // Determine the target list based on the semester
                     List? targetList;
                     if (['semester 01', 'semester 02']
@@ -1741,33 +1569,38 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     'Friday'
                   ];
                   List welcomeClass1 = [];
-                  print(selectedClass);
+
                   for (int j = 0; j < selectedClass.length; j++) {
                     for (int k = 0; k < days.length; k++) {
                       welcomeClass1.add({
                         'class_id': selectedClass[j]['class_id'],
                         'day': days[k],
                         'class_name': selectedClass[j]['class_name'],
-                        'slot': slot1SelectedStart
+                        'slot': slot1SelectedStart,
+                        'department_name': selectedClass[j]['department_name']
                       });
                       welcomeClass1.add({
                         'class_id': selectedClass[j]['class_id'],
                         'day': days[k],
                         'class_name': selectedClass[j]['class_name'],
-                        'slot': slot2SelectedStart
+                        'slot': slot2SelectedStart,
+                        'department_name': selectedClass[j]['department_name']
                       });
                       welcomeClass1.add({
                         'class_id': selectedClass[j]['class_id'],
                         'day': days[k],
                         'class_name': selectedClass[j]['class_name'],
-                        'slot': slot3SelectedStart
+                        'slot': slot3SelectedStart,
+                        'department_name': selectedClass[j]['department_name']
                       });
                     }
                   }
 
                   generatedTimetable1 = [];
+
                   List classFor12 = List.from(welcomeClass1);
                   List classFor34 = List.from(welcomeClass1);
+
                   List classFor56 = List.from(welcomeClass1);
                   List classFor78 = List.from(welcomeClass1);
 
@@ -1810,39 +1643,105 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     itemsToRemove
                         .clear(); // Clear the list for the next iteration
                   }
+                  Map<String, List<Map<String, String>>> groupData = {};
+                  for (var entry in generatedTimetable1) {
+                    String day = entry['day']!;
+                    if (!groupData.containsKey(day)) {
+                      groupData[day] = [];
+                    }
+
+                    groupData[day]!.add({
+                      'subject_name': entry['subject_name']!,
+                      'teacher_name': entry['teacher_name']!,
+                      'class_name': entry['class_name']!,
+                      'day': entry['day']!,
+                      'slot': entry['slot']!
+                    });
+                  }
+
+                  for (var day in days) {
+                    List<Map<String, String>> dayTimetable =
+                        groupData[day] ?? [];
+                    timetable.add(dayTimetable);
+                  }
 
                   // 3 and 4 semester schedule----------------------------------------------------
+
+                  for (var gen in generatedTimetable1) {
+                    for (var item in classFor34) {
+                      if (gen['day'].toLowerCase() ==
+                              item['day'].toLowerCase() &&
+                          gen['slot'].toLowerCase() ==
+                              item['slot'].toLowerCase() &&
+                          gen['class_name'] == item['class_name']) {
+                        classFor34.remove(item);
+
+                        // Mark the item for removal
+                        break;
+                      }
+                    }
+
+                    // Exit the inner loop after adding one entry
+                  }
+
+                  generatedTimetable2 = [];
                   classFor34.shuffle();
 
                   for (int sub = 0; sub < semester3and4.length; sub++) {
+                    bool slotAssigned = false;
+
                     for (var dash in classFor34) {
-                      // Check if the teacher is already assigned in generatedTimetable1
-                      bool isTeacherAssigned = generatedTimetable1.any(
-                          (entry) =>
+                      // Check if the `teacher_id` is already assigned a class in `generatedTimetable1` or `generatedTimetable2` at the same slot
+                      bool teacherConflict = generatedTimetable1.any((entry) =>
                               entry['teacher_id'] ==
                                   semester3and4[sub]['teacher_id'] &&
-                              entry['day'].toLowerCase() ==
-                                  dash['day'].toLowerCase() &&
-                              entry['slot'].toLowerCase() ==
-                                  dash['slot'].toLowerCase());
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']) ||
+                          generatedTimetable2.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester3and4[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']);
 
-                      // Check if the classroom is already assigned in generatedTimetable1
-                      bool isClassroomAssigned = generatedTimetable1.any(
-                          (entry) =>
-                              entry['id'] == semester3and4[sub]['id'] &&
-                              entry['day'].toLowerCase() ==
-                                  dash['day'].toLowerCase() &&
-                              entry['slot'].toLowerCase() ==
-                                  dash['slot'].toLowerCase());
+                      // Skip this slot if there's a conflict
+                      if (teacherConflict) {
+                        continue;
+                      }
 
-                      // If no conflict for both teacher_id and class_id, assign the slot
-                      if (!isTeacherAssigned && !isClassroomAssigned) {
+                      // Assign the slot if no conflict
+                      generatedTimetable2.add({
+                        'id': semester3and4[sub]['id'],
+                        'subject_name': semester3and4[sub]['subject_name'],
+                        'teacher_name': semester3and4[sub]['teacher_name'],
+                        'teacher_id': semester3and4[sub]
+                            ['teacher_id'], // Added for conflict check
+                        'semester': semester3and4[sub]['semester'],
+                        'department_name': semester3and4[sub]
+                            ['department_name'],
+                        'day': dash['day'],
+                        'class_name': dash['class_name'],
+                        'slot': dash['slot']
+                      });
+
+                      // Mark items to remove after assigning
+                      itemsToRemove.addAll(classFor34.where((item) =>
+                          item['day'].toLowerCase() ==
+                              dash['day'].toLowerCase() &&
+                          item['slot'].toLowerCase() ==
+                              dash['slot'].toLowerCase()));
+
+                      slotAssigned = true;
+                      break; // Exit the inner loop once a slot is assigned
+                    }
+
+                    if (!slotAssigned) {
+                      // Retry finding a slot for the same class with remaining available slots
+                      for (var dash in classFor34) {
+                        // If this point is reached, all conflicting slots have been skipped
                         generatedTimetable2.add({
-                          'id': semester3and4[sub]['id'],
-                          'subject_id': semester3and4[sub]['subject_id'],
                           'subject_name': semester3and4[sub]['subject_name'],
-                          'teacher_id': semester3and4[sub]['teacher_id'],
                           'teacher_name': semester3and4[sub]['teacher_name'],
+                          'teacher_id': semester3and4[sub]['teacher_id'],
                           'semester': semester3and4[sub]['semester'],
                           'department_name': semester3and4[sub]
                               ['department_name'],
@@ -1851,130 +1750,48 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                           'slot': dash['slot']
                         });
 
-                        // Mark the slot for removal from classFor34 if assigned
-                        for (var item in classFor34) {
-                          if (dash['day'].toLowerCase() ==
-                                  item['day'].toLowerCase() &&
-                              dash['slot'].toLowerCase() ==
-                                  item['slot'].toLowerCase()) {
-                            itemsToRemove.add(item);
-                          }
-                        }
+                        // Mark items to remove after assigning
+                        itemsToRemove.addAll(classFor34.where((item) =>
+                            item['day'].toLowerCase() ==
+                                dash['day'].toLowerCase() &&
+                            item['slot'].toLowerCase() ==
+                                dash['slot'].toLowerCase()));
 
-                        break; // Exit the inner loop after adding one entry
-                      } else if (isTeacherAssigned) {
-                        // If teacher is already assigned, find a free slot for the teacher
-                        for (var availableSlot in classFor34) {
-                          if (availableSlot['day'].toLowerCase() ==
-                                  dash['day'].toLowerCase() &&
-                              availableSlot['slot'].toLowerCase() !=
-                                  dash['slot'].toLowerCase()) {
-                            // Assign the teacher to this available slot
-                            generatedTimetable2.add({
-                              'id': semester3and4[sub]['id'],
-                              'subject_id': semester3and4[sub]['subject_id'],
-                              'subject_name': semester3and4[sub]
-                                  ['subject_name'],
-                              'teacher_id': semester3and4[sub]['teacher_id'],
-                              'teacher_name': semester3and4[sub]
-                                  ['teacher_name'],
-                              'semester': semester3and4[sub]['semester'],
-                              'department_name': semester3and4[sub]
-                                  ['department_name'],
-                              'day': availableSlot['day'],
-                              'class_name': availableSlot['class_name'],
-                              'slot': availableSlot['slot']
-                            });
-                            break; // Break after assigning the teacher to an available slot
-                          }
-                        }
-                      } else if (isClassroomAssigned) {
-                        // If classroom is already assigned, find a free class for this subject
-                        for (var availableSlot in classFor34) {
-                          if (availableSlot['day'].toLowerCase() ==
-                                  dash['day'].toLowerCase() &&
-                              availableSlot['slot'].toLowerCase() !=
-                                  dash['slot'].toLowerCase()) {
-                            // Assign the classroom to this available slot
-                            generatedTimetable2.add({
-                              'id': semester3and4[sub]['id'],
-                              'subject_id': semester3and4[sub]['subject_id'],
-                              'subject_name': semester3and4[sub]
-                                  ['subject_name'],
-                              'teacher_id': semester3and4[sub]['teacher_id'],
-                              'teacher_name': semester3and4[sub]
-                                  ['teacher_name'],
-                              'semester': semester3and4[sub]['semester'],
-                              'department_name': semester3and4[sub]
-                                  ['department_name'],
-                              'day': availableSlot['day'],
-                              'class_name': availableSlot['class_name'],
-                              'slot': availableSlot['slot']
-                            });
-                            break; // Break after assigning the classroom to an available slot
-                          }
-                        }
+                        slotAssigned = true;
+                        break; // Exit the inner loop after assigning the class
                       }
                     }
 
-                    // Remove all items marked for deletion
+                    // Remove all marked items from `classFor34`
                     classFor34
                         .removeWhere((item) => itemsToRemove.contains(item));
-                    itemsToRemove
-                        .clear(); // Clear the list for the next iteration
+                    itemsToRemove.clear(); // Clear for the next iteration
                   }
 
-                  // for (var gen in generatedTimetable1) {
-                  //   for (var item in classFor34) {
-                  //     if (gen['day'].toLowerCase() == item['day'].toLowerCase() &&
-                  //         gen['slot'].toLowerCase() ==
-                  //             item['slot'].toLowerCase() &&
-                  //         gen['class_name'] == item['class_name']) {
-                  //       classFor34.remove(item);
+                  // --------------------------------------------------------------------------------------------
 
-                  //       // Mark the item for removal
-                  //       break;
-                  //     }
-                  //   }
+                  // ============================================================
+                  Map<String, List<Map<String, String>>> groupData2 = {};
+                  for (var entry in generatedTimetable2) {
+                    String day = entry['day']!;
+                    if (!groupData2.containsKey(day)) {
+                      groupData2[day] = [];
+                    }
 
-                  //   // Exit the inner loop after adding one entry
-                  // }
+                    groupData2[day]!.add({
+                      'subject_name': entry['subject_name']!,
+                      'teacher_name': entry['teacher_name']!,
+                      'class_name': entry['class_name']!,
+                      'day': entry['day']!,
+                      'slot': entry['slot']!
+                    });
+                  }
 
-                  // classFor34.shuffle();
-                  // for (int sub = 0; sub < semester3and4.length; sub++) {
-                  //   for (var dash in classFor34) {
-                  //     generatedTimetable2.add({
-                  //       'id': semester3and4[sub]['id'],
-                  //       'subject_id':semester3and4[sub]['subject_id'],
-                  //       'subject_name': semester3and4[sub]['subject_name'],
-                  //       'teacher_id':semester3and4[sub]['teacher_id'],
-                  //       'teacher_name': semester3and4[sub]['teacher_name'],
-                  //       'semester': semester3and4[sub]['semester'],
-                  //       'department_name': semester3and4[sub]['department_name'],
-                  //       'day': dash['day'],
-                  //       'class_name': dash['class_name'],
-                  //       'slot': dash['slot']
-                  //     });
-
-                  //     for (var item in classFor34) {
-                  //       if (dash['day'].toLowerCase() ==
-                  //               item['day'].toLowerCase() &&
-                  //           dash['slot'].toLowerCase() ==
-                  //               item['slot'].toLowerCase()) {
-                  //         itemsToRemove.add(item);
-                  //         // Mark the item for removal
-                  //       }
-                  //     }
-
-                  //     break; // Exit the inner loop after adding one entry
-                  //   }
-
-                  //   // Remove all items marked for deletion
-                  //   classFor34
-                  //       .removeWhere((item) => itemsToRemove.contains(item));
-                  //   itemsToRemove
-                  //       .clear(); // Clear the list for the next iteration
-                  // }
+                  for (var day in days) {
+                    List<Map<String, String>> dayTimetable =
+                        groupData2[day] ?? [];
+                    timetable2.add(dayTimetable);
+                  }
                   // ---------------------------------------------------------------------------------------------
                   for (var gen in generatedTimetable1) {
                     for (var item in classFor56) {
@@ -1989,20 +1806,59 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         break;
                       }
                     }
+                    for (var gen in generatedTimetable2) {
+                      for (var item in classFor56) {
+                        if (gen['day'].toLowerCase() ==
+                                item['day'].toLowerCase() &&
+                            gen['slot'].toLowerCase() ==
+                                item['slot'].toLowerCase() &&
+                            gen['class_name'] == item['class_name']) {
+                          classFor56.remove(item);
+
+                          // Mark the item for removal
+                          break;
+                        }
+                      }
+
+                      // Exit the inner loop after adding one entry
+                    }
 
                     // Exit the inner loop after adding one entry
                   }
-
-                  // for (int remove = 0; remove < generatedTimetable1.length;remove++){
-
-                  // }
                   classFor56.shuffle();
+
                   for (int sub = 0; sub < semester5and6.length; sub++) {
+                    bool slotAssigned = false;
+
                     for (var dash in classFor56) {
+                      // Check if the `teacher_id` is already assigned a class in `generatedTimetable1`, `generatedTimetable2`, or `generatedTimetable3` at the same slot
+                      bool teacherConflict = generatedTimetable1.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester5and6[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']) ||
+                          generatedTimetable2.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester5and6[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']) ||
+                          generatedTimetable3.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester5and6[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']);
+
+                      // Skip this slot if there's a conflict
+                      if (teacherConflict) {
+                        continue;
+                      }
+
+                      // Assign the slot if no conflict
                       generatedTimetable3.add({
-                        'id': semester5and6[sub]['id'],
                         'subject_name': semester5and6[sub]['subject_name'],
                         'teacher_name': semester5and6[sub]['teacher_name'],
+                        'teacher_id': semester5and6[sub]
+                            ['teacher_id'], // Added for conflict check
                         'semester': semester5and6[sub]['semester'],
                         'department_name': semester5and6[sub]
                             ['department_name'],
@@ -2011,25 +1867,77 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         'slot': dash['slot']
                       });
 
-                      for (var item in classFor56) {
-                        if (dash['day'].toLowerCase() ==
-                                item['day'].toLowerCase() &&
-                            dash['slot'].toLowerCase() ==
-                                item['slot'].toLowerCase()) {
-                          itemsToRemove.add(item); // Mark the item for removal
-                        }
-                      }
+                      // Mark items to remove after assigning
+                      itemsToRemove.addAll(classFor56.where((item) =>
+                          item['day'].toLowerCase() ==
+                              dash['day'].toLowerCase() &&
+                          item['slot'].toLowerCase() ==
+                              dash['slot'].toLowerCase()));
 
-                      break; // Exit the inner loop after adding one entry
+                      slotAssigned = true;
+                      break; // Exit the inner loop once a slot is assigned
                     }
 
-                    // Remove all items marked for deletion
+                    if (!slotAssigned) {
+                      // Retry finding a slot for the same class with remaining available slots
+                      for (var dash in classFor56) {
+                        // If this point is reached, all conflicting slots have been skipped
+                        generatedTimetable3.add({
+                          'subject_name': semester5and6[sub]['subject_name'],
+                          'teacher_name': semester5and6[sub]['teacher_name'],
+                          'teacher_id': semester5and6[sub]['teacher_id'],
+                          'semester': semester5and6[sub]['semester'],
+                          'department_name': semester5and6[sub]
+                              ['department_name'],
+                          'day': dash['day'],
+                          'class_name': dash['class_name'],
+                          'slot': dash['slot']
+                        });
+
+                        // Mark items to remove after assigning
+                        itemsToRemove.addAll(classFor56.where((item) =>
+                            item['day'].toLowerCase() ==
+                                dash['day'].toLowerCase() &&
+                            item['slot'].toLowerCase() ==
+                                dash['slot'].toLowerCase()));
+
+                        slotAssigned = true;
+                        break; // Exit the inner loop after assigning the class
+                      }
+                    }
+
+                    // Remove all marked items from `classFor56`
                     classFor56
                         .removeWhere((item) => itemsToRemove.contains(item));
-                    itemsToRemove
-                        .clear(); // Clear the list for the next iteration
+                    itemsToRemove.clear(); // Clear for the next iteration
                   }
-                  // --------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------
+
+// Group generatedTimetable3 by day for display
+                  Map<String, List<Map<String, String>>> groupData3 = {};
+                  for (var entry in generatedTimetable3) {
+                    String day = entry['day']!;
+                    if (!groupData3.containsKey(day)) {
+                      groupData3[day] = [];
+                    }
+
+                    groupData3[day]!.add({
+                      'subject_name': entry['subject_name']!,
+                      'teacher_name': entry['teacher_name']!,
+                      'class_name': entry['class_name']!,
+                      'day': entry['day']!,
+                      'slot': entry['slot']!
+                    });
+                  }
+
+// Add the grouped data to `timetable3` for each day
+                  for (var day in days) {
+                    List<Map<String, String>> dayTimetable =
+                        groupData3[day] ?? [];
+                    timetable3.add(dayTimetable);
+                  }
+
                   for (var gen in generatedTimetable1) {
                     for (var item in classFor78) {
                       if (gen['day'].toLowerCase() ==
@@ -2043,16 +1951,70 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         break;
                       }
                     }
+                  }
+                  for (var gen in generatedTimetable2) {
+                    for (var item in classFor78) {
+                      if (gen['day'].toLowerCase() ==
+                              item['day'].toLowerCase() &&
+                          gen['slot'].toLowerCase() ==
+                              item['slot'].toLowerCase() &&
+                          gen['class_name'] == item['class_name']) {
+                        classFor78.remove(item);
 
-                    // Exit the inner loop after adding one entry
+                        // Mark the item for removal
+                        break;
+                      }
+                    }
+                  }
+                  for (var gen in generatedTimetable3) {
+                    for (var item in classFor78) {
+                      if (gen['day'].toLowerCase() ==
+                              item['day'].toLowerCase() &&
+                          gen['slot'].toLowerCase() ==
+                              item['slot'].toLowerCase() &&
+                          gen['class_name'] == item['class_name']) {
+                        classFor78.remove(item);
+
+                        // Mark the item for removal
+                        break;
+                      }
+                    }
                   }
                   classFor78.shuffle();
+
                   for (int sub = 0; sub < semester7and8.length; sub++) {
+                    bool slotAssigned = false;
+
+                    // Iterate over class slots for semester 7 and 8
                     for (var dash in classFor78) {
+                      // Check if the teacher is already assigned a class in any timetable at the same slot
+                      bool teacherConflict = generatedTimetable1.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester7and8[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']) ||
+                          generatedTimetable2.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester7and8[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']) ||
+                          generatedTimetable3.any((entry) =>
+                              entry['teacher_id'] ==
+                                  semester7and8[sub]['teacher_id'] &&
+                              entry['day'] == dash['day'] &&
+                              entry['slot'] == dash['slot']);
+
+                      // Skip the current slot if a conflict is detected
+                      if (teacherConflict) {
+                        continue;
+                      }
+
+                      // Assign the slot if no conflict
                       generatedTimetable4.add({
-                        'id': semester7and8[sub]['id'],
                         'subject_name': semester7and8[sub]['subject_name'],
                         'teacher_name': semester7and8[sub]['teacher_name'],
+                        'teacher_id': semester7and8[sub]
+                            ['teacher_id'], // For conflict check
                         'semester': semester7and8[sub]['semester'],
                         'department_name': semester7and8[sub]
                             ['department_name'],
@@ -2061,166 +2023,297 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                         'slot': dash['slot']
                       });
 
-                      for (var item in classFor78) {
-                        if (dash['day'].toLowerCase() ==
-                                item['day'].toLowerCase() &&
-                            dash['slot'].toLowerCase() ==
-                                item['slot'].toLowerCase()) {
-                          itemsToRemove.add(item); // Mark the item for removal
-                        }
-                      }
+                      // Mark the assigned slot to be removed later
+                      itemsToRemove.addAll(classFor78.where((item) =>
+                          item['day'].toLowerCase() ==
+                              dash['day'].toLowerCase() &&
+                          item['slot'].toLowerCase() ==
+                              dash['slot'].toLowerCase()));
 
-                      break; // Exit the inner loop after adding one entry
+                      slotAssigned = true;
+                      break; // Exit the inner loop after successfully assigning a slot
                     }
 
-                    // Remove all items marked for deletion
+                    // Retry slot assignment if the first attempt failed
+                    if (!slotAssigned) {
+                      for (var dash in classFor78) {
+                        bool teacherConflict = generatedTimetable1.any(
+                                (entry) =>
+                                    entry['teacher_id'] ==
+                                        semester7and8[sub]['teacher_id'] &&
+                                    entry['day'] == dash['day'] &&
+                                    entry['slot'] == dash['slot']) ||
+                            generatedTimetable2.any((entry) =>
+                                entry['teacher_id'] ==
+                                    semester7and8[sub]['teacher_id'] &&
+                                entry['day'] == dash['day'] &&
+                                entry['slot'] == dash['slot']) ||
+                            generatedTimetable3.any((entry) =>
+                                entry['teacher_id'] ==
+                                    semester7and8[sub]['teacher_id'] &&
+                                entry['day'] == dash['day'] &&
+                                entry['slot'] == dash['slot']);
+
+                        // Skip the slot if there's a conflict
+                        if (teacherConflict) {
+                          continue;
+                        }
+
+                        // Assign the slot if no conflict
+                        generatedTimetable4.add({
+                          'subject_name': semester7and8[sub]['subject_name'],
+                          'teacher_name': semester7and8[sub]['teacher_name'],
+                          'teacher_id': semester7and8[sub]['teacher_id'],
+                          'semester': semester7and8[sub]['semester'],
+                          'department_name': semester7and8[sub]
+                              ['department_name'],
+                          'day': dash['day'],
+                          'class_name': dash['class_name'],
+                          'slot': dash['slot']
+                        });
+
+                        // Mark the assigned slot for removal
+                        itemsToRemove.addAll(classFor56.where((item) =>
+                            item['day'].toLowerCase() ==
+                                dash['day'].toLowerCase() &&
+                            item['slot'].toLowerCase() ==
+                                dash['slot'].toLowerCase()));
+
+                        slotAssigned = true;
+                        break; // Exit after assigning a slot
+                      }
+                    }
+
+                    // Remove assigned slots from the available pool
                     classFor78
                         .removeWhere((item) => itemsToRemove.contains(item));
-                    itemsToRemove
-                        .clear(); // Clear the list for the next iteration
+                    itemsToRemove.clear(); // Clear for the next iteration
+                  }
+                  Map<String, List<Map<String, String>>> groupData4 = {};
+                  for (var entry in generatedTimetable4) {
+                    String day = entry['day']!;
+                    if (!groupData4.containsKey(day)) {
+                      groupData4[day] = [];
+                    }
+
+                    groupData4[day]!.add({
+                      'subject_name': entry['subject_name']!,
+                      'teacher_name': entry['teacher_name']!,
+                      'class_name': entry['class_name']!,
+                      'day': entry['day']!,
+                      'slot': entry['slot']!
+                    });
                   }
 
+// Add the grouped data to `timetable3` for each day
+                  for (var day in days) {
+                    List<Map<String, String>> dayTimetable =
+                        groupData4[day] ?? [];
+                    timetable4.add(dayTimetable);
+                  }
                   setState(() {});
                 },
                 child: const Text('Generate Timetable')),
           ),
-          generatedTimetable1.isEmpty
-              ? Container()
-              : Expanded(
-                  child: GroupedListView(
-                    elements: generatedTimetable1,
-                    groupBy: (element) => element['semester'] ?? '',
-                    order: GroupedListOrder.ASC,
-                    groupSeparatorBuilder: (String groupByValue) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        groupByValue,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                    itemBuilder: (context, dynamic element) => ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            '${element['slot']}',
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['subject_name'],
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['teacher_name'],
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                          Text(
-                            element['class_name'],
-                            style: const TextStyle(color: Colors.blue),
-                          ),
-                          Text(
-                            element['semester'],
-                            style: const TextStyle(color: Colors.blue),
-                          ),
-                          Text(
-                            element['day'],
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['slot'],
-                            style: const TextStyle(color: Colors.green),
-                          ),
-                        ],
-                      ),
-                    ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  timetable.isEmpty
+                      ? SizedBox.shrink()
+                      : const Text(
+                          'BSCS 1st',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                  timetable.isEmpty
+                      ? const Center(child: Text('No timetable data available'))
+                      : buildTimetableView(timetable),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-          generatedTimetable2.isEmpty
-              ? Container()
-              : Expanded(
-                  child: GroupedListView(
-                    elements: generatedTimetable2,
-                    groupBy: (element) => element['semester'] ?? '',
-                    order: GroupedListOrder.ASC,
-                    groupSeparatorBuilder: (String groupByValue) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        groupByValue,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                    itemBuilder: (context, dynamic element) => ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            '${element['slot']}',
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['subject_name'],
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['teacher_name'],
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                          Text(
-                            element['class_name'],
-                            style: const TextStyle(color: Colors.blue),
-                          ),
-                          Text(
-                            element['semester'],
-                            style: const TextStyle(color: Colors.blue),
-                          ),
-                          Text(
-                            element['day'],
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            element['slot'],
-                            style: const TextStyle(color: Colors.green),
-                          ),
-                        ],
-                      ),
-                    ),
+                  timetable3.isEmpty
+                      ? SizedBox.shrink()
+                      : const Text(
+                          'BSCS 3rd',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                  timetable2.isEmpty
+                      ? const Center(child: Text('No timetable data available'))
+                      : buildTimetableView(timetable2),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
+                  timetable3.isEmpty
+                      ? SizedBox.shrink()
+                      : const Text(
+                          'BSCS 5th',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                  timetable3.isEmpty
+                      ? const Center(child: Text('No timetable data available'))
+                      : buildTimetableView(timetable3),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  timetable4.isEmpty
+                      ? SizedBox.shrink()
+                      : const Text(
+                          'BSCS 7th',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                  timetable4.isEmpty
+                      ? const Center(child: Text('No timetable data available'))
+                      : buildTimetableView(timetable4),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     ));
   }
 
-  List<DataRow> createRow() {
-    return generatedTimetable1
-        .map((e) => DataRow(cells: [
-              DataCell(Text(
-                e['slot']?.toString() ??
-                    'N/A', // Access 'slot' using map notation
-                style: const TextStyle(color: Colors.black),
-              )),
-              DataCell(Text(
-                e['subject_name']?.toString() ??
-                    'N/A', // Access 'subject_name' using map notation
-                style: const TextStyle(color: Colors.black),
-              )),
-              DataCell(Text(
-                e['subject_name']?.toString() ?? 'N/A',
-                style: const TextStyle(color: Colors.black),
-              )),
-              DataCell(Text(
-                e['subject_name']?.toString() ?? 'N/A',
-                style: const TextStyle(color: Colors.black),
-              )),
-              DataCell(Text(
-                e['subject_name']?.toString() ?? 'N/A',
-                style: const TextStyle(color: Colors.black),
-              )),
-              DataCell(Text(
-                e['subject_name']?.toString() ?? 'N/A',
-                style: const TextStyle(color: Colors.black),
-              ))
-            ]))
-        .toList();
+  Widget buildTimetableView(List timetable) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.circular(8)),
+      child: Column(
+        children: [
+          // Header Row for Days
+          Row(
+            children: [
+              // Empty cell for time slots column
+              Container(
+                width: 100,
+                padding: const EdgeInsets.all(8),
+                child: const Text(
+                  '',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              // Days of the week
+              for (String day in [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday'
+              ])
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Center(
+                      child: Text(
+                        day,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          // Rows for time slots
+          for (String timeSlot in ['9:30 AM', '11:30 AM', '1:30 PM'])
+            Row(
+              children: [
+                // Time slot column
+                Container(
+                  width: 100,
+                  padding: const EdgeInsets.all(8),
+                  child: Center(
+                    child: Text(
+                      timeSlot,
+                      style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                // Timetable cells for each day
+                for (String day in [
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday'
+                ])
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Builder(
+                        builder: (context) {
+                          // Flatten the timetable data
+                          var flattenedTimetable =
+                              timetable.expand((list) => list).toList();
+
+                          // Find entry for the current day and slot
+                          var cellData = flattenedTimetable.firstWhere(
+                            (entry) =>
+                                entry['day'] == day &&
+                                entry['slot'] == timeSlot,
+                            orElse: () => null,
+                          );
+
+                          // If no data, display "Break"
+                          if (cellData == null) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.blue.withOpacity(0.3))),
+                              child: const Center(
+                                child: Text(
+                                  'Break',
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+
+                          // Display subject, class, teacher, and slot
+                          return Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.blue.withOpacity(0.3))),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    cellData['subject_name'] ?? 'N/A',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    cellData['class_name'] ?? 'N/A',
+                                    style: const TextStyle(color: Colors.red),
+                                  ),
+                                  Text(
+                                    cellData['teacher_name'] ?? 'N/A',
+                                    style:
+                                        const TextStyle(color: Colors.orange),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+        ],
+      ),
+    );
   }
 }

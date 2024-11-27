@@ -12,13 +12,15 @@ class TitleContainer extends StatefulWidget {
   final List? department;
   final List? sems;
   final String? buttonName;
+  final VoidCallback? timetableItself;
   const TitleContainer(
       {super.key,
       this.department,
       this.pageTitle,
       this.description,
       this.buttonName,
-      this.sems});
+      this.sems,
+      this.timetableItself});
 
   @override
   State<TitleContainer> createState() => _TitleContainerState();
@@ -30,7 +32,7 @@ class _TitleContainerState extends State<TitleContainer> {
     var mediaquery = MediaQuery.of(context).size;
     return Container(
       height: mediaquery.height * 0.1,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5), topRight: Radius.circular(5)),
       ),
@@ -48,6 +50,7 @@ class _TitleContainerState extends State<TitleContainer> {
                 ),
                 widget.pageTitle == 'Manage Classes' ||
                         widget.pageTitle == 'Manage Department' ||
+                        widget.pageTitle == 'Generate Timetable' ||
                         widget.pageTitle == 'Manage Coordinator' ||
                         widget.pageTitle == 'Dashboard' ||
                         widget.pageTitle == 'Manage Teacher' ||
@@ -115,12 +118,17 @@ class _TitleContainerState extends State<TitleContainer> {
                                       .read(addNewTimetableProvider.notifier)
                                       .setPosition(4);
                                   // context.pop();
+                                } else if (widget.pageTitle ==
+                                    'Generate Timetable') {
+                                  widget.timetableItself?.call();
+                                  setState(() {});
                                 } else {
                                   context.push(Routes.addNewTime);
                                 }
                               },
                               child: Text('${widget.buttonName}',
-                                  style: TextStyle(color: Colors.orange)));
+                                  style:
+                                      const TextStyle(color: Colors.orange)));
                         },
                       )
                     : Container()
@@ -138,7 +146,7 @@ class _TitleContainerState extends State<TitleContainer> {
                       BoxShadow(
                         color: Colors.black
                             .withOpacity(0.2), // Shadow color with opacity
-                        offset: Offset(0, 1), // Shadow only below
+                        offset: const Offset(0, 1), // Shadow only below
                         blurRadius: 3, // Controls how blurry the shadow is
                         spreadRadius: 0.4, // Spread of the shadow
                       ),
@@ -184,7 +192,7 @@ class _TitleContainerState extends State<TitleContainer> {
                       BoxShadow(
                         color: Colors.black
                             .withOpacity(0.2), // Shadow color with opacity
-                        offset: Offset(0, 1), // Shadow only below
+                        offset: const Offset(0, 1), // Shadow only below
                         blurRadius: 3, // Controls how blurry the shadow is
                         spreadRadius: 0.4, // Spread of the shadow
                       ),
