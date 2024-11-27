@@ -377,9 +377,16 @@ class _SubjectViewState extends State<SubjectView> {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          Text(
-                                                            element['subject_name'] ??
-                                                                'No Name',
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                element['subject_name'] ??
+                                                                    'No Name',
+                                                              ),
+                                                              Text(
+                                                                ' (${element['theory']}+${element['lab']})',
+                                                              ),
+                                                            ],
                                                           ),
                                                           switchCheck
                                                               ? SizedBox
