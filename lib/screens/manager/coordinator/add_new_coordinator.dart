@@ -121,7 +121,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                     BoxShadow(
                       color: Colors.black
                           .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
+                      offset: const Offset(0, 10), // Shadow only below
                       blurRadius: 8, // Controls how blurry the shadow is
                       spreadRadius: 0.3, // Spread of the shadow
                     ),
@@ -174,7 +174,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                     BoxShadow(
                       color: Colors.black
                           .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
+                      offset: const Offset(0, 10), // Shadow only below
                       blurRadius: 8, // Controls how blurry the shadow is
                       spreadRadius: 0.3, // Spread of the shadow
                     ),
@@ -197,13 +197,13 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                     controller: email,
                     cursorHeight: 20,
                     style: const TextStyle(fontSize: 15, color: Colors.black),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
                       labelStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black),
-                      hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(Icons.email, color: Colors.black),
-                      prefixStyle: const TextStyle(fontSize: 10),
+                          TextStyle(fontSize: 10, color: Colors.black),
+                      hintStyle: TextStyle(fontSize: 10),
+                      prefixIcon: Icon(Icons.email, color: Colors.black),
+                      prefixStyle: TextStyle(fontSize: 10),
                       border: InputBorder.none,
 
                       // focusedBorder: OutlineInputBorder(
@@ -226,7 +226,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                     BoxShadow(
                       color: Colors.black
                           .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
+                      offset: const Offset(0, 10), // Shadow only below
                       blurRadius: 8, // Controls how blurry the shadow is
                       spreadRadius: 0.3, // Spread of the shadow
                     ),
@@ -248,14 +248,14 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                     controller: password,
                     cursorHeight: 20,
                     style: const TextStyle(fontSize: 15, color: Colors.black),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       labelStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black),
-                      hintStyle: const TextStyle(fontSize: 10),
+                          TextStyle(fontSize: 10, color: Colors.black),
+                      hintStyle: TextStyle(fontSize: 10),
                       prefixIcon:
-                          const Icon(Icons.password, color: Colors.black),
-                      prefixStyle: const TextStyle(fontSize: 10),
+                          Icon(Icons.password, color: Colors.black),
+                      prefixStyle: TextStyle(fontSize: 10),
                       border: InputBorder.none,
                     ),
                   ),
@@ -279,7 +279,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               BoxShadow(
                                 color: Colors.black.withOpacity(
                                     0.2), // Shadow color with opacity
-                                offset: Offset(0, 10), // Shadow only below
+                                offset: const Offset(0, 10), // Shadow only below
                                 blurRadius:
                                     8, // Controls how blurry the shadow is
                                 spreadRadius: 0.3, // Spread of the shadow

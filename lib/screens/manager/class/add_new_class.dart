@@ -104,7 +104,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     BoxShadow(
                       color: Colors.black
                           .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
+                      offset: const Offset(0, 10), // Shadow only below
                       blurRadius: 8, // Controls how blurry the shadow is
                       spreadRadius: 0.3, // Spread of the shadow
                     ),
@@ -159,7 +159,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                         BoxShadow(
                           color: Colors.black
                               .withOpacity(0.2), // Shadow color with opacity
-                          offset: Offset(0, 10), // Shadow only below
+                          offset: const Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
                         ),
@@ -220,7 +220,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     BoxShadow(
                       color: Colors.black
                           .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
+                      offset: const Offset(0, 10), // Shadow only below
                       blurRadius: 8, // Controls how blurry the shadow is
                       spreadRadius: 0.3, // Spread of the shadow
                     ),

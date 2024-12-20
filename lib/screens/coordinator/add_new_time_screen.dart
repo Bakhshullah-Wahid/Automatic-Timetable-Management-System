@@ -2120,7 +2120,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
               child: Column(
                 children: [
                   timetable.isEmpty
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : const Text(
                           'BSCS 1st',
                           style: TextStyle(color: Colors.black),
@@ -2132,7 +2132,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     height: 20,
                   ),
                   timetable3.isEmpty
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : const Text(
                           'BSCS 3rd',
                           style: TextStyle(color: Colors.black),
@@ -2144,7 +2144,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     height: 20,
                   ),
                   timetable3.isEmpty
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : const Text(
                           'BSCS 5th',
                           style: TextStyle(color: Colors.black),
@@ -2156,7 +2156,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     height: 20,
                   ),
                   timetable4.isEmpty
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : const Text(
                           'BSCS 7th',
                           style: TextStyle(color: Colors.black),

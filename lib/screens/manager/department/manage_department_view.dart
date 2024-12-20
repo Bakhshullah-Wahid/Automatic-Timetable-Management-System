@@ -35,7 +35,7 @@ class ManageDepartmentView extends ConsumerWidget {
               pageTitle: 'Manage Department',
               buttonName: 'Add New Department',
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             formattedDepartments.isEmpty
                 ? Center(
                     child: Text(
@@ -62,9 +62,9 @@ class ManageDepartmentView extends ConsumerWidget {
                                                 8), // Optional: rounded corners
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.black.withOpacity(
-                                                    0.2), // Shadow color with opacity
-                                                offset: Offset(
+                                                color: Colors.black.withValues(
+                                                    alpha: 0x33), // Shadow color with opacity
+                                                offset: const Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
                                                     3, // Controls how blurry the shadow is

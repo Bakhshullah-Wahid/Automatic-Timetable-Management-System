@@ -149,8 +149,8 @@ class DialogeBoxOpen {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
-                title: Column(
-                  children: [const Text('Delete'), Divider()],
+                title: const Column(
+                  children: [Text('Delete'), Divider()],
                 ),
                 content: SizedBox(
                     width: 300,

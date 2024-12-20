@@ -61,7 +61,7 @@ class ManagerScreen extends ConsumerWidget {
                 pageTitle: 'Manage Coordinator',
                 buttonName: 'Add New Coordinator',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Expanded(
@@ -93,7 +93,7 @@ class ManagerScreen extends ConsumerWidget {
                                                 .bodySmall,
                                           ),
                                         ),
-                                        Divider()
+                                        const Divider()
                                       ],
                                     ),
                                   ),
@@ -116,7 +116,7 @@ class ManagerScreen extends ConsumerWidget {
                                                 BoxShadow(
                                                   color: Colors.black.withOpacity(
                                                       0.2), // Shadow color with opacity
-                                                  offset: Offset(0,
+                                                  offset: const Offset(0,
                                                       1), // Shadow only below
                                                   blurRadius:
                                                       3, // Controls how blurry the shadow is

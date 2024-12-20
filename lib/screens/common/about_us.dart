@@ -16,7 +16,7 @@ class _AboutUsState extends State<AboutUs> {
         color: Colors.white,
         child: Column(
           children: [
-            TitleContainer(
+            const TitleContainer(
               description: 'Decription about us',
               pageTitle: 'About Us',
             ),
@@ -223,8 +223,8 @@ class _AboutUsState extends State<AboutUs> {
       children: [
         Row(
           children: [
-            Icon(Icons.email, color: Colors.teal),
-            SizedBox(width: 8),
+            const Icon(Icons.email, color: Colors.teal),
+            const SizedBox(width: 8),
             Text(
               "Email: teaminnovators@example.com",
               style: TextStyle(color: Colors.grey[800]),
@@ -234,8 +234,8 @@ class _AboutUsState extends State<AboutUs> {
         const SizedBox(height: 8),
         Row(
           children: [
-            Icon(Icons.phone, color: Colors.teal),
-            SizedBox(width: 8),
+            const Icon(Icons.phone, color: Colors.teal),
+            const SizedBox(width: 8),
             Text(
               "Phone: +123 456 7890",
               style: TextStyle(color: Colors.grey[800]),
@@ -245,8 +245,8 @@ class _AboutUsState extends State<AboutUs> {
         const SizedBox(height: 8),
         Row(
           children: [
-            Icon(Icons.location_on, color: Colors.teal),
-            SizedBox(width: 8),
+            const Icon(Icons.location_on, color: Colors.teal),
+            const SizedBox(width: 8),
             Text(
               "Location: Tech Hub, Innovation Street, City XYZ",
               style: TextStyle(color: Colors.grey[800]),

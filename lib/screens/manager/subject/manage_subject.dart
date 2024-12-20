@@ -207,6 +207,7 @@ class _SubjectViewState extends State<SubjectView> {
     departmentShared = prefs2.getString('department').toString();
   }
 
+  @override
   void initState() {
     super.initState();
     journal();
@@ -295,7 +296,7 @@ class _SubjectViewState extends State<SubjectView> {
                         switchCheck ? 'Manage Subjects' : 'Manage subjects',
                     buttonName: switchCheck ? 'Add New Subject' : '',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Expanded(
@@ -331,7 +332,7 @@ class _SubjectViewState extends State<SubjectView> {
                                                         .bodySmall,
                                                   ),
                                                 ),
-                                                Divider()
+                                                const Divider()
                                               ],
                                             ),
                                           ),
@@ -355,7 +356,7 @@ class _SubjectViewState extends State<SubjectView> {
                                                       color: Colors.black
                                                           .withOpacity(
                                                               0.2), // Shadow color with opacity
-                                                      offset: Offset(0,
+                                                      offset: const Offset(0,
                                                           1), // Shadow only below
                                                       blurRadius:
                                                           3, // Controls how blurry the shadow is
@@ -389,14 +390,14 @@ class _SubjectViewState extends State<SubjectView> {
                                                             ],
                                                           ),
                                                           switchCheck
-                                                              ? SizedBox
+                                                              ? const SizedBox
                                                                   .shrink()
                                                               : Text(
                                                                   element['teacher_name'] ==
                                                                           null
                                                                       ? ' (assign a teacher)'
                                                                       : '',
-                                                                  style: TextStyle(
+                                                                  style: const TextStyle(
                                                                       color: Colors
                                                                           .red,
                                                                       fontSize:
@@ -438,7 +439,7 @@ class _SubjectViewState extends State<SubjectView> {
                                                                       null
                                                                   ? 'Assign Teacher'
                                                                   : '${element['teacher_name']}'))
-                                                          : SizedBox.shrink()
+                                                          : const SizedBox.shrink()
                                                     ],
                                                   ),
                                                 ),
@@ -473,7 +474,7 @@ class _SubjectViewState extends State<SubjectView> {
                                                     },
                                                     icon: const Icon(Icons.edit,
                                                         color: Colors.black))
-                                                : SizedBox.shrink(),
+                                                : const SizedBox.shrink(),
                                             switchCheck
                                                 ? IconButton(
                                                     onPressed: () async {
@@ -499,7 +500,7 @@ class _SubjectViewState extends State<SubjectView> {
                                                         Icons.delete,
                                                         color: Colors.black),
                                                   )
-                                                : SizedBox.shrink(),
+                                                : const SizedBox.shrink(),
                                           ],
                                         ),
                                       ))))
@@ -531,7 +532,7 @@ class _SubjectViewState extends State<SubjectView> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) => AlertDialog(
-            title: Text('Select Teacher'),
+            title: const Text('Select Teacher'),
             content: SingleChildScrollView(
               child: Column(
                 children: [

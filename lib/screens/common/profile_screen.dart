@@ -48,13 +48,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleContainer(
+            const TitleContainer(
               description: 'Who is Logged In',
               pageTitle: 'Profile',
               buttonName: 'Log Out',
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 5, right: 5),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0, left: 5, right: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),

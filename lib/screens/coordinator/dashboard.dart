@@ -45,7 +45,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(75.0),
         child: widget.showNavigationBar
-            ? SizedBox() // Navigation bar hidden
+            ? const SizedBox() // Navigation bar hidden
             : Column(
                 children: [
                   AppBar(
@@ -120,7 +120,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ],
                     ),
                   ),
-                  Divider()
+                  const Divider()
                 ],
               ),
       ),

@@ -73,7 +73,7 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                                         BoxShadow(
                                           color: Colors.black.withOpacity(
                                               0.2), // Shadow color with opacity
-                                          offset: Offset(
+                                          offset: const Offset(
                                               0, 10), // Shadow only below
                                           blurRadius:
                                               8, // Controls how blurry the shadow is
@@ -107,7 +107,7 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                                           color: Colors.black.withOpacity(
                                               0.2), // Shadow color with opacity
                                           offset:
-                                              Offset(0, 1), // Shadow only below
+                                              const Offset(0, 1), // Shadow only below
                                           blurRadius:
                                               3, // Controls how blurry the shadow is
                                           spreadRadius:

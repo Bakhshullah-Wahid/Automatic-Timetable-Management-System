@@ -57,7 +57,7 @@ class ClassView extends ConsumerWidget {
               pageTitle: 'Manage Classes',
               buttonName: 'Add New Class',
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Expanded(
@@ -89,7 +89,7 @@ class ClassView extends ConsumerWidget {
                                               .bodySmall,
                                         ),
                                       ),
-                                      Divider()
+                                      const Divider()
                                     ],
                                   ),
                                 ),
@@ -110,7 +110,7 @@ class ClassView extends ConsumerWidget {
                                               BoxShadow(
                                                 color: Colors.black.withOpacity(
                                                     0.2), // Shadow color with opacity
-                                                offset: Offset(
+                                                offset: const Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
                                                     3, // Controls how blurry the shadow is

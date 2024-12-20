@@ -71,7 +71,7 @@ class Style {
             bodyMedium:
                 TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             bodySmall: TextStyle(color: Color(0xFFF1592A))),
-        drawerTheme: DrawerThemeData(backgroundColor: Colors.white),
+        drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
         
         
         );
