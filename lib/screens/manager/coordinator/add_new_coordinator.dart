@@ -3,9 +3,11 @@ import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../provider/department_provider.dart';
 import '../../../provider/manager_provider.dart';
+import '../../../responsive.dart';
 import '../../../route/navigations.dart';
 import '../../../services/coordinator/fetch_user_data.dart';
 import '../../../widget/manager/department_data.dart';
@@ -32,6 +34,20 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
   List<Map<String, dynamic>> dataList = [];
   DepartmentDataForSelectingClassAndCoordinator functionDepartment =
       DepartmentDataForSelectingClassAndCoordinator();
+  Future<void> sendEmail(context) async {
+    const String baseUrl = 'http://127.0.0.1:8000/';
+    final url = Uri.parse('${baseUrl}send-email/');
+    await http.post(
+      url,
+      body: {
+        'email': email.text,
+        'name': userName.text,
+        'message':
+            'your login as co-ordinator :email:{${email.text}} pswd:${password.text}',
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -102,280 +118,315 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
         }
 
         return Form(
-          key: formkey,
-          child: Column(
-            children: [
-              const TitleContainer(
-                description: "Add a new Coordinator for a Department",
-                pageTitle: "Add New Coordinator",
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, // Background color of the container
-                  borderRadius:
-                      BorderRadius.circular(8), // Optional: rounded corners
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
-                      blurRadius: 8, // Controls how blurry the shadow is
-                      spreadRadius: 0.3, // Spread of the shadow
-                    ),
-                  ],
+            key: formkey,
+            child: Column(
+              children: [
+                const TitleContainer(
+                  description: "Add a new Coordinator for a Department",
+                  pageTitle: "Add New Coordinator",
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Name is required';
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: userName,
-                    cursorHeight: 20,
-                    style: const TextStyle(fontSize: 15, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Co-ordinator name',
-                      labelStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black),
-                      hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(Icons.person, color: Colors.black),
-                      prefixStyle: const TextStyle(fontSize: 10),
-                      border: InputBorder.none,
-                      //  OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(12.0),
-                      // ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                const SizedBox(
+                  height: 100,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, // Background color of the container
-                  borderRadius:
-                      BorderRadius.circular(8), // Optional: rounded corners
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
-                      blurRadius: 8, // Controls how blurry the shadow is
-                      spreadRadius: 0.3, // Spread of the shadow
-                    ),
-                  ],
-                ),
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Email is required';
-                      } else {
-                        return null;
-                      }
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    controller: email,
-                    cursorHeight: 20,
-                    style: const TextStyle(fontSize: 15, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      labelStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black),
-                      hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon: const Icon(Icons.email, color: Colors.black),
-                      prefixStyle: const TextStyle(fontSize: 10),
-                      border: InputBorder.none,
-
-                      // focusedBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(12.0),
-                      //   borderSide: const BorderSide(color: Colors.blue),
-                      // ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white, // Background color of the container
-                  borderRadius:
-                      BorderRadius.circular(8), // Optional: rounded corners
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.2), // Shadow color with opacity
-                      offset: Offset(0, 10), // Shadow only below
-                      blurRadius: 8, // Controls how blurry the shadow is
-                      spreadRadius: 0.3, // Spread of the shadow
-                    ),
-                  ],
-                ),
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Password is required';
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: password,
-                    cursorHeight: 20,
-                    style: const TextStyle(fontSize: 15, color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle:
-                          const TextStyle(fontSize: 10, color: Colors.black),
-                      hintStyle: const TextStyle(fontSize: 10),
-                      prefixIcon:
-                          const Icon(Icons.password, color: Colors.black),
-                      prefixStyle: const TextStyle(fontSize: 10),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  userId == null
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .white, // Background color of the container
-                            borderRadius: BorderRadius.circular(
-                                8), // Optional: rounded corners
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(
-                                    0.2), // Shadow color with opacity
-                                offset: Offset(0, 10), // Shadow only below
-                                blurRadius:
-                                    8, // Controls how blurry the shadow is
-                                spreadRadius: 0.3, // Spread of the shadow
-                              ),
-                            ],
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0, vertical: 2),
-                            child: TextFormField(
-                              onTap: () async {
-                                List v = await functionDepartment.function(
-                                    formattedDepartments,
-                                    1,
-                                    context,
-                                    department.text);
-                                if (v != 'null') {
-                                  department.text = v[0];
-                                  departmentId = v[1];
-                                  setState(() {});
-                                }
-                              },
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Department is required';
-                                } else if (!departmentCheck(
-                                    department.text, formattedManager)) {
-                                  return 'Department Coordinator already Exist';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              controller: department,
-                              showCursor: false,
-                              readOnly: true,
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.black),
-                              decoration: InputDecoration(
-                                labelText: 'Department',
-                                labelStyle: const TextStyle(
-                                    fontSize: 10, color: Colors.black),
-                                hintStyle: const TextStyle(fontSize: 10),
-                                prefixIcon: const Icon(Icons.business,
-                                    color: Colors.black),
-                                prefixStyle: const TextStyle(fontSize: 10),
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    borderSide: BorderSide.none),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Colors.white, // Background color of the container
+                          borderRadius: BorderRadius.circular(
+                              8), // Optional: rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              offset: Offset(0, 10), // Shadow only below
+                              blurRadius:
+                                  8, // Controls how blurry the shadow is
+                              spreadRadius: 0.3, // Spread of the shadow
+                            ),
+                          ],
+                        ),
+                        width: Responsive.isMobile(context)
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : MediaQuery.of(context).size.width * 0.4,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 2),
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Name is required';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: userName,
+                            cursorHeight: 20,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                            decoration: InputDecoration(
+                              labelText: 'Co-ordinator name',
+                              labelStyle: const TextStyle(
+                                  fontSize: 10, color: Colors.black),
+                              hintStyle: const TextStyle(fontSize: 10),
+                              prefixIcon:
+                                  const Icon(Icons.person, color: Colors.black),
+                              prefixStyle: const TextStyle(fontSize: 10),
+                              border: InputBorder.none,
+                              //  OutlineInputBorder(
+                              //   borderRadius: BorderRadius.circular(12.0),
+                              // ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                                borderSide: BorderSide.none,
                               ),
                             ),
                           ),
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    if (formkey.currentState!.validate() &&
-                        email.text.isNotEmpty &&
-                        password.text.isNotEmpty &&
-                        userName.text.isNotEmpty &&
-                        department.text.isNotEmpty) {
-                      if (userId == null) {
-                        if (departmentCheck(
-                            department.text, formattedManager)) {
-                          managerUpdate.addManager(
-                              userName.text,
-                              'Co-ordinator',
-                              email.text,
-                              password.text,
-                              departmentId!);
-                          context.go(Routes.managerAdmin);
-                        }
-                      } else {
-                        managerUpdate.updateManager(
-                            userId,
-                            userName.text,
-                            'Co-ordinator',
-                            email.text,
-                            password.text,
-                            departmentId!);
-                        context.go(Routes.managerAdmin);
-                      }
-                    }
-                  },
-                  child: const Text('Done'))
-            ],
-          ),
-        );
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Colors.white, // Background color of the container
+                          borderRadius: BorderRadius.circular(
+                              8), // Optional: rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              offset: Offset(0, 10), // Shadow only below
+                              blurRadius:
+                                  8, // Controls how blurry the shadow is
+                              spreadRadius: 0.3, // Spread of the shadow
+                            ),
+                          ],
+                        ),
+                        width: Responsive.isMobile(context)
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : MediaQuery.of(context).size.width * 0.4,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 2),
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Email is required';
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            controller: email,
+                            cursorHeight: 20,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                              labelStyle: const TextStyle(
+                                  fontSize: 10, color: Colors.black),
+                              hintStyle: const TextStyle(fontSize: 10),
+                              prefixIcon:
+                                  const Icon(Icons.email, color: Colors.black),
+                              prefixStyle: const TextStyle(fontSize: 10),
+                              border: InputBorder.none,
+
+                              // focusedBorder: OutlineInputBorder(
+                              //   borderRadius: BorderRadius.circular(12.0),
+                              //   borderSide: const BorderSide(color: Colors.blue),
+                              // ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              Colors.white, // Background color of the container
+                          borderRadius: BorderRadius.circular(
+                              8), // Optional: rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Shadow color with opacity
+                              offset: Offset(0, 10), // Shadow only below
+                              blurRadius:
+                                  8, // Controls how blurry the shadow is
+                              spreadRadius: 0.3, // Spread of the shadow
+                            ),
+                          ],
+                        ),
+                        width: Responsive.isMobile(context)
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : MediaQuery.of(context).size.width * 0.4,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 2),
+                          child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Password is required';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: password,
+                            cursorHeight: 20,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: const TextStyle(
+                                  fontSize: 10, color: Colors.black),
+                              hintStyle: const TextStyle(fontSize: 10),
+                              prefixIcon: const Icon(Icons.password,
+                                  color: Colors.black),
+                              prefixStyle: const TextStyle(fontSize: 10),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          userId == null
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors
+                                        .white, // Background color of the container
+                                    borderRadius: BorderRadius.circular(
+                                        8), // Optional: rounded corners
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(
+                                            0.2), // Shadow color with opacity
+                                        offset:
+                                            Offset(0, 10), // Shadow only below
+                                        blurRadius:
+                                            8, // Controls how blurry the shadow is
+                                        spreadRadius:
+                                            0.3, // Spread of the shadow
+                                      ),
+                                    ],
+                                  ),
+                                  width: Responsive.isMobile(context)
+                                      ? MediaQuery.of(context).size.width * 0.8
+                                      : MediaQuery.of(context).size.width * 0.4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5.0, vertical: 2),
+                                    child: TextFormField(
+                                      onTap: () async {
+                                        List v =
+                                            await functionDepartment.function(
+                                                formattedDepartments,
+                                                1,
+                                                context,
+                                                department.text);
+                                        if (v.isNotEmpty) {
+                                          department.text = v[0];
+                                          departmentId = v[1];
+                                          setState(() {});
+                                        }
+                                      },
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Department is required';
+                                        } else if (!departmentCheck(
+                                            department.text,
+                                            formattedManager)) {
+                                          return 'Department Coordinator already Exist';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      controller: department,
+                                      showCursor: false,
+                                      readOnly: true,
+                                      style: const TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                      decoration: InputDecoration(
+                                        labelText: 'Department',
+                                        labelStyle: const TextStyle(
+                                            fontSize: 10, color: Colors.black),
+                                        hintStyle:
+                                            const TextStyle(fontSize: 10),
+                                        prefixIcon: const Icon(Icons.business,
+                                            color: Colors.black),
+                                        prefixStyle:
+                                            const TextStyle(fontSize: 10),
+                                        border: InputBorder.none,
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                            borderSide: BorderSide.none),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (formkey.currentState!.validate() &&
+                                email.text.isNotEmpty &&
+                                password.text.isNotEmpty &&
+                                userName.text.isNotEmpty &&
+                                department.text.isNotEmpty) {
+                              if (userId == null) {
+                                if (departmentCheck(
+                                    department.text, formattedManager)) {
+                                  sendEmail(context);
+                                  managerUpdate.addManager(
+                                      userName.text,
+                                      'Co-ordinator',
+                                      email.text,
+                                      password.text,
+                                      departmentId!);
+                                  context.go(Routes.managerAdmin);
+                                }
+                              } else {
+                                managerUpdate.updateManager(
+                                    userId,
+                                    userName.text,
+                                    'Co-ordinator',
+                                    email.text,
+                                    password.text,
+                                    departmentId!);
+                                context.go(Routes.managerAdmin);
+                              }
+                            }
+                          },
+                          child: const Text('Done'))
+                    ],
+                  ),
+                ),
+              ],
+            ));
       }),
     ));
   }

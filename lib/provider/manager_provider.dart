@@ -6,37 +6,31 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../services/coordinator/fetch_user_data.dart';
+import '../widget/base_api.dart';
 
 // StateNotifier to manage department fetching state
 class ManagerNotifier extends StateNotifier<List<FetchingManager>> {
   ManagerNotifier() : super([]);
 
   Future<void> retrieveManager() async {
-    try {
-      ManagerService urlFetch = ManagerService();
-      final response = await http.get(Uri.parse('${urlFetch.baseUrl}users/'));
+    
+      API api = API();
+      try{
+      final response = await http.get(Uri.parse('${api.baseUrl}users/'));
       if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 
-        // Parse and store department data as FetchingManager objects
+        // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingManager.fromMap(noteMap))
             .toList();
-
-        // Convert the state to a list of maps (dictionaries)
-        // List<Map<String, dynamic>> managerList =
-        //     state.map((dept) => dept.toMap()).toList();
-
-        // Print just the list of dictionaries
       } else {
-        // print(
-        //     'Failed to load departments with status code: ${response.statusCode}');
+        // Handle non-200 status codes
+        // print('Failed to load user: ${response.statusCode}');
       }
-    } on TimeoutException {
-      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      // print('Error occurred: $e');
+      // Handle any exceptions
+      // print('Error retrieving user: $e');
     }
   }
 }

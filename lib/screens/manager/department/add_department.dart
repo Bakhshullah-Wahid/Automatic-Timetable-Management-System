@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../responsive.dart';
 import '../../../route/navigations.dart';
 import '../../../services/department/fetch_department.dart';
 import '../../../wholeData/department/update_department.dart';
@@ -68,7 +69,9 @@ class _AddAccountScreenState extends State<AddDepartmentScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),

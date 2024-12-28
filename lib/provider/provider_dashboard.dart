@@ -7,6 +7,7 @@ final dashboardProvider = StateNotifierProvider<DashboardProvider, int>((ref) {
   return DashboardProvider(0);
 });
 
+
 final isLoginProvider = StateNotifierProvider<IsLoginProvider, bool>((ref) {
   return IsLoginProvider();
 });

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../provider/department_provider.dart';
+import '../../../responsive.dart';
 import '../../../route/navigations.dart';
 import '../../../wholeData/teacher/update_teacher.dart';
 import '../../../widget/manager/department_data.dart';
@@ -110,7 +111,9 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
@@ -159,7 +162,9 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
@@ -207,7 +212,9 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
@@ -215,7 +222,7 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                     onTap: () async {
                       List v = await functionDepartment.function(
                           formattedDepartments, 1, context, department.text);
-                      if (v != 'null') {
+                      if (v.isNotEmpty) {
                         department.text = v[0];
                         departmentId = v[1];
 

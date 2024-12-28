@@ -6,39 +6,36 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../services/subject/fetch_subject.dart';
+import '../widget/base_api.dart';
 
 // StateNotifier to manage department fetching state
 class SubjectNotifier extends StateNotifier<List<FetchingSubject>> {
   SubjectNotifier() : super([]);
 
   Future<void> retrieveSubject() async {
-    try {
-      SubjectService urlFetch = SubjectService();
+    API api = API();
+    
+      try{
       final response =
-          await http.get(Uri.parse('${urlFetch.baseUrl}subjects/'));
+          await http.get(Uri.parse('${api.baseUrl}subjects/'));
       if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 
-        // Parse and store department data as FetchingSubject objects
+        // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingSubject.fromMap(noteMap))
             .toList();
-        // Convert the state to a list of maps (dictionaries)
-        // List<Map<String, dynamic>> subjectLists =
-        //     state.map((dept) => dept.toMap()).toList();
-
-        // Print just the list of dictionaries
       } else {
-        // print(
-        //     'Failed to load departments with status code: ${response.statusCode}');
+        // Handle non-200 status codes
+        // print('Failed to load subjects: ${response.statusCode}');
       }
-    } on TimeoutException {
-      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      // print('Error occurred: $e');
+      // Handle any exceptions
+      // print('Error retrieving subjects: $e');
     }
   }
+  
+  
 }
 
 // Provider to access SubjectNotifier
