@@ -1,6 +1,12 @@
+import 'package:attms/provider/dashboard_provider.dart';
 import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../provider/provider_dashboard.dart';
+import '../../widget/coordinator/drawer_box.dart';
+import '../../widget/manager/manager_drawer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -44,60 +50,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleContainer(
-              description: 'Who is Logged In',
-              pageTitle: 'Profile',
-              buttonName: 'Log Out',
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 5, right: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-            ),
-            const Divider(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          color: Colors.white,
+          child: Consumer(builder: (context, ref, child) {
+    late bool isAdminPages = ref.watch(isAdmin);
+            final bool mobileCheck = ref.watch(mobileDrawer);
+            return Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 50),
-                  child: Text(
-                    name,
-                    style: Theme.of(context).textTheme.displaySmall,
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  TitleContainer(
+                    description: 'Who is Logged In',
+                    pageTitle: 'Profile',
+                    buttonName: 'Log Out',
                   ),
-                ),
-                Row(
-                  children: [
-                    const Padding(
-                        padding: EdgeInsets.only(top: 8.0, left: 50),
-                        child: CircleAvatar(
-                          maxRadius: 20,
-                        )),
-                    const SizedBox(
-                      width: 5,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, left: 5, right: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
-                    Column(
+                  ),
+                  const Divider(),
+                  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(profileId,
-                            style: const TextStyle(
-                              color: Colors.black,
-                            )),
-                        Text(department,
-                            style: const TextStyle(color: Colors.black))
-                      ],
-                    ),
-                  ],
-                ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, left: 50),
+                          child: Text(
+                            name,
+                            style: Theme.of(context).textTheme.displaySmall,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Padding(
+                                padding: EdgeInsets.only(top: 8.0, left: 50),
+                                child: CircleAvatar(
+                                  maxRadius: 20,
+                                )),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(profileId,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    )),
+                                Text(department,
+                                    style: const TextStyle(color: Colors.black))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ])
+                ]),
+               mobileCheck
+                      ? isAdminPages
+                          ? ManagerDrawerBox()
+                          : DrawerBox()
+                      : SizedBox.shrink(),
               ],
-            ),
-          ],
-        ),
-      ),
+            );
+          })),
     );
   }
 }

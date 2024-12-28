@@ -10,6 +10,7 @@ import 'package:attms/wholeData/teacher/update_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../screens/coordinator/requestClasses/request.dart';
 import '../wholeData/subject/update_subject.dart';
 import './all_screens.dart';
 import 'navigations.dart';
@@ -57,7 +58,7 @@ class MyRouter {
             GoRoute(
               path: Routes.manageClass,
               name: 'manage_class',
-              pageBuilder: (context, state) => const NoTransitionPage(
+              pageBuilder: (context, state) => NoTransitionPage(
                 child: ClassView(),
               ),
             ),
@@ -82,14 +83,14 @@ class MyRouter {
             GoRoute(
               path: Routes.manageDepartment,
               name: 'manage_department',
-              pageBuilder: (context, state) => const NoTransitionPage(
+              pageBuilder: (context, state) => NoTransitionPage(
                 child: ManageDepartmentView(),
               ),
             ),
             GoRoute(
                 path: Routes.managerAdmin,
                 name: 'manager',
-                pageBuilder: (context, state) => const NoTransitionPage(
+                pageBuilder: (context, state) => NoTransitionPage(
                       child: ManagerScreen(),
                     )),
             GoRoute(
@@ -107,7 +108,7 @@ class MyRouter {
             GoRoute(
                 path: Routes.teacherView,
                 name: 'teacher_view',
-                pageBuilder: (context, state) => const NoTransitionPage(
+                pageBuilder: (context, state) => NoTransitionPage(
                       child: TeacherView(),
                     )),
             GoRoute(
@@ -152,7 +153,7 @@ class MyRouter {
                 path: Routes.home,
                 name: "home",
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: HomeScreens())),
+                    NoTransitionPage(child: HomeScreens())),
             GoRoute(
                 path: Routes.addNewTime,
                 name: "add_new_time",
@@ -177,6 +178,12 @@ class MyRouter {
                 name: 'about_us',
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: AboutUs(),
+                    )),
+            GoRoute(
+                path: Routes.classRequest,
+                name: 'class_request',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                      child: ClassRequestSystem(),
                     )),
             GoRoute(
                 path: Routes.profile,

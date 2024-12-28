@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../provider/provider_dashboard.dart';
+import '../../responsive.dart';
 import '../../route/navigations.dart';
 
 class DrawerBox extends ConsumerStatefulWidget {
@@ -18,6 +19,7 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
   List routing = [
     {'title': 'Dashboard', 'leading': Icons.dashboard},
     {'title': 'Manage Sub Teacher', 'leading': Icons.menu_book},
+    {'title': 'Request Free Class', 'leading': Icons.class_},
     {'title': 'Profile', 'leading': Icons.account_circle},
     {'title': 'About Us', 'leading': Icons.info},
   ];
@@ -57,124 +59,140 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                 padding: EdgeInsets.only(top: mediaquery.height * 0.05),
                 child: ListView.builder(
                   itemCount: routing.length,
-                  itemBuilder: (context, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                          child: position == index
-                              ? Container(
-                                  width: mediaquery.width * 0.4,
-                                  height: mediaquery.height * 0.04,
-                                  decoration: BoxDecoration(
-                                      // Background color of the container
-                                      borderRadius: BorderRadius.circular(
-                                          8), // Optional: rounded corners
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(
-                                              0.2), // Shadow color with opacity
-                                          offset: Offset(
-                                              0, 10), // Shadow only below
-                                          blurRadius:
-                                              8, // Controls how blurry the shadow is
-                                          spreadRadius:
-                                              0.3, // Spread of the shadow
+                  itemBuilder: (context, index) => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                            child: position == index
+                                ? Container(
+                                    width: mediaquery.width * 0.4,
+                                    height: mediaquery.height * 0.04,
+                                    decoration: BoxDecoration(
+                                        // Background color of the container
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Optional: rounded corners
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(
+                                                0.2), // Shadow color with opacity
+                                            offset: Offset(
+                                                0, 10), // Shadow only below
+                                            blurRadius:
+                                                8, // Controls how blurry the shadow is
+                                            spreadRadius:
+                                                0.3, // Spread of the shadow
+                                          ),
+                                        ],
+                                        color: Theme.of(context)
+                                            .dialogTheme
+                                            .backgroundColor),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, top: 5),
+                                      child: Text(
+                                        Responsive.isMobile(context)
+                                            ? routing[index]['title']
+                                                .substring(0, 1)
+                                            : routing[index]['title'],
+                                        style: const TextStyle(
+                                          color: Colors.black,
                                         ),
-                                      ],
-                                      color: Theme.of(context)
-                                          .dialogTheme
-                                          .backgroundColor),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, top: 5),
-                                    child: Text(
-                                      routing[index]['title'],
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    width: mediaquery.width * 0.4,
+                                    height: mediaquery.height * 0.04,
+                                    decoration: BoxDecoration(
+                                        // Background color of the container
+                                        borderRadius: BorderRadius.circular(
+                                            4), // Optional: rounded corners
+                                        boxShadow: Responsive.isMobile(context)
+                                            ? null
+                                            : [
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(
+                                                      0.2), // Shadow color with opacity
+                                                  offset: Offset(0,
+                                                      1), // Shadow only below
+                                                  blurRadius:
+                                                      3, // Controls how blurry the shadow is
+                                                  spreadRadius:
+                                                      0.4, // Spread of the shadow
+                                                ),
+                                              ],
+                                        color: Theme.of(context)
+                                            .dialogTheme
+                                            .backgroundColor),
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 15.0),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            routing[index]['leading'],
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: mediaquery.width * 0.002,
+                                          ),
+                                          if (!Responsive.isMobile(context))
+                                            Text(routing[index]['title'],
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: Colors.black)
+                                                //  Theme.of(context)
+                                                //     .textTheme
+                                                //     .bodyMedium,
+                                                ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                )
-                              : Container(
-                                  width: mediaquery.width * 0.4,
-                                  height: mediaquery.height * 0.04,
-                                  decoration: BoxDecoration(
-                                      // Background color of the container
-                                      borderRadius: BorderRadius.circular(
-                                          4), // Optional: rounded corners
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(
-                                              0.2), // Shadow color with opacity
-                                          offset:
-                                              Offset(0, 1), // Shadow only below
-                                          blurRadius:
-                                              3, // Controls how blurry the shadow is
-                                          spreadRadius:
-                                              0.4, // Spread of the shadow
-                                        ),
-                                      ],
-                                      color: Theme.of(context)
-                                          .dialogTheme
-                                          .backgroundColor),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          routing[index]['leading'],
-                                          color: Colors.black,
-                                        ),
-                                        SizedBox(
-                                          width: mediaquery.width * 0.002,
-                                        ),
-                                        Text(routing[index]['title'],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.black)
-                                            //  Theme.of(context)
-                                            //     .textTheme
-                                            //     .bodyMedium,
-                                            ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                          onTap: () {
-                            if (index == 0 ||
-                                index == 1 ||
-                                index == 2 ||
-                                index == 3) {
-                              ref
-                                  .read(dashboardProvider.notifier)
-                                  .setPosition(index);
+                            onTap: () {
+                              if (index == 0 ||
+                                  index == 1 ||
+                                  index == 2 ||
+                                  index == 4 ||
+                                  index == 3) {
+                                ref
+                                    .read(dashboardProvider.notifier)
+                                    .setPosition(index);
 
-                              switch (index) {
-                                case 0:
-                                  context.go(Routes.home);
-                                  break;
-                                case 1:
-                                  context.go(Routes.manageSubject);
-                                  break;
-                                case 2:
-                                  context.go(Routes.profile);
+                                switch (index) {
+                                  case 0:
+                                    context.go(Routes.home);
+                                    break;
+                                  case 1:
+                                    context.go(Routes.manageSubject);
+                                    break;
+                                  case 2:
+                                    context.go(Routes.classRequest);
 
-                                  break;
-                                case 3:
-                                  context.go(Routes.aboutUs);
-                                  break;
+                                    break;
+                                  case 3:
+                                    context.go(Routes.profile);
 
-                                default:
+                                    break;
+                                  case 4:
+                                    context.go(Routes.aboutUs);
+                                    break;
+
+                                  default:
+                                }
                               }
-                            }
-                          }),
-                      // Divider(
-                      //   color: Colors.black.withOpacity(0.1),
-                      // )
-                      SizedBox(
-                        height: mediaquery.height * 0.015,
-                      )
-                    ],
+                            }),
+                        // Divider(
+                        //   color: Colors.black.withOpacity(0.1),
+                        // )
+                        SizedBox(
+                          height: mediaquery.height * 0.015,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

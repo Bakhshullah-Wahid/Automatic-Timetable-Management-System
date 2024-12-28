@@ -22,4 +22,5 @@ abstract class Routes {
   static const addTeacher = '/add_teacher';
   static const manageSubject = '/manage_subject';
   static const addSubject = '/add_subject';
+  static const classRequest = '/class_request';
 }

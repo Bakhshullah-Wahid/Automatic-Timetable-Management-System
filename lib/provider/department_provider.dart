@@ -6,38 +6,30 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../services/department/fetch_department.dart';
+import '../widget/base_api.dart';
 
 // StateNotifier to manage department fetching state
 class DepartmentNotifier extends StateNotifier<List<FetchingDepartment>> {
   DepartmentNotifier() : super([]);
 
   Future<void> retrieveDepartments() async {
-    try {
-      DepartmentService urlFetch = DepartmentService();
-      final response =
-          await http.get(Uri.parse('${urlFetch.baseUrl}departments/'));
-      if (response.statusCode == 200) {
+    API api = API();
+    try{
+    final response = await http.get(Uri.parse('${api.baseUrl}departments/'));
+     if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 
-        // Parse and store department data as FetchingDepartment objects
+        // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingDepartment.fromMap(noteMap))
             .toList();
-
-        // Convert the state to a list of maps (dictionaries)
-        // List<Map<String, dynamic>> departmentList =
-        //     state.map((dept) => dept.toMap()).toList();
-
-        // Print just the list of dictionaries
       } else {
-        // print(
-        //     'Failed to load departments with status code: ${response.statusCode}');
+        // Handle non-200 status codes
+        // print('Failed to load departments: ${response.statusCode}');
       }
-    } on TimeoutException {
-      // print('Request timed out. Please check your network connection.');
     } catch (e) {
-      // print('Error occurred: $e');
+      // Handle any exceptions
+      // print('Error retrieving departments: $e');
     }
   }
 }

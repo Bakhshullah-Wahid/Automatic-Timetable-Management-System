@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../provider/provider_dashboard.dart';
+import '../../responsive.dart';
 import '../../route/navigations.dart';
 
 class ManagerDrawerBox extends ConsumerStatefulWidget {
@@ -91,7 +92,10 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                     padding: const EdgeInsets.only(
                                         left: 20.0, top: 5),
                                     child: Text(
-                                      routing[index]['title'],
+                                      Responsive.isMobile(context)
+                                          ? routing[index]['title']
+                                              .substring(0, 1)
+                                          : routing[index]['title'],
                                       style:
                                           const TextStyle(color: Colors.black),
                                     ),
@@ -103,18 +107,20 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                       // Background color of the container
                                       borderRadius: BorderRadius.circular(
                                           8), // Optional: rounded corners
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(
-                                              0.2), // Shadow color with opacity
-                                          offset:
-                                              Offset(0, 1), // Shadow only below
-                                          blurRadius:
-                                              3, // Controls how blurry the shadow is
-                                          spreadRadius:
-                                              0.4, // Spread of the shadow
-                                        ),
-                                      ],
+                                      boxShadow: Responsive.isMobile(context)
+                                          ? null
+                                          : [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                    0.2), // Shadow color with opacity
+                                                offset: Offset(
+                                                    0, 1), // Shadow only below
+                                                blurRadius:
+                                                    3, // Controls how blurry the shadow is
+                                                spreadRadius:
+                                                    0.4, // Spread of the shadow
+                                              ),
+                                            ],
                                       color: Theme.of(context)
                                           .dialogTheme
                                           .backgroundColor),
@@ -129,10 +135,11 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                         SizedBox(
                                           width: mediaquery.width * 0.002,
                                         ),
-                                        Text(routing[index]['title'],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.black)),
+                                        if (!Responsive.isMobile(context))
+                                          Text(routing[index]['title'],
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.black)),
                                       ],
                                     ),
                                   ),

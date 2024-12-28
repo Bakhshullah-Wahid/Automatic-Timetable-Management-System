@@ -113,6 +113,7 @@ class DialogeBoxOpen {
                                         Navigator.pop(context);
                                         w[0] = element['teacher_name'];
                                         w.add(element['teacher_id']);
+                                        w.add(element['department_name']);
                                       } else {
                                         w = [];
                                       }

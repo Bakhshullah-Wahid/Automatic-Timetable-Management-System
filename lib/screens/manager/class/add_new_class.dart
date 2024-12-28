@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../provider/department_provider.dart';
+import '../../../responsive.dart';
 import '../../../route/navigations.dart';
 import '../../../services/class/fetch_class_data.dart';
 import '../../../wholeData/class/update_class.dart';
@@ -110,7 +111,9 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
@@ -165,7 +168,9 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                         ),
                       ],
                     ),
-                    width: MediaQuery.of(context).size.width * 0.4,
+                    width: Responsive.isMobile(context)
+                        ? MediaQuery.of(context).size.width * 0.8
+                        : MediaQuery.of(context).size.width * 0.4,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 5.0, vertical: 2),
@@ -226,7 +231,9 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.8
+                    : MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2),
@@ -234,7 +241,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                     onTap: () async {
                       List v = await functionDepartment.function(
                           formattedDepartments, 1, context, department.text);
-                      if (v != 'null') {
+                      if (v.isNotEmpty) {
                         department.text = v[0];
                         departmentId = v[1];
 
@@ -280,10 +287,17 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                         className.text.isNotEmpty) {
                       if (classId == null) {
                         classUpdate.addClass(
-                            className.text, classType.text, departmentId!);
+                          className.text,
+                          classType.text,
+                          departmentId!,
+                        );
                       } else {
-                        classUpdate.updateClass(classId, className.text,
-                            classType.text, departmentId);
+                        classUpdate.updateClass(
+                          classId,
+                          className.text,
+                          classType.text,
+                          departmentId,
+                        );
                       }
                       context.go(Routes.manageClass);
                     }
