@@ -7,7 +7,8 @@ import '../../provider/subject_provider.dart';
 import '../../provider/teacher_provider.dart';
 import '../../provider/timetable_provider.dart';
 
-class FetchingDataCall {teacher(WidgetRef ref) { 
+class FetchingDataCall {
+  teacher(WidgetRef ref) {
     ref.read(teacherProvider.notifier).retrieveTeacher();
     final teachersss = ref.watch(teacherProvider);
     List<Map<String, dynamic>> formattedTeacher = teachersss.map((dept) {
@@ -19,7 +20,9 @@ class FetchingDataCall {teacher(WidgetRef ref) {
       };
     }).toList();
     return formattedTeacher;
-  }subject(WidgetRef ref) {
+  }
+
+  subject(WidgetRef ref) {
     ref.read(subjectProvider.notifier).retrieveSubject();
 
     final subject = ref.watch(subjectProvider);
@@ -38,7 +41,9 @@ class FetchingDataCall {teacher(WidgetRef ref) {
       };
     }).toList();
     return formattedSubject;
-  } manager(WidgetRef ref) {
+  }
+
+  manager(WidgetRef ref) {
     ref.read(managerProvider.notifier).retrieveManager();
     final userss = ref.watch(managerProvider);
     List<Map<String, dynamic>> formattedManager = userss.map((dept) {
@@ -52,8 +57,10 @@ class FetchingDataCall {teacher(WidgetRef ref) {
       };
     }).toList();
     return formattedManager;
-  } department(WidgetRef ref){
-     ref.read(departmentProvider.notifier).retrieveDepartments();
+  }
+
+  department(WidgetRef ref) {
+    ref.read(departmentProvider.notifier).retrieveDepartments();
     final departments = ref.watch(departmentProvider);
     // Convert departments to a list of maps
     List<Map<String, dynamic>> formattedDepartments = departments.map((dept) {
@@ -64,6 +71,7 @@ class FetchingDataCall {teacher(WidgetRef ref) {
     }).toList();
     return formattedDepartments;
   }
+
   classs(WidgetRef ref) {
     ref.read(classProvider.notifier).retrieveClass();
     final classs = ref.watch(classProvider);
@@ -73,11 +81,14 @@ class FetchingDataCall {teacher(WidgetRef ref) {
         'department_id': dept.departmentId,
         'class_name': dept.className,
         'class_type': dept.classType,
-        'request_confirmation': dept.requestConfirmation
+        'requested_by': dept.requestedBy,
+        'given_to': dept.givenTo
       };
     }).toList();
     return formattedClass;
-  }timetables(WidgetRef ref, departmentId) {
+  }
+
+  timetables(WidgetRef ref, departmentId) {
     ref.read(timetableProvider.notifier).retrieveTimetable(departmentId);
     final timetable = ref.watch(timetableProvider);
     List<Map<String, dynamic>> formattedTimetable = timetable.map((dept) {
@@ -89,8 +100,8 @@ class FetchingDataCall {teacher(WidgetRef ref) {
         'department_id': dept.departmentId,
         'day_of_week': dept.dayOfWeek,
         'class_id': dept.classId,
-        'teacher_department':dept.teacherDepartmentName,
-        'class_department':dept.classDepartmentName
+        'teacher_department': dept.teacherDepartmentName,
+        'class_department': dept.classDepartmentName
       };
     }).toList();
     return formattedTimetable;

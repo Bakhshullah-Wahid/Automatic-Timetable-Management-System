@@ -1,20 +1,31 @@
-import 'package:attms/provider/class_provider.dart';
-import 'package:attms/provider/retrieve_request_provider.dart';
+import 'package:attms/utils/containor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../provider/department_provider.dart';
+import '../../../services/class/fetch_class_data.dart';
 
 class ManageRequestsPage extends StatefulWidget {
-  const ManageRequestsPage({super.key});
+  final List formattedClass;
+  final String departments;
+  final int deptId;
+  const ManageRequestsPage(
+      {super.key,
+      required this.formattedClass,
+      required this.departments,
+      required this.deptId});
 
   @override
   ManageRequestsPageState createState() => ManageRequestsPageState();
 }
 
 class ManageRequestsPageState extends State<ManageRequestsPage> {
+  ClassService c = ClassService();
   @override
   Widget build(BuildContext context) {
+    widget.formattedClass.removeWhere(
+        (element) => element['department_name'] != widget.departments);
+    widget.formattedClass
+        .removeWhere((element) => element['requested_by'] == '');
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -23,41 +34,87 @@ class ManageRequestsPageState extends State<ManageRequestsPage> {
           children: [
             Consumer(
               builder: (context, ref, child) {
-                ref.read(departmentProvider.notifier).retrieveDepartments();
-                ref.read(classProvider.notifier).retrieveClass();
-                ref.read(requestProvider.notifier).retrieveRequest();
-                // final department = ref.watch(departmentProvider);
-                // final classs = ref.watch(classProvider);
-                // final requestsAction = ref.watch(requestProvider);
-                // // Convert departments to a list of maps
-                // List<Map<String, dynamic>> formattedDepartments =
-                //     department.map((dept) {
-                //   return {
-                //     'department_name': dept.departmentName,
-                //     'department_id': dept.departmentId,
-                //   };
-                // }).toList();
-                // List<Map<String, dynamic>> formattedRequest =
-                //     requestsAction.map((dept) {
-                //   return {
-                //     'id': dept.id,
-                //     'status': dept.status,
-                //     'department_id': dept.requesterDepartment,
-                //     'class_id': dept.requestedClass,
-                //     'date_created': dept.dateCreated,
-                //     'purpose': dept.purpose,
-                //   };
-                // }).toList();
-                // List<Map<String, dynamic>> formattedClass = classs.map((dept) {
-                //   return {
-                //     'class_id': dept.classId,
-                //     'department_id': dept.departmentId,
-                //     'class_name': dept.className,
-                //     'class_type': dept.classType
-                //   };
-                // }).toList();
+                return Expanded(
+                    child: ListView.builder(
+                  itemCount: widget.formattedClass.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TheContainer(
+                      child: ListTile(
+                        trailing: TextButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(Colors.green)),
+                            onPressed: () {
+                              if (widget.formattedClass[index]['given_to'] ==
+                                  '') {
+                                c.updateClass(
+                                    widget.formattedClass[index]['class_id'],
+                                    widget.formattedClass[index]['class_name'],
+                                    widget.formattedClass[index]['class_type'],
+                                    widget.formattedClass[index]
+                                        ['department_id'],
+                                    widget.formattedClass[index]
+                                        ['requested_by'],
+                                    widget.formattedClass[index]
+                                        ['requested_by']);
+                                setState(() {});
+                              }
+                            },
+                            child: Text(
+                              widget.formattedClass[index]['requested_by'] ==
+                                      widget.formattedClass[index]['given_to']
+                                  ? 'Accepted'
+                                  : 'Accept',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                        title: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Request for Class'),
+                              InkWell(
+                                onTap: () {
+                                  c.updateClass(
+                                      widget.formattedClass[index]['class_id'],
+                                      widget.formattedClass[index]
+                                          ['class_name'],
+                                      widget.formattedClass[index]
+                                          ['class_type'],
+                                      widget.formattedClass[index]
+                                          ['department_id'],
+                                      '',
+                                      '');
 
-                return Expanded(child: Text('hello'));
+                                  widget.formattedClass.removeAt(index);
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        subtitle: Text(
+                          'The class "${widget.formattedClass[index]['class_name']}" is requested by the ${widget.formattedClass[index]['requested_by']}',
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ),
+                  ),
+                ));
               },
             )
           ],

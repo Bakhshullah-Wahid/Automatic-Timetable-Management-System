@@ -86,44 +86,13 @@ class _TitleContainerState extends State<TitleContainer> {
                                       .setPositionMobile();
                                 },
                                 icon: Icon(Icons.list))
-                        : button()
+                        : widget.buttonName == null
+                            ? SizedBox.shrink()
+                            : button()
                     : Container()
               ],
             ),
             const Divider(),
-            // widget.pageTitle == 'Dashboard' || widget.pageTitle == 'Dashboard '
-            //     ? TheContainer(
-            //         width: double.maxFinite,
-            //         child: Padding(
-            //             padding: const EdgeInsets.symmetric(),
-            //             child: Row(
-            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //               children: [
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(top: 8.0, left: 50),
-            //                   child: Text(
-            //                     'Title',
-            //                     style: Theme.of(context).textTheme.displaySmall,
-            //                   ),
-            //                 ),
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(left: 90, top: 8.0),
-            //                   child: Text(
-            //                     'Date',
-            //                     style: Theme.of(context).textTheme.displaySmall,
-            //                   ),
-            //                 ),
-            //                 Padding(
-            //                   padding:
-            //                       const EdgeInsets.only(top: 8.0, right: 150),
-            //                   child: Text(
-            //                     'Action',
-            //                     style: Theme.of(context).textTheme.displaySmall,
-            //                   ),
-            //                 )
-            //               ],
-            //             )))
-            //     :
             TheContainer(
               width: double.maxFinite,
               // width: MediaQuery.of(context).size.width * 0.4,

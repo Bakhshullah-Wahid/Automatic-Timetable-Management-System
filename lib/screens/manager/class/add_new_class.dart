@@ -292,12 +292,8 @@ class _AddAccountScreenState extends State<AddClassScreen> {
                           departmentId!,
                         );
                       } else {
-                        classUpdate.updateClass(
-                          classId,
-                          className.text,
-                          classType.text,
-                          departmentId,
-                        );
+                        classUpdate.updateClass(classId, className.text,
+                            classType.text, departmentId, '', '');
                       }
                       context.go(Routes.manageClass);
                     }
