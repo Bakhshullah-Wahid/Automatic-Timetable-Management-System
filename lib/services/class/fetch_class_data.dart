@@ -25,7 +25,7 @@ class ClassService {
   }
 
   Future<void> updateClass(int? id, String className, String classType,
-      dynamic departmentId) async {
+      dynamic departmentId , String requestedBy , String givenTo) async {
  await http.put(
       Uri.parse('${api.baseUrl}classs/update/$id/'),
       headers: <String, String>{
@@ -35,6 +35,8 @@ class ClassService {
         'class_name': className,
         'class_type': classType,
         'department_id': departmentId,
+         'requested_by':requestedBy,
+        'given_to':givenTo
         
         // Change here
       }),

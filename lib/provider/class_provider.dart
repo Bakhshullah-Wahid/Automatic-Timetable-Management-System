@@ -12,9 +12,9 @@ class ClassNotifier extends StateNotifier<List<FetchingClass>> {
 
   Future<void> retrieveClass() async {
     API api = API();
-    try{
-    final response = await http.get(Uri.parse('${api.baseUrl}classs/'));
-    if (response.statusCode == 200) {
+    try {
+      final response = await http.get(Uri.parse('${api.baseUrl}classs/'));
+      if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 
         // Parse and store department data as FetchingTeacher objects
@@ -44,11 +44,13 @@ class FetchingClass {
   String className;
   String classType;
   int departmentId;
-  String requestConfirmation;
+  String? requestedBy;
+  String? givenTo;
 
   FetchingClass(
       {required this.classId,
-      required this.requestConfirmation,
+      this.requestedBy,
+      this.givenTo,
       required this.className,
       required this.classType,
       required this.departmentId});
@@ -59,7 +61,8 @@ class FetchingClass {
         className: map['class_name'] ?? '',
         classType: map['class_type'] ?? '',
         departmentId: map['department_id'] ?? 0,
-        requestConfirmation: map['request_confirmation'] ?? '');
+        requestedBy: map['requested_by'] ?? '',
+        givenTo: map['given_to']);
   }
 
   // Convert instance to a Map (useful for JSON)
@@ -69,12 +72,13 @@ class FetchingClass {
       'class_name': className,
       'class_type': classType,
       'department_id': departmentId,
-      'request_confirmation': requestConfirmation
+      'requested_by': requestedBy,
+      'given_to': givenTo
     };
   }
 
   // Override toString for readable output
   @override
   String toString() =>
-      'FetchingClass(class_name: $className,class_id:$classId ,class_type:$classType, department_id: $departmentId , request_confirmation: $requestConfirmation)';
+      'FetchingClass(class_name: $className,class_id:$classId ,class_type:$classType, department_id: $departmentId , requested_by:$requestedBy,given_to:$givenTo)';
 }

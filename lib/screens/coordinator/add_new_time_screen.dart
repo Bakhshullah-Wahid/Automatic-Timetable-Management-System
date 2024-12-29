@@ -532,6 +532,10 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                 }
               }
             }
+            formattedClass.removeWhere((element) =>
+                (element['department_name'] != department &&
+                    element['given_to'] != department));
+
             return Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
