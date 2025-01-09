@@ -12,11 +12,12 @@ import '../widget/base_api.dart';
 class ManagerNotifier extends StateNotifier<List<FetchingManager>> {
   ManagerNotifier() : super([]);
 
-  Future<void> retrieveManager() async {
-    
-      API api = API();
-      try{
-      final response = await http.get(Uri.parse('${api.baseUrl}users/'));
+  Future<void> retrieveManager(int? departmentId) async {
+    API api = API(); 
+    try {
+      final response = departmentId != null
+          ? await http.get(Uri.parse('${api.baseUrl}users/$departmentId/'))
+          : await http.get(Uri.parse('${api.baseUrl}users/'));
       if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 

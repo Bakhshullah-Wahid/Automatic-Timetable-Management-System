@@ -46,19 +46,24 @@ class FetchingTeacher {
   final String teacherName;
   final String email;
   final int departmentId;
+  String? requestedBy;
+  String? givenTo;
 
-  FetchingTeacher({
-    required this.teacherId,
-    required this.email,
-    required this.teacherName,
-    required this.departmentId,
-  });
+  FetchingTeacher(
+      {required this.teacherId,
+      required this.email,
+      required this.teacherName,
+      required this.departmentId,
+      required this.givenTo,
+      required this.requestedBy});
   factory FetchingTeacher.fromMap(Map<String, dynamic> map) {
     return FetchingTeacher(
       teacherId: map['teacher_id'] ?? 0,
       email: map['email'] ?? '',
       teacherName: map['teacher_name'] ?? '',
       departmentId: map['department_id'] ?? 0,
+      requestedBy: map['requested_by'] ?? '',
+      givenTo: map['given_to'] ?? '',
     );
   }
 
@@ -68,12 +73,14 @@ class FetchingTeacher {
       "teacher_id": teacherId,
       "teacher_name": teacherName,
       "email": email,
-      "department_id": departmentId
+      "department_id": departmentId,
+      "requested_by": requestedBy,
+      "given_to": givenTo
     };
   }
 
   // Override toString for readable output
   @override
   String toString() =>
-      'FetchingTeacher( teacher_id:$teacherId,teacher_name: $teacherName,email:$email ,department_id:$departmentId)';
+      'FetchingTeacher( teacher_id:$teacherId,teacher_name: $teacherName,email:$email ,department_id:$departmentId ,requested_by:$requestedBy,given_to:$givenTo)';
 }

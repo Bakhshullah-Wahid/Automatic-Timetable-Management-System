@@ -1,5 +1,6 @@
 import 'package:attms/preference/shared_preferenced.dart';
 import 'package:attms/screens/common/log_in_screen.dart';
+import 'package:attms/screens/coordinator/requestTeacher/request.dart';
 import 'package:attms/screens/manager/class/class_view.dart';
 import 'package:attms/screens/manager/department/add_department.dart';
 import 'package:attms/screens/manager/department/manage_department_view.dart';
@@ -184,6 +185,12 @@ class MyRouter {
                 name: 'class_request',
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: ClassRequestSystem(),
+                    )),
+                      GoRoute(
+                path: Routes.teacherRequest,
+                name: 'teacher_request',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                      child: TeacherRequestSystem(),
                     )),
             GoRoute(
                 path: Routes.profile,

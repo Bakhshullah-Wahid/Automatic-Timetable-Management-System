@@ -6,9 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../provider/department_provider.dart';
-import '../../provider/teacher_provider.dart';
 import '../../responsive.dart';
+import '../../services/class/fetch_class_data.dart';
 import '../../services/freeSlots/retrieve_free_slot.dart';
 import '../../utils/containor.dart';
 import '../../utils/data/fetching_data.dart';
@@ -56,7 +55,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             }
           }
         }
-
         for (var addTeacher in formattedTeacher) {
           for (var addSubject in formattedSubject) {
             if (addTeacher['teacher_id'] == addSubject['teacher_id']) {
@@ -70,7 +68,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             : position == 1
                 ? _buildClass(context, formattedDepartments)
                 : position == 2
-                    ? _buildTeacher(context)
+                    ? _buildTeacher(context, formattedDepartments)
                     : position == 3
                         ? _buildSubject(context)
                         : _buildGenerateTimetable(context);
@@ -282,49 +280,49 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        TheContainer(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0, vertical: 2),
-                            child: TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Name is required';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              controller: timetableName,
-                              cursorHeight: 20,
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.black),
-                              decoration: InputDecoration(
-                                errorStyle: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                ),
+                        // TheContainer(
+                        //   width: MediaQuery.of(context).size.width * 0.4,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 5.0, vertical: 2),
+                        //     child: TextFormField(
+                        //       autovalidateMode:
+                        //           AutovalidateMode.onUserInteraction,
+                        //       validator: (value) {
+                        //         if (value!.isEmpty) {
+                        //           return 'Name is required';
+                        //         } else {
+                        //           return null;
+                        //         }
+                        //       },
+                        //       controller: timetableName,
+                        //       cursorHeight: 20,
+                        //       style: const TextStyle(
+                        //           fontSize: 15, color: Colors.black),
+                        //       decoration: InputDecoration(
+                        //         errorStyle: const TextStyle(
+                        //           color: Colors.red,
+                        //           fontSize: 12,
+                        //         ),
 
-                                labelText: 'Timetable Name',
-                                labelStyle: const TextStyle(
-                                    fontSize: 10, color: Colors.black),
-                                hintStyle: const TextStyle(fontSize: 10),
-                                prefixIcon: const Icon(Icons.schedule,
-                                    color: Colors.black),
-                                prefixStyle: const TextStyle(fontSize: 10),
-                                border: InputBorder.none,
-                                //  OutlineInputBorder(
-                                //   borderRadius: BorderRadius.circular(12.0),
-                                // ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    borderSide: BorderSide.none),
-                              ),
-                            ),
-                          ),
-                        ),
+                        //         labelText: 'Timetable Name',
+                        //         labelStyle: const TextStyle(
+                        //             fontSize: 10, color: Colors.black),
+                        //         hintStyle: const TextStyle(fontSize: 10),
+                        //         prefixIcon: const Icon(Icons.schedule,
+                        //             color: Colors.black),
+                        //         prefixStyle: const TextStyle(fontSize: 10),
+                        //         border: InputBorder.none,
+                        //         //  OutlineInputBorder(
+                        //         //   borderRadius: BorderRadius.circular(12.0),
+                        //         // ),
+                        //         focusedBorder: OutlineInputBorder(
+                        //             borderRadius: BorderRadius.circular(12.0),
+                        //             borderSide: BorderSide.none),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -630,10 +628,16 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                         element['class_type'],
                                                     'class_id':
                                                         element['class_id'],
-                                                    'class_department': element[
+                                                    'department_name': element[
                                                         'department_name'],
                                                     'class_name':
-                                                        element['class_name']
+                                                        element['class_name'],
+                                                    'requested_by':
+                                                        element['requested_by'],
+                                                    'given_to':
+                                                        element['given_to'],
+                                                    'department_id':
+                                                        element['department_id']
                                                   });
                                                 }
                                                 setState(() {});
@@ -760,7 +764,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                                                 element[
                                                                     'class_id'] ==
                                                                 value);
-
                                                         setState(() {});
                                                       },
                                                       child: SizedBox(
@@ -831,7 +834,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   }
 
 // teacher
-  Widget _buildTeacher(BuildContext context) {
+  Widget _buildTeacher(BuildContext context, formattedDepartments) {
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -848,28 +851,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             ),
             Consumer(
               builder: (context, ref, child) {
-                ref.read(departmentProvider.notifier).retrieveDepartments();
-                ref.read(teacherProvider.notifier).retrieveTeacher();
-                final department = ref.watch(departmentProvider);
-                final teachersss = ref.watch(teacherProvider);
-                // // Convert departments to a list of maps
-                List<Map<String, dynamic>> formattedDepartments =
-                    department.map((dept) {
-                  return {
-                    'department_name': dept.departmentName,
-                    'department_id': dept.departmentId,
-                  };
-                }).toList();
-                List<Map<String, dynamic>> formattedTeacher =
-                    teachersss.map((dept) {
-                  return {
-                    'teacher_id': dept.teacherId,
-                    'department_id': dept.departmentId,
-                    'teacher_name': dept.teacherName,
-                    'email': dept.email
-                  };
-                }).toList();
-
+                var formattedTeacher = fetchingDataCall.teacher(ref);
                 for (var i in formattedDepartments) {
                   for (var j in formattedTeacher) {
                     if (i['department_id'] == j['department_id']) {
@@ -877,6 +859,9 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                     }
                   }
                 }
+                formattedTeacher.removeWhere((element) =>
+                    (element['department_name'] != department &&
+                        element['given_to'] != department));
                 return Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1216,6 +1201,19 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                             generatedTimetable3, deptId);
                         await timetableManaging.savingTimetable(
                             generatedTimetable4, deptId);
+                        ClassService c = ClassService();
+                        for (var virtual in selectedClass) {
+                          if (virtual['given_to'] == department) {
+                            c.updateClass(
+                                virtual['class_id'],
+                                virtual['class_name'],
+                                virtual['class_type'],
+                                virtual['department_id'],
+                                '',
+                                '');
+                          }
+                        }
+
                         ref
                             .read(addNewTimetableProvider.notifier)
                             .setPosition(0);
@@ -1235,6 +1233,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   }
 
   triggerTimetableGeneration() {
+
     if (selectedSem == null) {
       reference.read(addNewTimetableProvider.notifier).setPosition(0);
     }
@@ -1247,7 +1246,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
     List semester3and4 = [];
     List semester5and6 = [];
     List semester7and8 = [];
-
+    
     for (var filteredDatamm
         in selectedSem == 'semester 01' ? filteredDataOdd : filteredDataEven) {
       int repetitionCount = 1;
@@ -1259,7 +1258,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
       } else if (filteredDatamm['theory'] + filteredDatamm['lab'] == 4) {
         repetitionCount = 3;
       }
-
       // Add the data to newFilteredData based on the repetition count
       for (int i = 0; i < repetitionCount; i++) {
         newFilteredData.add({
@@ -1278,7 +1276,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
       }
     }
     // ----------------------------------------------------------------------------------------
-
     // ================================================================================
     if (welcomeClass1.length < newFilteredData.length ||
         welcomeClass1.isEmpty) {

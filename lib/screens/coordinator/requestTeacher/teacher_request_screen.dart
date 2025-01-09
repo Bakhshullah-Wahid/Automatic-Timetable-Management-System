@@ -1,108 +1,33 @@
-import 'package:attms/services/class/fetch_class_data.dart';
+import 'package:attms/services/teacher/fetch_teacher.dart';
 import 'package:attms/utils/containor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/grouped_list.dart';
-import '../../../services/freeSlots/retrieve_free_slot.dart';
+
 import '../../../services/requestings/requist_ap.dart';
 
-class ClassRequestScreens extends StatefulWidget {
+class TeacherRequestScreens extends StatefulWidget {
   final String departments;
   final int deptId;
-  final List formattedClass;
-  const ClassRequestScreens(
+  final List formattedTeacher;
+  const TeacherRequestScreens(
       {super.key,
-      required this.formattedClass,
+      required this.formattedTeacher,
       required this.departments,
       required this.deptId});
 
   @override
-  State<ClassRequestScreens> createState() => _ClassRequestScreensState();
+  State<TeacherRequestScreens> createState() => _ClassRequestScreensState();
 }
 
-class _ClassRequestScreensState extends State<ClassRequestScreens> {
+class _ClassRequestScreensState extends State<TeacherRequestScreens> {
 // ====================================================================
-  List classes = [];
+  List teachers = [];
   List requests = [];
   bool isLoading = true;
   // ===================================================
   final ClassRequestService service = ClassRequestService();
-  ClassService c = ClassService();
-  requestClass(freeSlots, classId, className, departmentName, requestedBy,
-      departmentId, classType) async {
-    return await showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return AlertDialog(
-                title: Text(className),
-                content: freeSlots.isEmpty
-                    ? Text('Slots are Booked')
-                    : SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 300,
-                              height: 200,
-                              child: GroupedListView<dynamic, String>(
-                                elements: freeSlots,
-                                groupBy: (element) {
-                                  return element['day_of_week'];
-                                },
-                                order: GroupedListOrder.ASC,
-                                groupSeparatorBuilder: (String groupByValue) =>
-                                    Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    groupByValue,
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ),
-                                itemBuilder: (context, dynamic element) {
-                                  return ListTile(
-                                    title: Row(
-                                      children: [
-                                        Text(element['free_slots']),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('cancel')),
-                  freeSlots.isEmpty
-                      ? const SizedBox.shrink()
-                      : ElevatedButton(
-                          onPressed: () async {
-                            if (requestedBy == widget.departments) {
-                              await c.updateClass(classId, className, classType,
-                                  departmentId, '', '');
-                            } else {
-                              await c.updateClass(classId, className, classType,
-                                  departmentId, widget.departments, '');
-                            }
-                            Navigator.pop(context);
-                          },
-                          child: Text(requestedBy == widget.departments
-                              ? 'Cancel Request'
-                              : 'Request'))
-                ],
-              );
-            },
-          );
-        });
-  }
+  TeacherService c = TeacherService();
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +41,19 @@ class _ClassRequestScreensState extends State<ClassRequestScreens> {
               height: 15,
             ),
             Consumer(builder: (context, ref, child) {
-              widget.formattedClass.removeWhere((element) =>
+              widget.formattedTeacher.removeWhere((element) =>
                   element['department_name'] == widget.departments);
-              var mediaquery = MediaQuery.of(context).size;
               return Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: widget.formattedClass.isEmpty
+                      child: widget.formattedTeacher.isEmpty
                           ? Center(
                               child: Text(
-                              'No Class Found',
+                              'No Teacher Found',
                               style: Theme.of(context).textTheme.bodySmall,
                             ))
                           : GroupedListView(
-                              elements: widget.formattedClass,
+                              elements: widget.formattedTeacher,
                               groupBy: (element) =>
                                   element['department_name'] ?? '',
                               order: GroupedListOrder.ASC,
@@ -157,12 +81,12 @@ class _ClassRequestScreensState extends State<ClassRequestScreens> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: TheContainer(
                                       child: ListTile(
-                                        subtitle: element['requested_by'] !=
+                                        subtitle: (element['requested_by'] !=
                                                     '' &&
                                                 element['requested_by'] !=
-                                                    widget.departments
+                                                    widget.departments)
                                             ? Text(
-                                                'This class is requested by: ${element['requested_by']}',
+                                                'This Teacher is requested by: ${element['requested_by']}',
                                                 style: TextStyle(
                                                     fontWeight:
                                                         FontWeight.normal,
@@ -178,35 +102,49 @@ class _ClassRequestScreensState extends State<ClassRequestScreens> {
                                                               widget.departments
                                                       ? TextButton(
                                                           onPressed: () async {
-                                                            final freeSlots =
-                                                                await fetchFreeSlots(
-                                                                    element[
-                                                                        'class_id']);
-
-                                                            await requestClass(
-                                                                freeSlots,
-                                                                element[
-                                                                    'class_id'],
-                                                                element[
-                                                                    'class_name'],
-                                                                element[
-                                                                    'department_name'],
-                                                                element[
-                                                                    'requested_by'],
-                                                                element[
-                                                                    'department_id'],
-                                                                element[
-                                                                    'class_type']);
+                                                            if (element[
+                                                                    'requested_by'] ==
+                                                                widget
+                                                                    .departments) {
+                                                              await c.updateTeacher(
+                                                                  element[
+                                                                      'teacher_id'],
+                                                                  element[
+                                                                      'teacher_name'],
+                                                                  element[
+                                                                      'email'],
+                                                                  element[
+                                                                      'department_id'],
+                                                                  '',
+                                                                  '');
+                                                            } else {
+                                                              await c.updateTeacher(
+                                                                  element[
+                                                                      'teacher_id'],
+                                                                  element[
+                                                                      'teacher_name'],
+                                                                  element[
+                                                                      'email'],
+                                                                  element[
+                                                                      'department_id'],
+                                                                  widget
+                                                                      .departments,
+                                                                  '');
+                                                            }
                                                           },
-                                                          child:
-                                                              Text('view slot'))
+                                                          child: Text(element[
+                                                                      'requested_by'] ==
+                                                                  widget
+                                                                      .departments
+                                                              ? 'Cancel request'
+                                                              : 'Request'))
                                                       : SizedBox.shrink()
                                                 ],
                                               ),
                                         title: Row(
                                           children: [
                                             Text(
-                                              element['class_name'] ??
+                                              element['teacher_name'] ??
                                                   'No Name',
                                             ),
                                             element['requested_by'] ==

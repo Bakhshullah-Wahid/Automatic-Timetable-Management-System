@@ -3,14 +3,14 @@ import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
 
-import '../../../provider/department_provider.dart';
-import '../../../provider/manager_provider.dart';
-import '../../../responsive.dart';
-import '../../../route/navigations.dart';
-import '../../../services/coordinator/fetch_user_data.dart';
-import '../../../widget/manager/department_data.dart';
+import '../../../../provider/department_provider.dart';
+import '../../../../provider/manager_provider.dart';
+import '../../../../responsive.dart';
+import '../../../../route/navigations.dart';
+import '../../../../services/coordinator/fetch_user_data.dart';
+import '../../../../services/email.dart';
+import '../../../../widget/manager/department_data.dart';
 
 class AddAccountScreen extends StatefulWidget {
   final UpdateAccount? updatedData;
@@ -31,22 +31,10 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
   int? userId;
   int? departmentId;
   ManagerService managerUpdate = ManagerService();
+  EmailSystem emailing = EmailSystem();
   List<Map<String, dynamic>> dataList = [];
   DepartmentDataForSelectingClassAndCoordinator functionDepartment =
       DepartmentDataForSelectingClassAndCoordinator();
-  Future<void> sendEmail(context) async {
-    const String baseUrl = 'http://127.0.0.1:8000/';
-    final url = Uri.parse('${baseUrl}send-email/');
-    await http.post(
-      url,
-      body: {
-        'email': email.text,
-        'name': userName.text,
-        'message':
-            'your login as co-ordinator :email:{${email.text}} pswd:${password.text}',
-      },
-    );
-  }
 
   @override
   void initState() {
@@ -400,7 +388,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               if (userId == null) {
                                 if (departmentCheck(
                                     department.text, formattedManager)) {
-                                  sendEmail(context);
+                                  emailing.sendEmail(context, 'email', email.text,
+                                      userName.text, password.text);
                                   managerUpdate.addManager(
                                       userName.text,
                                       'Co-ordinator',

@@ -55,16 +55,17 @@ class _HomeScreensState extends State<HomeScreens> {
   final FreeSlotServices free = FreeSlotServices();
   final FetchingDataCall fetchingDataCall = FetchingDataCall();
   final TimingManage timetableManaging = TimingManage();
+  List timetable1 = [];
+  List timetable2 = [];
+  List timetable3 = [];
+  List timetable4 = [];
   @override
   Widget build(BuildContext context) {
     // var mediaquery = MediaQuery.of(context).size;
 
     return Consumer(builder: (context, ref, child) {
       final bool mobileCheck = ref.watch(mobileDrawer);
-      List timetable1 = [];
-      List timetable2 = [];
-      List timetable3 = [];
-      List timetable4 = [];
+
       semester01And02.clear();
       semester03And04.clear();
       semester05And06.clear();
@@ -178,7 +179,16 @@ class _HomeScreensState extends State<HomeScreens> {
     await addSlots(semester03And04);
     await addSlots(semester05And06);
     await addSlots(semester07And08);
+    semester01And02.clear();
+    semester03And04.clear();
+    semester05And06.clear();
+    semester07And08.clear();
+    timetable1.clear();
+    timetable2.clear();
+    timetable3.clear();
+    timetable4.clear();
     await scheduleService.deleteTimetable(departmentId);
+    setState(() {});
   }
 
   addSlots(semester) {
@@ -186,6 +196,5 @@ class _HomeScreensState extends State<HomeScreens> {
       free.addFreeSlot(
           i['class_id'], i['slot'], i['department_id'], i['day_of_week']);
     }
-    setState(() {});
   }
 }

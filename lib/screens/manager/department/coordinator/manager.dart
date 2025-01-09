@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-import '../../../provider/dashboard_provider.dart';
-import '../../../responsive.dart';
-import '../../../route/navigations.dart';
-import '../../../services/coordinator/fetch_user_data.dart';
-import '../../../utils/containor.dart';
-import '../../../utils/data/fetching_data.dart';
-import '../../../wholeData/coordinator/update_user.dart';
-import '../../../widget/dialoge_box.dart';
-import '../../../widget/manager/manager_drawer.dart';
-import '../../../widget/title_container.dart';
+import '../../../../provider/dashboard_provider.dart';
+import '../../../../responsive.dart';
+import '../../../../route/navigations.dart';
+import '../../../../services/coordinator/fetch_user_data.dart';
+import '../../../../utils/containor.dart';
+import '../../../../utils/data/fetching_data.dart';
+import '../../../../wholeData/coordinator/update_user.dart';
+import '../../../../widget/dialoge_box.dart';
+import '../../../../widget/manager/manager_drawer.dart';
+import '../../../../widget/title_container.dart';
 
 class ManagerScreen extends ConsumerWidget {
   ManagerScreen({super.key});
@@ -20,7 +20,7 @@ class ManagerScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var formattedDepartments = fetchingDataCall.department(ref);
-    var formattedManager = fetchingDataCall.manager(ref);
+    var formattedManager = fetchingDataCall.manager(ref,null);
     for (var i in formattedDepartments) {
       for (var j in formattedManager) {
         if (i['department_id'] == j['department_id']) {
