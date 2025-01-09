@@ -22,7 +22,7 @@ class TeacherService {
   }
 
   Future<void> updateTeacher(
-      int? id, String teacherName, String email, dynamic departmentId) async {
+      int? id, String teacherName, String email, dynamic departmentId ,String requestedBy , String givenTo) async {
     await http.put(
       Uri.parse('${api.baseUrl}teachers/update/$id/'),
       headers: <String, String>{
@@ -32,6 +32,8 @@ class TeacherService {
         'teacher_name': teacherName,
         'email': email,
         'department_id': departmentId, // Change here
+        'requested_by':requestedBy,
+        'given_to':givenTo
       }),
     );
   }

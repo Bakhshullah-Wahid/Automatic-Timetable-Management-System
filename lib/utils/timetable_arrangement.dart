@@ -1,3 +1,5 @@
+import 'package:attms/services/class/fetch_class_data.dart';
+
 import '../services/freeSlots/fetch_free_slots.dart';
 import '../services/timetable/fetch_timetable.dart';
 
@@ -183,6 +185,7 @@ class TimingManage {
   savingTimetable(generatedTimetableee, depart) {
     ScheduleService s = ScheduleService();
     FreeSlotServices free = FreeSlotServices();
+   
 
     for (var t1 in generatedTimetableee) {
       s.addTimetable(

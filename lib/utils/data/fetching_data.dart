@@ -16,7 +16,9 @@ class FetchingDataCall {
         'teacher_id': dept.teacherId,
         'department_id': dept.departmentId,
         'teacher_name': dept.teacherName,
-        'email': dept.email
+        'email': dept.email,
+        'requested_by': dept.requestedBy,
+        'given_to': dept.givenTo
       };
     }).toList();
     return formattedTeacher;
@@ -43,8 +45,8 @@ class FetchingDataCall {
     return formattedSubject;
   }
 
-  manager(WidgetRef ref) {
-    ref.read(managerProvider.notifier).retrieveManager();
+  manager(WidgetRef ref, departmentId) {
+    ref.read(managerProvider.notifier).retrieveManager(departmentId);
     final userss = ref.watch(managerProvider);
     List<Map<String, dynamic>> formattedManager = userss.map((dept) {
       return {

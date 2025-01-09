@@ -89,7 +89,7 @@ class _TitleContainerState extends State<TitleContainer> {
                         : widget.buttonName == null
                             ? SizedBox.shrink()
                             : button()
-                    : Container()
+                    : SizedBox.shrink()
               ],
             ),
             const Divider(),
@@ -117,7 +117,6 @@ class _TitleContainerState extends State<TitleContainer> {
 
   Widget button() {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.4,
       child: Consumer(
         builder: (context, ref, child) {
           return TextButton(

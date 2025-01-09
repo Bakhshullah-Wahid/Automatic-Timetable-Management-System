@@ -1,10 +1,10 @@
 export '../screens/common/about_us.dart';
-export '../screens/manager/coordinator/add_new_coordinator.dart';
+export '../screens/manager/department/coordinator/add_new_coordinator.dart';
 export '../screens/coordinator/add_new_time_screen.dart';
 export '../screens/coordinator/dashboard.dart';
 export '../screens/common/error_screen.dart';
 export '../screens/coordinator/home_screen.dart';
-export '../screens/manager/coordinator/manager.dart';
+export '../screens/manager/department/coordinator/manager.dart';
 export '../screens/manager/manager_dashboard.dart';
 export '../screens/common/profile_screen.dart';
 export '../screens/coordinator/view_timetable_screen.dart';
@@ -14,3 +14,4 @@ export '../screens/manager/teacher/add_teacher.dart';
 export '../screens/manager/subject/manage_subject.dart';
 export '../screens/manager/subject/add_subject.dart';
 export '../screens/coordinator/requestClasses/class_request_screen.dart';
+export '../screens/coordinator/requestTeacher/teacher_request_screen.dart';

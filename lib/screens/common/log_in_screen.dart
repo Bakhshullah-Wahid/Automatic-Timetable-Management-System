@@ -1,11 +1,10 @@
 import 'package:attms/provider/provider_dashboard.dart';
+import 'package:attms/utils/data/fetching_data.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../provider/department_provider.dart';
-import '../../provider/manager_provider.dart';
 import '../../responsive.dart';
 
 class LogInPage extends StatefulWidget {
@@ -27,41 +26,16 @@ class _LogInPageState extends State<LogInPage> {
   void initState() {
     super.initState();
     // Trigger retrieval of departments and manager data
-    Future.microtask(() {
-      final ref = ProviderScope.containerOf(context, listen: false);
-      ref.read(departmentProvider.notifier).retrieveDepartments();
-      ref.read(managerProvider.notifier).retrieveManager();
-    });
   }
 
+  FetchingDataCall fetchingDataCall = FetchingDataCall();
   bool isShow = true;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (_, WidgetRef ref, __) {
       bool switchCheck = ref.watch(isAdmin);
-      final department = ref.watch(departmentProvider);
-      final userss = ref.watch(managerProvider);
-
-      // Format department and manager data after loading
-      List<Map<String, dynamic>> formattedDepartments = department.map((dept) {
-        return {
-          'department_name': dept.departmentName,
-          'department_id': dept.departmentId,
-        };
-      }).toList();
-
-      List<Map<String, dynamic>> formattedManager = userss.map((dept) {
-        return {
-          "user_id": dept.userId,
-          "user_name": dept.userName,
-          "user_type": dept.userType,
-          "email": dept.email,
-          "password": dept.password,
-          "department_id": dept.departmentId
-        };
-      }).toList();
-
-      // Match departments to managers
+      var formattedDepartments = fetchingDataCall.department(ref);
+      var formattedManager = fetchingDataCall.manager(ref, null);
       for (var i in formattedDepartments) {
         for (var j in formattedManager) {
           if (i['department_id'] == j['department_id']) {
@@ -69,7 +43,6 @@ class _LogInPageState extends State<LogInPage> {
           }
         }
       }
-
       return Scaffold(
           body: Container(
         color: Colors.white,

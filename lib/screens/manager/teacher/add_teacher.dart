@@ -271,7 +271,7 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                             teacherName.text, email.text, departmentId!);
                       } else {
                         teacherUpdate.updateTeacher(teacherId, teacherName.text,
-                            email.text, departmentId);
+                            email.text, departmentId ,'','');
                       }
                       context.go(Routes.teacherView);
                     }

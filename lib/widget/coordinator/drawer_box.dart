@@ -20,6 +20,7 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
     {'title': 'Dashboard', 'leading': Icons.dashboard},
     {'title': 'Manage Sub Teacher', 'leading': Icons.menu_book},
     {'title': 'Request Free Class', 'leading': Icons.class_},
+    {'title': 'Request Teacher', 'leading': Icons.person_3},
     {'title': 'Profile', 'leading': Icons.account_circle},
     {'title': 'About Us', 'leading': Icons.info},
   ];
@@ -157,7 +158,8 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                                   index == 1 ||
                                   index == 2 ||
                                   index == 4 ||
-                                  index == 3) {
+                                  index == 3 ||
+                                  index == 5) {
                                 ref
                                     .read(dashboardProvider.notifier)
                                     .setPosition(index);
@@ -174,10 +176,13 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
 
                                     break;
                                   case 3:
+                                    context.go(Routes.teacherRequest);
+                                    break;
+                                  case 4:
                                     context.go(Routes.profile);
 
                                     break;
-                                  case 4:
+                                  case 5:
                                     context.go(Routes.aboutUs);
                                     break;
 
