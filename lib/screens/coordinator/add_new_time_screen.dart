@@ -3,10 +3,12 @@ import 'package:attms/utils/date_time.dart';
 import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../responsive.dart';
+import '../../route/navigations.dart';
 import '../../services/class/fetch_class_data.dart';
 import '../../services/freeSlots/retrieve_free_slot.dart';
 import '../../utils/containor.dart';
@@ -84,6 +86,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   List otherDepartmentTeacher = [];
   String department = '';
   int deptId = 0;
+  bool _isTapped = false;
   filteringData() async {
     var prefs2 = await SharedPreferences.getInstance();
     department = prefs2.getString('department').toString();
@@ -1192,48 +1195,27 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
               ? const SizedBox.shrink()
               : Consumer(builder: (context, ref, child) {
                   return ElevatedButton(
-                      onPressed: () async {
-                        await timetableManaging.savingTimetable(
-                            generatedTimetable1, deptId);
-                        await timetableManaging.savingTimetable(
-                            generatedTimetable2, deptId);
-                        await timetableManaging.savingTimetable(
-                            generatedTimetable3, deptId);
-                        await timetableManaging.savingTimetable(
-                            generatedTimetable4, deptId);
-                        ClassService c = ClassService();
-                        for (var virtual in selectedClass) {
-                          if (virtual['given_to'] == department) {
-                            c.updateClass(
-                                virtual['class_id'],
-                                virtual['class_name'],
-                                virtual['class_type'],
-                                virtual['department_id'],
-                                '',
-                                '');
-                          }
-                        }
-
-                        ref
-                            .read(addNewTimetableProvider.notifier)
-                            .setPosition(0);
-                        popContextPage();
-                      },
-                      child: const Text('Save Timetable'));
+                    onPressed: () {
+                      _onPressed(ref);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    ),
+                    child: _isTapped
+                        ? CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        : Text('Save The Timetable'),
+                  );
                 }),
         ],
       ),
     ));
   }
 
-  popContextPage() {
-    setState(() {
-      Navigator.pop(context);
-    });
-  }
-
   triggerTimetableGeneration() {
-
     if (selectedSem == null) {
       reference.read(addNewTimetableProvider.notifier).setPosition(0);
     }
@@ -1246,7 +1228,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
     List semester3and4 = [];
     List semester5and6 = [];
     List semester7and8 = [];
-    
+
     for (var filteredDatamm
         in selectedSem == 'semester 01' ? filteredDataOdd : filteredDataEven) {
       int repetitionCount = 1;
@@ -1348,5 +1330,49 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
 
       setState(() {});
     }
+  }
+
+  void _onPressed(ref) async {
+    await timetableManaging.savingTimetable(generatedTimetable1, deptId);
+    await timetableManaging.savingTimetable(generatedTimetable2, deptId);
+    await timetableManaging.savingTimetable(generatedTimetable3, deptId);
+    await timetableManaging.savingTimetable(generatedTimetable4, deptId);
+    ClassService c = ClassService();
+    for (var virtual in selectedClass) {
+      if (virtual['given_to'] == department) {
+        c.updateClass(virtual['class_id'], virtual['class_name'],
+            virtual['class_type'], virtual['department_id'], '', '');
+      }
+    }
+    setState(() {
+      _isTapped = true;
+    });
+
+    // Simulate some loading process with a delay
+    await Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        _isTapped = false;
+      });
+    });
+    showLoadingDialog(context, ref);
+  }
+
+  void showLoadingDialog(BuildContext context, ref) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismissing by tapping outside
+      builder: (context) => AlertDialog(
+        content: Text('Timetable Saved'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                ref.read(addNewTimetableProvider.notifier).setPosition(0);
+                Navigator.pop(context);
+                context.go(Routes.home);
+              },
+              child: Text('ok'))
+        ],
+      ),
+    );
   }
 }

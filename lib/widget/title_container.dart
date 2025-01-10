@@ -1,11 +1,17 @@
 import 'package:attms/provider/dashboard_provider.dart';
+import 'package:attms/provider/retrieve_free_slots_pro.dart';
+import 'package:attms/provider/subject_provider.dart';
 import 'package:attms/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../provider/add_new_time_provider.dart';
+import '../provider/class_provider.dart';
 import '../provider/provider_dashboard.dart';
+import '../provider/teacher_provider.dart';
+import '../provider/timetable_provider.dart';
 import '../route/navigations.dart';
 import '../utils/containor.dart';
 
@@ -121,42 +127,58 @@ class _TitleContainerState extends State<TitleContainer> {
         builder: (context, ref, child) {
           return TextButton(
               onPressed: () async {
+                var prefs = await SharedPreferences.getInstance();
+                var prefs2 = await SharedPreferences.getInstance();
                 if (widget.pageTitle == 'Manage Classes') {
                   context.push(Routes.addClass);
                 } else if (widget.pageTitle == 'Profile') {
                   late bool value = ref.watch(isAdmin);
                   ref.read(dashboardProvider.notifier).setPosition(0);
+                  prefs2.setString('department', '');
 
+                  prefs.setInt('deptId', -1);
+                  ref.invalidate(timetableProvider);
                   if (value) {
                     context.go(Routes.managerAdmin);
                   } else {
                     context.go(Routes.home);
                   }
-                  ref.read(isLoginProvider.notifier).loginTime();
+                  ref.read(isLoginProvider.notifier).loginTime(); // restart();
                 } else if (widget.pageTitle == 'Manage Subjects') {
+                  dis(ref);
                   context.push(Routes.addSubject);
                 } else if (widget.pageTitle == 'Manage Coordinator') {
+                  dis(ref);
                   context.push(Routes.addAccount);
                 } else if (widget.pageTitle == 'Manage Department') {
+                  dis(ref);
                   context.push(Routes.addDepartment);
                 } else if (widget.pageTitle == 'Dashboard') {
+                  dis(ref);
                   context.push(Routes.addNewTime);
                 } else if (widget.pageTitle == 'Dashboard ') {
+                  ref.invalidate(timetableProvider);
                   await widget.timetableItself?.call();
                 } else if (widget.pageTitle == 'Manage Teacher') {
+                  dis(ref);
                   context.push(Routes.addTeacher);
                 } else if (widget.pageTitle == 'New Timetable') {
+                  dis(ref);
                   ref.read(addNewTimetableProvider.notifier).setPosition(1);
                 } else if (widget.pageTitle == 'Class Selection') {
+                  dis(ref);
                   ref.read(addNewTimetableProvider.notifier).setPosition(2);
                   // context.pop();
                 } else if (widget.pageTitle == 'Teacher Selection') {
+                  dis(ref);
                   ref.read(addNewTimetableProvider.notifier).setPosition(3);
                   // context.pop();
                 } else if (widget.pageTitle == 'Subject Selected') {
+                  dis(ref);
                   ref.read(addNewTimetableProvider.notifier).setPosition(4);
                   // context.pop();
                 } else if (widget.pageTitle == 'Generate Timetable') {
+                  dis(ref);
                   widget.timetableItself?.call();
                 } else {
                   context.push(Routes.addNewTime);
@@ -167,5 +189,14 @@ class _TitleContainerState extends State<TitleContainer> {
         },
       ),
     );
+  }
+
+  dis(ref) {
+    ref.invalidate(timetableProvider);
+    ref.invalidate(classProvider);
+    ref.invalidate(freeSlotProvider);
+    ref.invalidate(subjectProvider);
+    ref.invalidate(teacherProvider);
+    ref.invalidate(teacherProvider);
   }
 }
