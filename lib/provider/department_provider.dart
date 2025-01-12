@@ -12,7 +12,7 @@ import '../widget/base_api.dart';
 class DepartmentNotifier extends StateNotifier<List<FetchingDepartment>> {
   DepartmentNotifier() : super([]);
 
-  Future<void> retrieveDepartments() async {
+  Future<void> retrieveDepartments(ProviderContainer container) async {
     API api = API();
     try{
     final response = await http.get(Uri.parse('${api.baseUrl}departments/'));
@@ -22,7 +22,7 @@ class DepartmentNotifier extends StateNotifier<List<FetchingDepartment>> {
         // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingDepartment.fromMap(noteMap))
-            .toList();
+            .toList();container.dispose();
       } else {
         // Handle non-200 status codes
         // print('Failed to load departments: ${response.statusCode}');

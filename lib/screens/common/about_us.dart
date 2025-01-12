@@ -35,32 +35,8 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                   Consumer(
                     builder: (context, ref, child) => ElevatedButton(
-                        onPressed: () {
-                          List days = [
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                          ];
-                          FreeSlotServices free = FreeSlotServices();
-                          FetchingDataCall f = FetchingDataCall();
-                          var bak = f.classs(ref);
-                          for (var i = 0; i < bak.length; i++) {
-                            for (var j = 0; j < days.length; j++) {
-                              free.addFreeSlot(bak[i]['class_id'], '9:30 AM',
-                                  bak[i]['department_id'], days[j]);
-                              free.addFreeSlot(bak[i]['class_id'], '11:30 AM',
-                                  bak[i]['department_id'], days[j]);
-                              if (days[j] != 'Friday') {
-                                free.addFreeSlot(bak[i]['class_id'], '1:30 PM',
-                                    bak[i]['department_id'], days[j]);
-                              } else {
-                                free.addFreeSlot(bak[i]['class_id'], '2:30 PM',
-                                    bak[i]['department_id'], days[j]);
-                              }
-                            }
-                          }
+                        onPressed: () async {
+                          await freeSlotAdding(ref);
                         },
                         child: Text('About Us')),
                   ),
@@ -314,5 +290,34 @@ class _AboutUsState extends State<AboutUs> {
         ),
       ],
     );
+  }
+
+  Future<void> freeSlotAdding(ref) async {
+    List days = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+    ];
+    FreeSlotServices free = FreeSlotServices();
+    FetchingDataCall f = FetchingDataCall();
+
+    var bak = await f.classs(ref);
+    for (var i = 0; i < bak.length; i++) {
+      for (var j = 0; j < days.length; j++) {
+        await free.addFreeSlot(
+            bak[i]['class_id'], '9:30 AM', bak[i]['department_id'], days[j]);
+        await free.addFreeSlot(
+            bak[i]['class_id'], '11:30 AM', bak[i]['department_id'], days[j]);
+        if (days[j] != 'Friday') {
+          await free.addFreeSlot(
+              bak[i]['class_id'], '1:30 PM', bak[i]['department_id'], days[j]);
+        } else {
+          await free.addFreeSlot(
+              bak[i]['class_id'], '2:30 PM', bak[i]['department_id'], days[j]);
+        }
+      }
+    }
   }
 }

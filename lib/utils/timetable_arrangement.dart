@@ -1,5 +1,3 @@
-import 'package:attms/services/class/fetch_class_data.dart';
-
 import '../services/freeSlots/fetch_free_slots.dart';
 import '../services/timetable/fetch_timetable.dart';
 
@@ -12,7 +10,7 @@ class TimingManage {
     'Friday',
     'Saturday'
   ];
-  timetableManaging(List timetable) {
+  Future<dynamic> timetableManaging(List timetable) async {
     List timetable1 = [];
 
     Map<String, List<Map<String, String>>> groupData = {};
@@ -48,7 +46,7 @@ class TimingManage {
     return timetable1;
   }
 
-  timetableGenerate(c, s, g) {
+  Future<dynamic> timetableGenerate(c, s, g) async {
     List classes = c;
     List semester = s;
     List generates = g;
@@ -147,7 +145,7 @@ class TimingManage {
     return generatedTimetable;
   }
 
-  timetableDesignSheeet(generatedTimetable) {
+  Future<dynamic> timetableDesignSheeet(generatedTimetable) async {
     List timetable = [];
     List days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     Map<String, List<Map<String, String>>> groupData = {};
@@ -182,35 +180,46 @@ class TimingManage {
     return timetable;
   }
 
-  savingTimetable(generatedTimetableee, depart) {
+  Future<bool> savingTimetable(generatedTimetableee, depart) async {
     ScheduleService s = ScheduleService();
     FreeSlotServices free = FreeSlotServices();
-   
 
-    for (var t1 in generatedTimetableee) {
-      s.addTimetable(
-        t1['class_id'],
-        t1['subject_id'],
-        t1['teacher_id'],
-        t1['day_of_week'],
-        t1['slot'],
-        t1['semester'],
-        depart,
-        t1['teacher_department'],
-        t1['class_department'],
-      );
-      free.deleteFreeSlot(t1['class_id'], t1['slot'], t1['day_of_week']);
+    try {
+      for (var t1 in generatedTimetableee) {
+        bool isAdded = false;
+        while (!isAdded) {
+          isAdded = await s.addTimetable(
+            t1['class_id'],
+            t1['subject_id'],
+            t1['teacher_id'],
+            t1['day_of_week'],
+            t1['slot'],
+            t1['semester'],
+            depart,
+            t1['teacher_department'],
+            t1['class_department'],
+          );
+        }
+        bool isDeleted = false;
+        while (!isDeleted) {
+          isDeleted = await free.deleteFreeSlot(
+              t1['class_id'], t1['slot'], t1['day_of_week']);
+        }
+      }
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
-  removeBookedClasses(classes, generatedTimetableNone) {
+  Future<dynamic> removeBookedClasses(classes, generatedTimetableNone) async {
     for (var gen in generatedTimetableNone) {
       for (var item in classes) {
         if (gen['day_of_week'].toLowerCase() ==
                 item['day_of_week'].toLowerCase() &&
             gen['slot'].toLowerCase() == item['slot'].toLowerCase() &&
             gen['class_name'] == item['class_name']) {
-          classes.remove(item);
+          await classes.remove(item);
 
           // Mark the item for removal
           break;

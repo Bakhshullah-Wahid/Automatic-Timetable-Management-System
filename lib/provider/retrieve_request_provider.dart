@@ -10,7 +10,7 @@ import '../widget/base_api.dart';
 class RequestProviderNotifier extends StateNotifier<List<FetchingRequest>> {
   RequestProviderNotifier() : super([]);
 
-  Future<void> retrieveRequest() async {
+  Future<void> retrieveRequest(ProviderContainer container) async {
   
       API api = API();
       final response = await http.get(Uri.parse('${api.baseUrl}requests/'));
@@ -19,7 +19,7 @@ class RequestProviderNotifier extends StateNotifier<List<FetchingRequest>> {
 
         state = responseBody
             .map((noteMap) => FetchingRequest.fromMap(noteMap))
-            .toList();
+            .toList();container.dispose();
       }
    
   }

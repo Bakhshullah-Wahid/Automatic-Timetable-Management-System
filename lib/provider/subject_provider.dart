@@ -12,7 +12,7 @@ import '../widget/base_api.dart';
 class SubjectNotifier extends StateNotifier<List<FetchingSubject>> {
   SubjectNotifier() : super([]);
 
-  Future<void> retrieveSubject() async {
+  Future<void> retrieveSubject(ProviderContainer container) async {
     API api = API();
     
       try{
@@ -24,7 +24,7 @@ class SubjectNotifier extends StateNotifier<List<FetchingSubject>> {
         // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingSubject.fromMap(noteMap))
-            .toList();
+            .toList();container.dispose();
       } else {
         // Handle non-200 status codes
         // print('Failed to load subjects: ${response.statusCode}');

@@ -2,14 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../provider/class_provider.dart';
 import '../../provider/department_provider.dart';
-import '../../provider/manager_provider.dart';
+import '../../provider/manager_provider.dart'; 
 import '../../provider/subject_provider.dart';
 import '../../provider/teacher_provider.dart';
 import '../../provider/timetable_provider.dart';
 
 class FetchingDataCall {
   teacher(WidgetRef ref) {
-    ref.read(teacherProvider.notifier).retrieveTeacher();
+    final teacherNotifier = ref.read(teacherProvider.notifier);
+    final container = ProviderContainer();
+    teacherNotifier.retrieveTeacher(container);
     final teachersss = ref.watch(teacherProvider);
     List<Map<String, dynamic>> formattedTeacher = teachersss.map((dept) {
       return {
@@ -25,8 +27,9 @@ class FetchingDataCall {
   }
 
   subject(WidgetRef ref) {
-    ref.read(subjectProvider.notifier).retrieveSubject();
-
+    final subjectNotifier = ref.read(subjectProvider.notifier);
+    final container = ProviderContainer();
+    subjectNotifier.retrieveSubject(container);
     final subject = ref.watch(subjectProvider);
     // // Convert departments to a list of maps
 
@@ -46,7 +49,9 @@ class FetchingDataCall {
   }
 
   manager(WidgetRef ref, departmentId) {
-    ref.read(managerProvider.notifier).retrieveManager(departmentId);
+       final managerNotifier = ref.read(managerProvider.notifier);
+    final container = ProviderContainer();
+    managerNotifier.retrieveManager(departmentId,container);
     final userss = ref.watch(managerProvider);
     List<Map<String, dynamic>> formattedManager = userss.map((dept) {
       return {
@@ -62,7 +67,9 @@ class FetchingDataCall {
   }
 
   department(WidgetRef ref) {
-    ref.read(departmentProvider.notifier).retrieveDepartments();
+       final departmentNotifier = ref.read(departmentProvider.notifier);
+    final container = ProviderContainer();
+    departmentNotifier.retrieveDepartments(container);
     final departments = ref.watch(departmentProvider);
     // Convert departments to a list of maps
     List<Map<String, dynamic>> formattedDepartments = departments.map((dept) {
@@ -75,7 +82,9 @@ class FetchingDataCall {
   }
 
   classs(WidgetRef ref) {
-    ref.read(classProvider.notifier).retrieveClass();
+    final classNotifier = ref.read(classProvider.notifier);
+    final container = ProviderContainer();
+    classNotifier.retrieveClass(container);
     final classs = ref.watch(classProvider);
     List<Map<String, dynamic>> formattedClass = classs.map((dept) {
       return {
@@ -91,7 +100,9 @@ class FetchingDataCall {
   }
 
   timetables(WidgetRef ref, departmentId) {
-    ref.read(timetableProvider.notifier).retrieveTimetable(departmentId);
+       final timetableNotifier = ref.read(timetableProvider.notifier);
+    final container = ProviderContainer();
+    timetableNotifier.retrieveTimetable(departmentId , container);
     final timetable = ref.watch(timetableProvider);
     List<Map<String, dynamic>> formattedTimetable = timetable.map((dept) {
       return {
@@ -108,4 +119,5 @@ class FetchingDataCall {
     }).toList();
     return formattedTimetable;
   }
+ // This returns the list of free slots as maps
 }

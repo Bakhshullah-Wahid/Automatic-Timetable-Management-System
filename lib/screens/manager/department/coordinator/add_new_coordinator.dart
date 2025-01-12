@@ -1,11 +1,10 @@
+import 'package:attms/utils/data/fetching_data.dart';
 import 'package:attms/wholeData/coordinator/update_user.dart';
 import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../provider/department_provider.dart';
-import '../../../../provider/manager_provider.dart';
 import '../../../../responsive.dart';
 import '../../../../route/navigations.dart';
 import '../../../../services/coordinator/fetch_user_data.dart';
@@ -68,6 +67,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     }
   }
 
+  FetchingDataCall fetchingDataCall = FetchingDataCall();
   List<Map<String, dynamic>> data = [];
   @override
   Widget build(BuildContext context) {
@@ -75,28 +75,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
         body: Container(
       color: Colors.white,
       child: Consumer(builder: (_, WidgetRef ref, __) {
-        ref.read(departmentProvider.notifier).retrieveDepartments();
-        final userss = ref.watch(managerProvider);
-        final departments = ref.watch(departmentProvider);
-        // Convert departments to a list of maps
-        List<Map<String, dynamic>> formattedDepartments =
-            departments.map((dept) {
-          return {
-            'department_name': dept.departmentName,
-            'department_id': dept.departmentId,
-          };
-        }).toList();
-        List<Map<String, dynamic>> formattedManager = userss.map((dept) {
-          return {
-            "user_id": dept.userId,
-            "user_name": dept.userName,
-            "user_type": dept.userType,
-            "email": dept.email,
-            "password": dept.password,
-            "department_id": dept.departmentId
-          };
-        }).toList();
-
+        var formattedDepartments = fetchingDataCall.department(ref);
+        var formattedManager = fetchingDataCall.manager(ref, null);
         for (var i in formattedDepartments) {
           for (var j in formattedManager) {
             if (i['department_id'] == j['department_id']) {
@@ -388,8 +368,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               if (userId == null) {
                                 if (departmentCheck(
                                     department.text, formattedManager)) {
-                                  emailing.sendEmail(context, 'email', email.text,
-                                      userName.text, password.text);
+                                  emailing.sendEmail(context, 'email',
+                                      email.text, userName.text, password.text);
                                   managerUpdate.addManager(
                                       userName.text,
                                       'Co-ordinator',

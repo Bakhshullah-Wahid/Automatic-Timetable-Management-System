@@ -83,6 +83,7 @@ class ClassRequestSystemState extends State<ClassRequestSystem>
                           formattedClass: formattedClass,
                           departments: departments,
                           deptId: deptId,
+                          ref: ref,
                         ),
                         ManageRequestsPage(
                           formattedClass: formattedClass,

@@ -50,7 +50,7 @@ class _LogInPageState extends State<LogInPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text('Switch to Admin',
+              Text(switchCheck ? 'Switch to Co-ordinator' : 'Switch to Admin',
                   style: TextStyle(color: Colors.black)),
               Transform.scale(
                 scale: 0.8,

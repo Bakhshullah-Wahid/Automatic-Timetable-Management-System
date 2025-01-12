@@ -1,4 +1,5 @@
 import 'package:attms/services/subject/fetch_subject.dart';
+import 'package:attms/utils/data/fetching_data.dart';
 import 'package:attms/wholeData/subject/update_subject.dart';
 import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +134,7 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
     }
   }
 
+  FetchingDataCall fetchingDataCall = FetchingDataCall();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,26 +142,9 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
       child: Container(
         color: Colors.white,
         child: Consumer(builder: (_, WidgetRef ref, __) {
-          ref.read(departmentProvider.notifier).retrieveDepartments();
-          ref.read(teacherProvider.notifier).retrieveTeacher();
-          final departments = ref.watch(departmentProvider);
-          final teachersss = ref.watch(teacherProvider);
+          var formattedDepartments = fetchingDataCall.department(ref);
+          var formattedTeacher = fetchingDataCall.teacher(ref);
           // // Convert departments to a list of maps
-          List<Map<String, dynamic>> formattedDepartments =
-              departments.map((dept) {
-            return {
-              'department_name': dept.departmentName,
-              'department_id': dept.departmentId,
-            };
-          }).toList();
-          List<Map<String, dynamic>> formattedTeacher = teachersss.map((dept) {
-            return {
-              'teacher_id': dept.teacherId,
-              'department_id': dept.departmentId,
-              'teacher_name': dept.teacherName,
-              'email': dept.email
-            };
-          }).toList();
 
           for (var i in formattedDepartments) {
             for (var j in formattedTeacher) {
@@ -168,7 +153,6 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
               }
             }
           }
-
           return Form(
             key: formkey,
             child: Column(children: [

@@ -125,10 +125,7 @@ class _HomeScreensState extends State<HomeScreens> {
               semester07And08.add(item);
             }
           }
-          timetable1 = timetableManaging.timetableManaging(semester01And02);
-          timetable2 = timetableManaging.timetableManaging(semester03And04);
-          timetable3 = timetableManaging.timetableManaging(semester05And06);
-          timetable4 = timetableManaging.timetableManaging(semester07And08);
+          b();
         }
       }
       return Scaffold(
@@ -189,12 +186,13 @@ class _HomeScreensState extends State<HomeScreens> {
     });
   }
 
-  dialoge() async {
+  Future<void> dialoge() async {
     DialogeBoxOpen deletes = DialogeBoxOpen();
     k = false;
     bool isDelete = await deletes.deleteBox('Timetable', context);
     if (isDelete) {
       await calling();
+      k = true;
     } else {
       setState(() {
         k = true;
@@ -215,14 +213,27 @@ class _HomeScreensState extends State<HomeScreens> {
     timetable2.clear();
     timetable3.clear();
     timetable4.clear();
-    await scheduleService.deleteTimetable(departmentId);
+    bool isDelete = false;
+    while (!isDelete) {
+      isDelete = await scheduleService.deleteTimetable(departmentId);
+    }
     setState(() {});
   }
 
-  addSlots(semester) {
+  Future<void> addSlots(semester) async {
     for (var i in semester) {
-      free.addFreeSlot(
-          i['class_id'], i['slot'], i['department_id'], i['day_of_week']);
+      bool addSlot = false;
+      while (!addSlot) {
+        addSlot = await free.addFreeSlot(
+            i['class_id'], i['slot'], i['department_id'], i['day_of_week']);
+      }
     }
+  }
+
+  Future<void> b() async {
+    timetable1 = await timetableManaging.timetableManaging(semester01And02);
+    timetable2 = await timetableManaging.timetableManaging(semester03And04);
+    timetable3 = await timetableManaging.timetableManaging(semester05And06);
+    timetable4 = await timetableManaging.timetableManaging(semester07And08);
   }
 }
