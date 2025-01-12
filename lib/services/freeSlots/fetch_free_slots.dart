@@ -8,22 +8,26 @@ import '../../widget/base_api.dart';
 
 class FreeSlotServices {
   API api = API(); // Change to your Django server URL
-  Future<void> addFreeSlot(int classId, String freeSlots, int departmentId,
+  Future<bool> addFreeSlot(int classId, String freeSlots, int departmentId,
       String daysOfWeek) async {
-    final response = await http.post(
-      Uri.parse('${api.baseUrl}free-class/'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({
-        'class_id': classId,
-        'free_slots': freeSlots,
-        'department_id': departmentId,
-        'day_of_week': daysOfWeek
-      }),
-    );
-    if (response.statusCode != 201) {
-      throw Exception('Failed to add department');
+    try {
+        await http.post(
+        Uri.parse('${api.baseUrl}free-class/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'class_id': classId,
+          'free_slots': freeSlots,
+          'department_id': departmentId,
+          'day_of_week': daysOfWeek
+        }),
+      );
+    
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 
@@ -59,9 +63,14 @@ class FreeSlotServices {
     }
   }
 
-  Future<void> deleteFreeSlot(
+  Future<bool> deleteFreeSlot(
       int classId, String slot, String dayOfWeek) async {
-    await http.delete(
-        Uri.parse('${api.baseUrl}class/delete/$classId/$slot/$dayOfWeek/'));
+    try {
+      await http.delete(
+          Uri.parse('${api.baseUrl}class/delete/$classId/$slot/$dayOfWeek/'));
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

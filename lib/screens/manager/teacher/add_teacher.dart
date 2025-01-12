@@ -1,4 +1,5 @@
 import 'package:attms/services/teacher/fetch_teacher.dart';
+import 'package:attms/utils/data/fetching_data.dart';
 import 'package:attms/widget/title_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,23 +69,15 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
     }
   }
 
+  FetchingDataCall fetchingDataCall = FetchingDataCall();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
       color: Colors.white,
       child: Consumer(builder: (_, WidgetRef ref, __) {
-        ref.read(departmentProvider.notifier).retrieveDepartments();
-        final departments = ref.watch(departmentProvider);
+        var formattedDepartments = fetchingDataCall.department(ref);
         // Convert departments to a list of maps
-        List<Map<String, dynamic>> formattedDepartments =
-            departments.map((dept) {
-          return {
-            'department_name': dept.departmentName,
-            'department_id': dept.departmentId,
-          };
-        }).toList();
-
         return Form(
           key: formkey,
           child: Column(
@@ -271,7 +264,7 @@ class _AddAccountScreenState extends State<AddTeacherScreen> {
                             teacherName.text, email.text, departmentId!);
                       } else {
                         teacherUpdate.updateTeacher(teacherId, teacherName.text,
-                            email.text, departmentId ,'','');
+                            email.text, departmentId, '', '');
                       }
                       context.go(Routes.teacherView);
                     }

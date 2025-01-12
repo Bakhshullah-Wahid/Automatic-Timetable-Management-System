@@ -10,17 +10,20 @@ import '../widget/base_api.dart';
 class ClassNotifier extends StateNotifier<List<FetchingClass>> {
   ClassNotifier() : super([]);
 
-  Future<void> retrieveClass() async {
+  Future<void> retrieveClass(ProviderContainer container) async {
     API api = API();
     try {
       final response = await http.get(Uri.parse('${api.baseUrl}classs/'));
       if (response.statusCode == 200) {
         final List<dynamic> responseBody = json.decode(response.body);
 
-        // Parse and store department data as FetchingTeacher objects
+        // Parse and store department data as FetchingClass objects
         state = responseBody
             .map((noteMap) => FetchingClass.fromMap(noteMap))
             .toList();
+
+        // Dispose the provider after data is fetched
+        container.dispose(); // Dispose the provider container
       } else {
         // Handle non-200 status codes
         // print('Failed to load class: ${response.statusCode}');

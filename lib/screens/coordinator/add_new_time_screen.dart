@@ -30,6 +30,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   List selectedClass = [];
   List freeClass = [];
   List selectedTeachers = [];
+  ClassService c = ClassService();
   DialogeBoxOpen dialogebox = DialogeBoxOpen();
   final FetchingDataCall fetchingDataCall = FetchingDataCall();
   final TimingManage timetableManaging = TimingManage();
@@ -38,6 +39,12 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   String? selectedDepartment;
   List<Map<String, dynamic>> formattedSubject = [];
   List<Map<String, dynamic>> formattedTeacher = [];
+  @override
+  void initState() {
+    super.initState();
+    filteringData();
+  }
+
   var reference;
   @override
   Widget build(BuildContext context) {
@@ -45,15 +52,25 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
       builder: (context, ref, child) {
         reference = ref;
         final position = ref.watch(addNewTimetableProvider);
+        var formattedClass = fetchingDataCall.classs(ref);
         var formattedDepartments = fetchingDataCall.department(ref);
         formattedSubject = fetchingDataCall.subject(ref);
         formattedTeacher = fetchingDataCall.teacher(ref);
-
         for (var i in formattedDepartments) {
           for (var j in formattedSubject) {
             if (i['department_id'] == j['department_id']) {
               j['department_name'] = i['department_name'];
               j['department_id'] = i['department_id'];
+            }
+          }
+          for (var j in formattedClass) {
+            if (i['department_id'] == j['department_id']) {
+              j['department_name'] = i['department_name'];
+            }
+          }
+          for (var j in formattedTeacher) {
+            if (i['department_id'] == j['department_id']) {
+              j['department_name'] = i['department_name'];
             }
           }
         }
@@ -64,13 +81,19 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             }
           }
         }
-
+        var formattedteacher = formattedTeacher;
+        formattedteacher.removeWhere((element) =>
+            (element['department_name'] != department &&
+                element['given_to'] != department));
+        formattedClass.removeWhere((element) =>
+            (element['department_name'] != department &&
+                element['given_to'] != department));
         return position == 0
             ? _buildSemesterSelection(context)
             : position == 1
-                ? _buildClass(context, formattedDepartments)
+                ? _buildClass(context, formattedClass, ref)
                 : position == 2
-                    ? _buildTeacher(context, formattedDepartments)
+                    ? _buildTeacher(context, formattedteacher)
                     : position == 3
                         ? _buildSubject(context)
                         : _buildGenerateTimetable(context);
@@ -186,17 +209,19 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                             context,
                                             selectedTeachers,
                                             element['teacher_name']);
+                                    if (selectedTeacher1[0] !=
+                                        element['teacher_name']) {
+                                      if (selectedTeacher1[0] != '' ||
+                                          selectedTeacher1[0] != null) {
+                                        element['teacher_name'] =
+                                            selectedTeacher1[0];
+                                        element['teacher_id'] =
+                                            selectedTeacher1[1];
+                                        element['teacher_department'] =
+                                            selectedTeacher1[2];
 
-                                    if (selectedTeacher1[0] != '' ||
-                                        selectedTeacher1[0] != null) {
-                                      element['teacher_name'] =
-                                          selectedTeacher1[0];
-                                      element['teacher_id'] =
-                                          selectedTeacher1[1];
-                                      element['teacher_department'] =
-                                          selectedTeacher1[2];
-
-                                      setState(() {});
+                                        setState(() {});
+                                      }
                                     }
                                   },
                                   icon: Icon(Icons.edit)),
@@ -508,7 +533,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
   }
 
   // classes
-  Widget _buildClass(BuildContext context, formattedDepartments) {
+  Widget _buildClass(BuildContext context, formattedClass, ref) {
     return Scaffold(
         body: Container(
       color: Colors.white,
@@ -524,320 +549,306 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
           const SizedBox(
             height: 20,
           ),
-          Consumer(builder: (context, ref, child) {
-            var formattedClass = fetchingDataCall.classs(ref);
-            for (var i in formattedDepartments) {
-              for (var j in formattedClass) {
-                if (i['department_id'] == j['department_id']) {
-                  j['department_name'] = i['department_name'];
-                }
-              }
-            }
-            formattedClass.removeWhere((element) =>
-                (element['department_name'] != department &&
-                    element['given_to'] != department));
-
-            return Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: TheContainer(
-                      // height: MediaQuery.of(context).size.height * 0.4,
-                      width: Responsive.isMobile(context)
-                          ? MediaQuery.of(context).size.width * 0.8
-                          : MediaQuery.of(context).size.width * 0.4,
-                      child: formattedClass.isEmpty
-                          ? Center(
-                              child: Text(
-                                'No Classes! check Database Connectivity',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            )
-                          : SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.8,
-                              child: GroupedListView<dynamic, String>(
-                                  elements: formattedClass,
-                                  groupBy: (element) {
-                                    return element['department_name'];
-                                  },
-                                  order: GroupedListOrder.ASC,
-                                  groupSeparatorBuilder:
-                                      (String groupByValue) => Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 15),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  groupByValue,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge,
-                                                ),
-                                                const Divider()
-                                              ],
-                                            ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: TheContainer(
+                    // height: MediaQuery.of(context).size.height * 0.4,
+                    width: Responsive.isMobile(context)
+                        ? MediaQuery.of(context).size.width * 0.8
+                        : MediaQuery.of(context).size.width * 0.4,
+                    child: formattedClass.isEmpty
+                        ? Center(
+                            child: Text(
+                              'No Classes! check Database Connectivity',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          )
+                        : SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.8,
+                            child: GroupedListView<dynamic, String>(
+                                elements: formattedClass,
+                                groupBy: (element) {
+                                  return element['department_name'];
+                                },
+                                order: GroupedListOrder.ASC,
+                                groupSeparatorBuilder: (String groupByValue) =>
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 15),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            groupByValue,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
                                           ),
-                                  itemBuilder: (context, dynamic element) =>
-                                      ListTile(
-                                        title: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 20.0, bottom: 10),
-                                          child: TheContainer(
-                                            height: Responsive.isMobile(context)
-                                                ? MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.04
-                                                : null,
-                                            child: InkWell(
-                                              onDoubleTap: () async {
-                                                var value = element['class_id'];
+                                          const Divider()
+                                        ],
+                                      ),
+                                    ),
+                                itemBuilder: (context, dynamic element) =>
+                                    ListTile(
+                                      title: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 20.0, bottom: 10),
+                                        child: TheContainer(
+                                          height: Responsive.isMobile(context)
+                                              ? MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.04
+                                              : null,
+                                          child: InkWell(
+                                            onDoubleTap: () async {
+                                              var value = element['class_id'];
 
-                                                bool idExists = selectedClass
-                                                    .any((element) =>
+                                              bool idExists = selectedClass.any(
+                                                  (element) =>
+                                                      element['class_id'] ==
+                                                      value);
+
+                                              if (idExists) {
+                                                welcomeClass1.removeWhere(
+                                                    (element) =>
                                                         element['class_id'] ==
                                                         value);
-
-                                                if (idExists) {
-                                                  welcomeClass1.removeWhere(
-                                                      (element) =>
-                                                          element['class_id'] ==
-                                                          value);
-                                                  selectedClass.removeWhere(
-                                                      (element) =>
-                                                          element['class_id'] ==
-                                                          value);
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          backgroundColor:
-                                                              Colors.red,
-                                                          content: Text(
-                                                              'Class Removed')));
-                                                } else {
-                                                  final freeSlots =
+                                                selectedClass.removeWhere(
+                                                    (element) =>
+                                                        element['class_id'] ==
+                                                        value);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(const SnackBar(
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                        content: Text(
+                                                            'Class Removed')));
+                                              } else {
+                                                final container =
+                                                    ProviderContainer();
+                                                List freeSlots = [];
+                                                while (freeSlots.isEmpty) {
+                                                  freeSlots =
                                                       await fetchFreeSlots(
-                                                          element['class_id']);
-                                                  await freeSlotsAdd(
-                                                      freeSlots,
-                                                      element['class_type'],
-                                                      element['class_id'],
-                                                      element[
-                                                          'department_name'],
-                                                      element['class_name']);
-                                                  selectedClass.add({
-                                                    'class_type':
-                                                        element['class_type'],
-                                                    'class_id':
-                                                        element['class_id'],
-                                                    'department_name': element[
-                                                        'department_name'],
-                                                    'class_name':
-                                                        element['class_name'],
-                                                    'requested_by':
-                                                        element['requested_by'],
-                                                    'given_to':
-                                                        element['given_to'],
-                                                    'department_id':
-                                                        element['department_id']
-                                                  });
+                                                          element['class_id'],
+                                                          container);
                                                 }
-                                                setState(() {});
-                                              },
-                                              child: SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.55,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          '${element['class_name']}',
-                                                          style: !Responsive
-                                                                  .isMobile(
-                                                                      context)
-                                                              ? Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .displayLarge
-                                                              : TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  fontSize: 10),
-                                                        ),
-                                                        if (selectedClass.any(
-                                                            (e) =>
-                                                                e['class_id'] ==
-                                                                element[
-                                                                    'class_id']))
-                                                          const Text(
-                                                              ' (selected)',
-                                                              style: TextStyle(
-                                                                  fontSize: 10,
-                                                                  color: Colors
-                                                                      .green)),
-                                                      ],
-                                                    ),
-                                                  )),
-                                            ),
+
+                                                await freeSlotsAdd(
+                                                    freeSlots,
+                                                    element['class_type'],
+                                                    element['class_id'],
+                                                    element['department_name'],
+                                                    element['class_name']);
+                                                selectedClass.add({
+                                                  'class_type':
+                                                      element['class_type'],
+                                                  'class_id':
+                                                      element['class_id'],
+                                                  'department_name': element[
+                                                      'department_name'],
+                                                  'class_name':
+                                                      element['class_name'],
+                                                  'requested_by':
+                                                      element['requested_by'],
+                                                  'given_to':
+                                                      element['given_to'],
+                                                  'department_id':
+                                                      element['department_id']
+                                                });
+                                              }
+                                              // setState(() {});
+                                            },
+                                            child: SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.55,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        '${element['class_name']}',
+                                                        style: !Responsive
+                                                                .isMobile(
+                                                                    context)
+                                                            ? Theme.of(context)
+                                                                .textTheme
+                                                                .displayLarge
+                                                            : TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontSize: 10),
+                                                      ),
+                                                      if (selectedClass.any(
+                                                          (e) =>
+                                                              e['class_id'] ==
+                                                              element[
+                                                                  'class_id']))
+                                                        const Text(
+                                                            ' (selected)',
+                                                            style: TextStyle(
+                                                                fontSize: 10,
+                                                                color: Colors
+                                                                    .green)),
+                                                    ],
+                                                  ),
+                                                )),
                                           ),
                                         ),
-                                      )),
-                            ),
-                    ),
+                                      ),
+                                    )),
+                          ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (!Responsive.isMobile(context))
-                        Icon(Icons.arrow_forward),
-                      if (!Responsive.isMobile(context)) Icon(Icons.arrow_back),
-                    ],
-                  ),
-                  (!Responsive.isMobile(context))
-                      ? Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: TheContainer(
-                              // height: MediaQuery.of(context).size.height * 0.4,
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              child: selectedClass.isEmpty
-                                  ? const Center(
-                                      child: Text(
-                                          'Double click on a class to add',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.normal)),
-                                    )
-                                  : SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.8,
-                                      child: GroupedListView<dynamic, String>(
-                                          elements: selectedClass,
-                                          groupBy: (element) {
-                                            return element['department_name'];
-                                          },
-                                          order: GroupedListOrder.ASC,
-                                          groupSeparatorBuilder: (String
-                                                  groupByValue) =>
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      groupByValue,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge,
-                                                    ),
-                                                    const Divider()
-                                                  ],
-                                                ),
-                                              ),
-                                          itemBuilder: (context,
-                                                  dynamic element) =>
-                                              ListTile(
-                                                title: Padding(
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (!Responsive.isMobile(context))
+                      Icon(Icons.arrow_forward),
+                    if (!Responsive.isMobile(context)) Icon(Icons.arrow_back),
+                  ],
+                ),
+                (!Responsive.isMobile(context))
+                    ? Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: TheContainer(
+                            // height: MediaQuery.of(context).size.height * 0.4,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: selectedClass.isEmpty
+                                ? const Center(
+                                    child: Text(
+                                        'Double click on a class to add',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal)),
+                                  )
+                                : SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    child: GroupedListView<dynamic, String>(
+                                        elements: selectedClass,
+                                        groupBy: (element) {
+                                          return element['department_name'];
+                                        },
+                                        order: GroupedListOrder.ASC,
+                                        groupSeparatorBuilder:
+                                            (String groupByValue) => Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20.0),
-                                                  child: TheContainer(
-                                                    child: InkWell(
-                                                      onDoubleTap: () {
-                                                        (element['class_id']);
-                                                        var value =
-                                                            element['class_id'];
-                                                        welcomeClass1.removeWhere(
-                                                            (element) =>
-                                                                element[
-                                                                    'class_id'] ==
-                                                                value);
-                                                        selectedClass.removeWhere(
-                                                            (element) =>
-                                                                element[
-                                                                    'class_id'] ==
-                                                                value);
-                                                        setState(() {});
-                                                      },
-                                                      child: SizedBox(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.55,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      '${element['class_name']}',
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .displayLarge,
-                                                                    ),
-                                                                    const Text(
-                                                                        ' (selected)',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                10,
-                                                                            color:
-                                                                                Colors.green)),
-                                                                  ],
-                                                                ),
-                                                                CircleAvatar(
-                                                                  radius: 15,
-                                                                  backgroundColor:
-                                                                      Colors.green[
-                                                                          300],
-                                                                  child:
-                                                                      const Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .check,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )),
-                                                    ),
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        groupByValue,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge,
+                                                      ),
+                                                      const Divider()
+                                                    ],
                                                   ),
                                                 ),
-                                              )),
-                                    )),
-                        )
-                      : SizedBox.shrink(),
-                ],
-              ),
-            );
-          }),
+                                        itemBuilder: (context,
+                                                dynamic element) =>
+                                            ListTile(
+                                              title: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 20.0),
+                                                child: TheContainer(
+                                                  child: InkWell(
+                                                    onDoubleTap: () {
+                                                      (element['class_id']);
+                                                      var value =
+                                                          element['class_id'];
+                                                      welcomeClass1.removeWhere(
+                                                          (element) =>
+                                                              element[
+                                                                  'class_id'] ==
+                                                              value);
+                                                      selectedClass.removeWhere(
+                                                          (element) =>
+                                                              element[
+                                                                  'class_id'] ==
+                                                              value);
+                                                      setState(() {});
+                                                    },
+                                                    child: SizedBox(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.55,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    '${element['class_name']}',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .displayLarge,
+                                                                  ),
+                                                                  const Text(
+                                                                      ' (selected)',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              10,
+                                                                          color:
+                                                                              Colors.green)),
+                                                                ],
+                                                              ),
+                                                              CircleAvatar(
+                                                                radius: 15,
+                                                                backgroundColor:
+                                                                    Colors.green[
+                                                                        300],
+                                                                child:
+                                                                    const Center(
+                                                                  child: Icon(
+                                                                    Icons.check,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )),
+                                                  ),
+                                                ),
+                                              ),
+                                            )),
+                                  )),
+                      )
+                    : SizedBox.shrink(),
+              ],
+            ),
+          )
         ],
       ),
     ));
   }
 
 // teacher
-  Widget _buildTeacher(BuildContext context, formattedDepartments) {
+  Widget _buildTeacher(BuildContext context, formattedteacher) {
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -854,17 +865,6 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
             ),
             Consumer(
               builder: (context, ref, child) {
-                var formattedTeacher = fetchingDataCall.teacher(ref);
-                for (var i in formattedDepartments) {
-                  for (var j in formattedTeacher) {
-                    if (i['department_id'] == j['department_id']) {
-                      j['department_name'] = i['department_name'];
-                    }
-                  }
-                }
-                formattedTeacher.removeWhere((element) =>
-                    (element['department_name'] != department &&
-                        element['given_to'] != department));
                 return Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -885,7 +885,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.8,
                                   child: GroupedListView<dynamic, String>(
-                                      elements: formattedTeacher,
+                                      elements: formattedteacher,
                                       groupBy: (element) {
                                         return element['department_name'];
                                       },
@@ -1195,8 +1195,9 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
               ? const SizedBox.shrink()
               : Consumer(builder: (context, ref, child) {
                   return ElevatedButton(
-                    onPressed: () {
-                      _onPressed(ref);
+                    onPressed: () async {
+                      _isTapped = true;
+                      confirmSaving(ref, context);
                     },
                     style: ElevatedButton.styleFrom(
                       padding:
@@ -1215,10 +1216,7 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
     ));
   }
 
-  triggerTimetableGeneration() {
-    if (selectedSem == null) {
-      reference.read(addNewTimetableProvider.notifier).setPosition(0);
-    }
+  Future<void> triggerTimetableGeneration() async {
     timetable = [];
     timetable2 = [];
     timetable3 = [];
@@ -1304,75 +1302,128 @@ class _NewTimeTableScreenState extends State<NewTimeTableScreen> {
       List classFor56 = List.from(welcomeClass1);
       List classFor78 = List.from(welcomeClass1);
       generatedTimetable1 = [];
-      generatedTimetable1 = timetableManaging.timetableGenerate(
+      generatedTimetable1 = await timetableManaging.timetableGenerate(
           classFor12, semester1and2, generatedTimetable1);
-      timetable = timetableManaging.timetableDesignSheeet(generatedTimetable1);
-      classFor34 = timetableManaging.removeBookedClasses(
+      timetable =
+          await timetableManaging.timetableDesignSheeet(generatedTimetable1);
+      classFor34 = await timetableManaging.removeBookedClasses(
           classFor34, generatedTimetable1);
-      generatedTimetable2 = timetableManaging.timetableGenerate(
+      generatedTimetable2 = await timetableManaging.timetableGenerate(
           classFor34, semester3and4, generatedTimetable1);
-      timetable2 = timetableManaging.timetableDesignSheeet(generatedTimetable2);
+      timetable2 =
+          await timetableManaging.timetableDesignSheeet(generatedTimetable2);
       List generatedTimetableNone = [];
       generatedTimetableNone = generatedTimetable1 + generatedTimetable2;
-      classFor56 = timetableManaging.removeBookedClasses(
+      classFor56 = await timetableManaging.removeBookedClasses(
           classFor56, generatedTimetableNone);
-      generatedTimetable3 = timetableManaging.timetableGenerate(
+      generatedTimetable3 = await timetableManaging.timetableGenerate(
           classFor56, semester5and6, generatedTimetableNone);
-      timetable3 = timetableManaging.timetableDesignSheeet(generatedTimetable3);
+      timetable3 =
+          await timetableManaging.timetableDesignSheeet(generatedTimetable3);
       generatedTimetableNone = [];
       generatedTimetableNone =
           generatedTimetable1 + generatedTimetable2 + generatedTimetable3;
-      classFor78 = timetableManaging.removeBookedClasses(
+      classFor78 = await timetableManaging.removeBookedClasses(
           classFor78, generatedTimetableNone);
-      generatedTimetable4 = timetableManaging.timetableGenerate(
+      generatedTimetable4 = await timetableManaging.timetableGenerate(
           classFor78, semester7and8, generatedTimetableNone);
-      timetable4 = timetableManaging.timetableDesignSheeet(generatedTimetable4);
+      timetable4 =
+          await timetableManaging.timetableDesignSheeet(generatedTimetable4);
 
       setState(() {});
     }
   }
 
-  void _onPressed(ref) async {
+  bool ischeck = true;
+  Future<void> _onPressed(ref, BuildContext context) async {
+    for (var virtual in selectedClass) {
+      if (virtual['given_to'] == department) {
+        await c.updateClass(virtual['class_id'], virtual['class_name'],
+            virtual['class_type'], virtual['department_id'], '', '');
+      }
+    }
     await timetableManaging.savingTimetable(generatedTimetable1, deptId);
     await timetableManaging.savingTimetable(generatedTimetable2, deptId);
     await timetableManaging.savingTimetable(generatedTimetable3, deptId);
     await timetableManaging.savingTimetable(generatedTimetable4, deptId);
-    ClassService c = ClassService();
-    for (var virtual in selectedClass) {
-      if (virtual['given_to'] == department) {
-        c.updateClass(virtual['class_id'], virtual['class_name'],
-            virtual['class_type'], virtual['department_id'], '', '');
-      }
+    await Future.delayed(Duration(seconds: 4), () {});
+    if (context.mounted) {
+      // context.pop();
+      ref.read(addNewTimetableProvider.notifier).setPosition(0);
+      context.go(Routes.home);
     }
-    setState(() {
-      _isTapped = true;
-    });
-
-    // Simulate some loading process with a delay
-    await Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        _isTapped = false;
-      });
-    });
-    showLoadingDialog(context, ref);
   }
 
-  void showLoadingDialog(BuildContext context, ref) async {
+  Future<void> confirmSaving(ref, BuildContext context) async {
+    bool ischeck = true; // Flag to check whether the button should be active
+    // Flag to show circular progress indicator
+
     await showDialog(
+      barrierDismissible: false, // Prevent dialog dismissal by tapping outside
       context: context,
-      barrierDismissible: false, // Prevent dismissing by tapping outside
-      builder: (context) => AlertDialog(
-        content: Text('Timetable Saved'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                ref.read(addNewTimetableProvider.notifier).setPosition(0);
-                Navigator.pop(context);
-                context.go(Routes.home);
-              },
-              child: Text('ok'))
-        ],
-      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('Confirm saving'),
+              content: Text('Are you sure you want to save the timetable?'),
+              actions: [
+                // Cancel button shown when ischeck is true
+                if (ischeck)
+                  TextButton(
+                    onPressed: () {
+                      _isTapped = !_isTapped;
+                      Navigator.pop(
+                          context); // Close the dialog if cancel is pressed
+                    },
+                    child: Text('Cancel'),
+                  ),
+                // Show Save button or CircularProgressIndicator based on _isTapped
+                if (ischeck)
+                  ElevatedButton(
+                    onPressed: () async {
+                      setState(() {
+                        _isTapped = true; // Show progress indicator
+                        ischeck = false; // Disable buttons while saving
+                      });
+
+                      // Perform the save action (simulate work)
+                      await _onPressed(ref, context);
+
+                      // After save completes, close the dialog
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Text('Save'),
+                  )
+                else
+                  // Show CircularProgressIndicator instead of Save button
+                  CircularProgressIndicator(),
+              ],
+            );
+          },
+        );
+      },
     );
   }
+
+  // void showLoadingDialog(BuildContext context, ref) async {
+  //   await showDialog(
+  //     context: context,
+  //     // barrierDismissible: false, // Prevent dismissing by tapping outside
+  //     builder: (context) => AlertDialog(
+  //       content: Text('Timetable Saved'),
+  //       actions: [
+  //         TextButton(
+  //             onPressed: () {
+  //               context.pop();
+  //               context.go(Routes.home);
+  //               ref.read(addNewTimetableProvider.notifier).setPosition(0);
+  //             },
+  //             child: Text('ok'))
+  //       ],
+  //     ),
+  //   );
+  // }
 }

@@ -74,17 +74,7 @@ class _AddAccountScreenState extends State<AddClassScreen> {
         body: Container(
       color: Colors.white,
       child: Consumer(builder: (_, WidgetRef ref, __) {
-        ref.read(departmentProvider.notifier).retrieveDepartments();
-        final departments = ref.watch(departmentProvider);
-        // Convert departments to a list of maps
-        List<Map<String, dynamic>> formattedDepartments =
-            departments.map((dept) {
-          return {
-            'department_name': dept.departmentName,
-            'department_id': dept.departmentId,
-          };
-        }).toList();
-
+        final formattedDepartments = ref.watch(departmentProvider);
         return Form(
           key: formkey,
           child: Column(

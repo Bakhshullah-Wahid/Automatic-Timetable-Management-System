@@ -3,6 +3,7 @@ import 'package:attms/utils/containor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/grouped_list.dart';
+
 import '../../../services/freeSlots/retrieve_free_slot.dart';
 import '../../../services/requestings/requist_ap.dart';
 
@@ -10,8 +11,10 @@ class ClassRequestScreens extends StatefulWidget {
   final String departments;
   final int deptId;
   final List formattedClass;
+  final WidgetRef ref;
   const ClassRequestScreens(
       {super.key,
+      required this.ref,
       required this.formattedClass,
       required this.departments,
       required this.deptId});
@@ -178,10 +181,13 @@ class _ClassRequestScreensState extends State<ClassRequestScreens> {
                                                               widget.departments
                                                       ? TextButton(
                                                           onPressed: () async {
+                                                            final container =
+                                                                ProviderContainer();
                                                             final freeSlots =
                                                                 await fetchFreeSlots(
                                                                     element[
-                                                                        'class_id']);
+                                                                        'class_id'],
+                                                                    container);
 
                                                             await requestClass(
                                                                 freeSlots,

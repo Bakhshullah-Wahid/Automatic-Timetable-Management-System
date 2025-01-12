@@ -66,17 +66,24 @@ class DialogeBoxOpen {
     return selectedSem;
   }
 
-  teacherSelection(name, context, teacherList, selectedTeacher) async {
+  Future<List<dynamic>> teacherSelection(
+      name, BuildContext context, teacherList, selectedTeacher) async {
     List w = [];
     w.add(selectedTeacher);
-
     await showDialog(
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: Text('Cancel'))
+              ],
               title: Text(name),
               content: SingleChildScrollView(
                 child: Column(

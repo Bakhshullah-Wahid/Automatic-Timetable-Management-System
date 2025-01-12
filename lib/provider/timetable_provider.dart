@@ -9,7 +9,8 @@ import 'package:http/http.dart' as http;
 class TimetableNotifier extends StateNotifier<List<FetchingTimetable>> {
   TimetableNotifier() : super([]);
 
-  Future<void> retrieveTimetable(int departmentId) async {
+  Future<void> retrieveTimetable(
+      int departmentId, ProviderContainer container) async {
     API api = API();
     try {
       final response =
@@ -21,6 +22,7 @@ class TimetableNotifier extends StateNotifier<List<FetchingTimetable>> {
         state = responseBody
             .map((noteMap) => FetchingTimetable.fromMap(noteMap))
             .toList();
+        container.dispose();
       } else {
         // Handle non-200 status codes
         // print('Failed to load timetable: ${response.statusCode}');

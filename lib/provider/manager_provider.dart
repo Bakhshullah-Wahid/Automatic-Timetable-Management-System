@@ -12,7 +12,7 @@ import '../widget/base_api.dart';
 class ManagerNotifier extends StateNotifier<List<FetchingManager>> {
   ManagerNotifier() : super([]);
 
-  Future<void> retrieveManager(int? departmentId) async {
+  Future<void> retrieveManager(int? departmentId ,ProviderContainer container) async {
     API api = API(); 
     try {
       final response = departmentId != null
@@ -24,7 +24,7 @@ class ManagerNotifier extends StateNotifier<List<FetchingManager>> {
         // Parse and store department data as FetchingTeacher objects
         state = responseBody
             .map((noteMap) => FetchingManager.fromMap(noteMap))
-            .toList();
+            .toList();container.dispose();
       } else {
         // Handle non-200 status codes
         // print('Failed to load user: ${response.statusCode}');
