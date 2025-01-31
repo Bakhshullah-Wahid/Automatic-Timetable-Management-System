@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../responsive.dart';
 import '../../utils/data/fetching_data.dart';
+import '../../utils/saving_pdf.dart';
 import '../../utils/timetable_arrangement.dart';
 import '../../utils/timetable_design.dart';
 import '../../widget/coordinator/drawer_box.dart';
@@ -128,6 +129,7 @@ class _HomeScreensState extends State<HomeScreens> {
           b();
         }
       }
+
       return Scaffold(
         body: Container(
           color: Colors.white,
@@ -146,6 +148,20 @@ class _HomeScreensState extends State<HomeScreens> {
                   SizedBox(
                     height: 20,
                   ),
+                timetable1.isNotEmpty?  TextButton(
+                      onPressed: () async {
+                        bool b = false;
+                        while (!b) {
+                          b = await TimetablePdfGenerator(
+                                  timetableData1: timetable1,
+                                  timetableData2: timetable2,
+                                  timetableData3: timetable3,
+                                  timetableData4: timetable4,
+                                  department: department)
+                              .generateTimetablePdf();
+                        }
+                      },
+                      child: Text('convert to pdf')):SizedBox.shrink(),
                   _isLoading
                       ? CircularProgressIndicator()
                       : timetable1.isEmpty || semester01And02.isEmpty
@@ -236,4 +252,6 @@ class _HomeScreensState extends State<HomeScreens> {
     timetable3 = await timetableManaging.timetableManaging(semester05And06);
     timetable4 = await timetableManaging.timetableManaging(semester07And08);
   }
+
+  // saving pdf file of timetable
 }

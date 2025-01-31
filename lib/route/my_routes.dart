@@ -186,7 +186,7 @@ class MyRouter {
                 pageBuilder: (context, state) => const NoTransitionPage(
                       child: ClassRequestSystem(),
                     )),
-                      GoRoute(
+            GoRoute(
                 path: Routes.teacherRequest,
                 name: 'teacher_request',
                 pageBuilder: (context, state) => const NoTransitionPage(
