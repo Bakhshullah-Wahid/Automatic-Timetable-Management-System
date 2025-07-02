@@ -368,8 +368,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               if (userId == null) {
                                 if (departmentCheck(
                                     department.text, formattedManager)) {
-                                  emailing.sendEmail(context, 'email',
-                                      email.text, userName.text, password.text);
+                                 
                                   managerUpdate.addManager(
                                       userName.text,
                                       'Co-ordinator',
