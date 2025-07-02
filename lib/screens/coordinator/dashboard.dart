@@ -142,7 +142,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               padding: const EdgeInsets.only(right: 50, bottom: 20),
               child: Text(
                 'University of Turbat',
-                style: TextStyle(color: Colors.black.withOpacity(0.2)),
+                style: TextStyle(color: Colors.black.withValues(alpha: 0.2)),
               ),
             ),
       body: Row(

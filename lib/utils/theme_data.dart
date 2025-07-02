@@ -14,7 +14,7 @@ class Style {
       radioTheme: const RadioThemeData(
           fillColor: WidgetStatePropertyAll(Color(0xFFF1592A))),
       dividerTheme: DividerThemeData(
-          color: const Color(0xFF0161CD).withOpacity(0.1), thickness: 1),
+          color: const Color(0xFF0161CD).withValues(alpha: 0.1), thickness: 1),
       // drawerTheme: const DrawerThemeData(
       //     shape: ContinuousRectangleBorder(),
       //     elevation: 0,

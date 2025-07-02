@@ -107,8 +107,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               8), // Optional: rounded corners
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
+                              color: Colors.black.withValues(
+                                  alpha: 0.2), // Shadow color with opacity
                               offset: Offset(0, 10), // Shadow only below
                               blurRadius:
                                   8, // Controls how blurry the shadow is
@@ -167,8 +167,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               8), // Optional: rounded corners
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
+                              color: Colors.black.withValues(
+                                  alpha: 0.2), // Shadow color with opacity
                               offset: Offset(0, 10), // Shadow only below
                               blurRadius:
                                   8, // Controls how blurry the shadow is
@@ -226,8 +226,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               8), // Optional: rounded corners
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
+                              color: Colors.black.withValues(
+                                  alpha: 0.2), // Shadow color with opacity
                               offset: Offset(0, 10), // Shadow only below
                               blurRadius:
                                   8, // Controls how blurry the shadow is
@@ -284,8 +284,9 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                                         8), // Optional: rounded corners
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(
-                                            0.2), // Shadow color with opacity
+                                        color: Colors.black.withValues(
+                                            alpha:
+                                                0.2), // Shadow color with opacity
                                         offset:
                                             Offset(0, 10), // Shadow only below
                                         blurRadius:
@@ -368,7 +369,6 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                               if (userId == null) {
                                 if (departmentCheck(
                                     department.text, formattedManager)) {
-                                 
                                   managerUpdate.addManager(
                                       userName.text,
                                       'Co-ordinator',

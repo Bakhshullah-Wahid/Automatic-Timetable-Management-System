@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/services.dart'; // For rootBundle
+ // For rootBundle
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -26,9 +25,7 @@ class TimetablePdfGenerator {
       final pdf = pw.Document();
 
       // Load the font from assets
-      final fontData =
-          await rootBundle.load('assets/fonts/NotoSans-Regular.ttf');
-      final font = pw.Font.ttf(fontData);
+    
 
       // Add a page to the PDF document
       pdf.addPage(

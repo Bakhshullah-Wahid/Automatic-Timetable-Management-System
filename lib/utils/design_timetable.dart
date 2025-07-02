@@ -105,8 +105,8 @@ class TimetableDesign extends StatelessWidget {
                                 : Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                            color:
-                                                Colors.blue.withOpacity(0.3))),
+                                            color: Colors.blue
+                                                .withValues(alpha: 0.3))),
                                     child: Center(
                                       child: Text(
                                         'Break',
@@ -123,7 +123,7 @@ class TimetableDesign extends StatelessWidget {
                           return Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.blue.withOpacity(0.3))),
+                                    color: Colors.blue.withValues(alpha: 0.3))),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Center(

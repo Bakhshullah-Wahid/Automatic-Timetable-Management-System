@@ -16,7 +16,8 @@ class TheContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(8), // Optional: rounded corners
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Shadow color with opacity
+            color: Colors.black
+                .withValues(alpha: 0.2), // Shadow color with opacity
             offset: const Offset(0, 1), // Shadow only below
             blurRadius: 3, // Controls how blurry the shadow is
             spreadRadius: 0.4, // Spread of the shadow
