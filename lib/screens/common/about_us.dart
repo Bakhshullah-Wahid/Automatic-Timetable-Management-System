@@ -272,7 +272,7 @@ class _AboutUsState extends State<AboutUs> {
             Icon(Icons.phone, color: Colors.teal),
             SizedBox(width: 8),
             Text(
-              "Phone: 03202906160",
+              "Phone: 032xxxxxxxx",
               style: TextStyle(color: Colors.grey[800]),
             ),
           ],
