@@ -7,8 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../provider/department_provider.dart';
-import '../../../provider/teacher_provider.dart';
+import '../../../provider/department_provider.dart'; 
 import '../../../responsive.dart';
 import '../../../route/navigations.dart';
 import '../../../widget/manager/department_data.dart';
@@ -172,8 +171,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                           BorderRadius.circular(8), // Optional: rounded corners
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2), // Shadow color with opacity
+                          color: Colors.black.withValues(
+                              alpha: 0.2), // Shadow color with opacity
                           offset: Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
@@ -223,8 +222,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                           BorderRadius.circular(8), // Optional: rounded corners
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2), // Shadow color with opacity
+                          color: Colors.black.withValues(
+                              alpha: 0.2), // Shadow color with opacity
                           offset: Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
@@ -285,8 +284,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                           BorderRadius.circular(8), // Optional: rounded corners
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2), // Shadow color with opacity
+                          color: Colors.black.withValues(
+                              alpha: 0.1), // Shadow color with opacity
                           offset: Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
@@ -341,8 +340,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                           BorderRadius.circular(8), // Optional: rounded corners
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2), // Shadow color with opacity
+                          color: Colors.black.withValues(
+                              alpha: 0.2), // Shadow color with opacity
                           offset: Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
@@ -394,8 +393,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                           BorderRadius.circular(8), // Optional: rounded corners
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black
-                              .withOpacity(0.2), // Shadow color with opacity
+                          color: Colors.black.withValues(
+                              alpha: 0.2), // Shadow color with opacity
                           offset: Offset(0, 10), // Shadow only below
                           blurRadius: 8, // Controls how blurry the shadow is
                           spreadRadius: 0.3, // Spread of the shadow
@@ -467,8 +466,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                               8), // Optional: rounded corners
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
+                              color: Colors.black.withValues(
+                                  alpha: 0.2), // Shadow color with opacity
                               offset: Offset(0, 10), // Shadow only below
                               blurRadius:
                                   8, // Controls how blurry the shadow is
@@ -531,8 +530,8 @@ class _AddAccountScreenState extends State<AddSubjectScreen> {
                               8), // Optional: rounded corners
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Shadow color with opacity
+                              color: Colors.black.withValues(
+                                  alpha: 0.2), // Shadow color with opacity
                               offset: Offset(0, 10), // Shadow only below
                               blurRadius:
                                   8, // Controls how blurry the shadow is

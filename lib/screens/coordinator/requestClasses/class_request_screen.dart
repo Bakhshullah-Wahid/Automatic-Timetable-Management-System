@@ -120,8 +120,7 @@ class _ClassRequestScreensState extends State<ClassRequestScreens> {
             ),
             Consumer(builder: (context, ref, child) {
               widget.formattedClass.removeWhere((element) =>
-                  element['department_name'] == widget.departments);
-              var mediaquery = MediaQuery.of(context).size;
+                  element['department_name'] == widget.departments); 
               return Expanded(
                   child: Padding(
                       padding: const EdgeInsets.only(top: 10),

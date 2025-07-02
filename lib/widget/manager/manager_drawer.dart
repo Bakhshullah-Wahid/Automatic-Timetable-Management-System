@@ -75,8 +75,9 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                           8), // Optional: rounded corners
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(
-                                              0.1), // Shadow color with opacity
+                                          color: Colors.black.withValues(
+                                              alpha:
+                                                  0.1), // Shadow color with opacity
                                           offset:
                                               Offset(0, 7), // Shadow only below
                                           blurRadius:
@@ -111,8 +112,9 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                                           ? null
                                           : [
                                               BoxShadow(
-                                                color: Colors.black.withOpacity(
-                                                    0.2), // Shadow color with opacity
+                                                color: Colors.black.withValues(
+                                                    alpha:
+                                                        0.2), // Shadow color with opacity
                                                 offset: Offset(
                                                     0, 1), // Shadow only below
                                                 blurRadius:
@@ -188,7 +190,7 @@ class _DrawerBoxState extends ConsumerState<ManagerDrawerBox> {
                             }
                           }),
                       Divider(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                       )
                     ],
                   ),

@@ -76,8 +76,9 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                                             8), // Optional: rounded corners
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black.withOpacity(
-                                                0.2), // Shadow color with opacity
+                                            color: Colors.black.withValues(
+                                                alpha:
+                                                    0.2), // Shadow color with opacity
                                             offset: Offset(
                                                 0, 10), // Shadow only below
                                             blurRadius:
@@ -114,8 +115,9 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                                             ? null
                                             : [
                                                 BoxShadow(
-                                                  color: Colors.black.withOpacity(
-                                                      0.2), // Shadow color with opacity
+                                                  color: Colors.black.withValues(
+                                                      alpha:
+                                                          0.2), // Shadow color with opacity
                                                   offset: Offset(0,
                                                       1), // Shadow only below
                                                   blurRadius:
@@ -191,7 +193,7 @@ class _DrawerBoxState extends ConsumerState<DrawerBox> {
                               }
                             }),
                         // Divider(
-                        //   color: Colors.black.withOpacity(0.1),
+                        //   color: Colors.black.withValues(alpha:0.1),
                         // )
                         SizedBox(
                           height: mediaquery.height * 0.015,
